@@ -341,7 +341,11 @@ export function ProductsTab({ products, setProducts, categories, setCategories, 
  
   const filteredProducts = products.filter(p => {
     const matchesSearch = p.name?.toLowerCase().includes(globalSearch?.toLowerCase() || "") || p._id?.toLowerCase().includes(globalSearch?.toLowerCase() || "");
-    const matchesCategory = categoryFilter === "All" || p.category?._id === categoryFilter || p.category === categoryFilter;
+    const matchesCategory = categoryFilter === "All" || (() => {
+       const productCatId = p.category?._id || p.category;
+       if (productCatId === categoryFilter) return true;
+       return categories.some(c => c.parentCategory === categoryFilter && c._id === productCatId);
+    })();
     
     let matchesStatus = true;
     if (statusFilter === "Draft") {

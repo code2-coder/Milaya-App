@@ -205,12 +205,21 @@ export function Shop() {
       let url = `/products?limit=12&page=${page}`;
       
       if (activeFilters.category.length > 0) {
-        // Map category names to IDs
-        const catIds = activeFilters.category.map(catName => {
-           const c = categories.find(c => c.name === catName);
-           return c ? c._id : null;
-        }).filter(Boolean);
-        if (catIds.length > 0) url += `&category=${catIds.join(',')}`;
+        // Map category names to IDs and include subcategories if a parent is selected
+        const catIds = activeFilters.category.reduce((acc, catName) => {
+           const c = categories.find(cat => cat.name === catName);
+           if (c) {
+               acc.push(c._id);
+               const subCats = categories.filter(sub => sub.parentCategory === c._id);
+               subCats.forEach(sub => acc.push(sub._id));
+           }
+           return acc;
+        }, []);
+        
+        if (catIds.length > 0) {
+            const uniqueCatIds = [...new Set(catIds)];
+            url += `&category=${uniqueCatIds.join(',')}`;
+        }
       }
       
       if (activeFilters.keyword) url += `&keyword=${encodeURIComponent(activeFilters.keyword)}`;

@@ -1,15 +1,32 @@
 import { Header } from "../components/Header";
-import { lazy, Suspense, useState, useEffect } from "react";
+import { lazy, Suspense, useState, useEffect, useRef } from "react";
 const Footer = lazy(() => import("../components/Footer").then(m => ({ default: m.Footer })));
-import { Flower2 } from "lucide-react";
+import { Flower2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import api from "../api/axios";
 import { BannerCarousel } from "../components/BannerCarousel";
 import { Link } from "react-router";
 import { ProductCard } from "../components/ProductCard";
 
+import { LimitedTimeOffer } from "../components/home/LimitedTimeOffer";
+import { PremiumWhyChooseUs } from "../components/home/PremiumWhyChooseUs";
+import { CustomerReviews } from "../components/home/CustomerReviews";
+import { InstagramGallery } from "../components/home/InstagramGallery";
+
 export function Home() {
   useSEO("Home", "Browse Milaya's expansive offering of highly-rated clothing pieces, elegant outerwear, and premium dresses.");
+
+  const womensRef = useRef(null);
+  const mensRef = useRef(null);
+  const kidsRef = useRef(null);
+
+  const scroll = (ref, direction) => {
+    if (ref.current) {
+      const { scrollLeft, clientWidth } = ref.current;
+      const scrollTo = direction === 'left' ? scrollLeft - clientWidth / 2 : scrollLeft + clientWidth / 2;
+      ref.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
 
   const [banners, setBanners] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -55,7 +72,7 @@ export function Home() {
                 </h2>
                 <div className="w-16 h-[2px] bg-[#800000] mt-4 rounded-full"></div>
               </div>
-              <div className="flex overflow-x-auto gap-6 pb-6 px-2 xl:justify-center scrollbar-none snap-x" style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}>
+              <div className="flex overflow-x-auto gap-6 pb-6 px-2 justify-center scrollbar-none snap-x" style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}>
                 {categories.filter(c => !c.parentCategory).map((category) => (
                   <Link 
                     key={category._id}
@@ -80,22 +97,203 @@ export function Home() {
             </section>
           )}
 
-          {products && products.length > 0 && (
-            <section className="py-12 lg:py-16 mt-4 border-t border-gray-100">
-              <div className="flex flex-col items-center mb-12 text-center">
-                <h2 className="text-2xl md:text-3xl font-serif text-obsidian tracking-wide">
-                  Featured Collection
-                </h2>
-                <div className="w-16 h-[2px] bg-[#800000] mt-4 rounded-full"></div>
+          {/* Featured Collections */}
+          <section className="py-16 lg:py-24">
+            <div className="flex flex-col items-center mb-12 lg:mb-16 text-center">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-obsidian tracking-wide">
+                Featured Collections
+              </h2>
+              <div className="w-24 h-[2px] bg-[#800000] mt-6 rounded-full"></div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 px-4 sm:px-6 lg:px-10 pb-12 lg:pb-24">
+              {[
+                {
+                  title: "New Arrivals",
+                  image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800",
+                  link: "/shop?sort=newest"
+                },
+                {
+                  title: "Trending Now",
+                  image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=800",
+                  link: "/shop?tag=trending"
+                },
+                {
+                  title: "Best Sellers",
+                  image: "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?auto=format&fit=crop&q=80&w=800",
+                  link: "/shop?sort=bestselling"
+                }
+              ].map((collection, index) => (
+                <Link
+                  key={index}
+                  to={collection.link}
+                  className={`group relative overflow-hidden flex flex-col h-[450px] sm:h-[550px] lg:h-[700px] w-full bg-gray-100 rounded-sm shadow-md hover:shadow-2xl transition-all duration-700 ${index === 1 ? 'md:mt-12 lg:mt-16' : ''}`}
+                >
+                  {/* Subtle Inner Frame on Hover */}
+                  <div className="absolute inset-4 sm:inset-6 border border-white/0 group-hover:border-white/30 transition-colors duration-700 z-20 pointer-events-none"></div>
+
+                  <img
+                    src={collection.image}
+                    alt={collection.title}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-[1.07]"
+                  />
+                  {/* Gradient Overlay for Text Readability - Darker at bottom, slight vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/10 opacity-70 group-hover:opacity-80 transition-opacity duration-700 z-10"></div>
+                  
+                  {/* Content Container */}
+                  <div className="absolute inset-x-0 bottom-0 p-8 sm:p-12 flex flex-col items-center justify-end text-center z-20">
+                    <div className="relative overflow-hidden pb-2">
+                      <h3 className="text-white text-2xl sm:text-3xl lg:text-4xl font-serif tracking-[0.15em] uppercase drop-shadow-lg transform transition-transform duration-700 group-hover:-translate-y-2">
+                        {collection.title}
+                      </h3>
+                      {/* Expanding underline effect */}
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-white/80 transition-all duration-700 group-hover:w-full"></div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Women's Collection */}
+          {products.length > 0 && (
+            <section className="py-12 lg:py-20 bg-gray-50/30">
+              <div className="flex justify-between items-end mb-8 lg:mb-12 px-4 sm:px-6 lg:px-10">
+                <div className="flex flex-col">
+                  <h2 className="text-3xl md:text-4xl font-serif text-obsidian tracking-wide">
+                    Women's Collection
+                  </h2>
+                  <div className="w-16 h-[2px] bg-[#800000] mt-4 rounded-full"></div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="hidden sm:flex gap-2">
+                    <button onClick={() => scroll(womensRef, 'left')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronLeft size={20} /></button>
+                    <button onClick={() => scroll(womensRef, 'right')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronRight size={20} /></button>
+                  </div>
+                  <Link to="/shop?category=Women" className="text-sm font-medium text-gray-600 hover:text-[#800000] transition-colors border-b border-transparent hover:border-[#800000] pb-1 hidden sm:block uppercase tracking-wider">
+                    View All
+                  </Link>
+                </div>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-                {products.map(product => (
-                  <ProductCard key={product._id} product={product} />
+
+              {/* Horizontal Scroll Container */}
+              <div 
+                ref={womensRef}
+                className="flex overflow-x-auto gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10 pb-10 snap-x scroll-smooth"
+                style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
+              >
+                {/* Hide Webkit Scrollbar through inline styles if global css doesn't have it */}
+                <style>{`
+                  .snap-x::-webkit-scrollbar {
+                    display: none;
+                  }
+                `}</style>
+                {(products.filter(p => p.category?.name?.toLowerCase().includes('women') || p.name?.toLowerCase().includes('women')).length > 0 
+                  ? products.filter(p => p.category?.name?.toLowerCase().includes('women') || p.name?.toLowerCase().includes('women')) 
+                  : products
+                ).slice(0, 10).map((product) => (
+                  <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
+                    <ProductCard product={product} />
+                  </div>
                 ))}
               </div>
             </section>
           )}
+
+          {/* Men's Collection */}
+          {products.length > 0 && (
+            <section className="py-12 lg:py-20 bg-white">
+              <div className="flex justify-between items-end mb-8 lg:mb-12 px-4 sm:px-6 lg:px-10">
+                <div className="flex flex-col">
+                  <h2 className="text-3xl md:text-4xl font-serif text-obsidian tracking-wide">
+                    Men's Collection
+                  </h2>
+                  <div className="w-16 h-[2px] bg-[#800000] mt-4 rounded-full"></div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="hidden sm:flex gap-2">
+                    <button onClick={() => scroll(mensRef, 'left')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronLeft size={20} /></button>
+                    <button onClick={() => scroll(mensRef, 'right')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronRight size={20} /></button>
+                  </div>
+                  <Link to="/shop?category=Men" className="text-sm font-medium text-gray-600 hover:text-[#800000] transition-colors border-b border-transparent hover:border-[#800000] pb-1 hidden sm:block uppercase tracking-wider">
+                    View All
+                  </Link>
+                </div>
+              </div>
+
+              {/* Horizontal Scroll Container */}
+              <div 
+                ref={mensRef}
+                className="flex overflow-x-auto gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10 pb-10 snap-x scroll-smooth"
+                style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
+              >
+                {(products.filter(p => (p.category?.name?.toLowerCase().includes('men') && !p.category?.name?.toLowerCase().includes('women')) || (p.name?.toLowerCase().includes('men') && !p.name?.toLowerCase().includes('women'))).length > 0 
+                  ? products.filter(p => (p.category?.name?.toLowerCase().includes('men') && !p.category?.name?.toLowerCase().includes('women')) || (p.name?.toLowerCase().includes('men') && !p.name?.toLowerCase().includes('women'))) 
+                  : products
+                ).slice(0, 10).map((product) => (
+                  <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Kids Collection */}
+          {products.length > 0 && (
+            <section className="py-12 lg:py-20 bg-gray-50/30">
+              <div className="flex justify-between items-end mb-8 lg:mb-12 px-4 sm:px-6 lg:px-10">
+                <div className="flex flex-col">
+                  <h2 className="text-3xl md:text-4xl font-serif text-obsidian tracking-wide">
+                    Kids Collection
+                  </h2>
+                  <div className="w-16 h-[2px] bg-[#800000] mt-4 rounded-full"></div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="hidden sm:flex gap-2">
+                    <button onClick={() => scroll(kidsRef, 'left')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronLeft size={20} /></button>
+                    <button onClick={() => scroll(kidsRef, 'right')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronRight size={20} /></button>
+                  </div>
+                  <Link to="/shop?category=Kids" className="text-sm font-medium text-gray-600 hover:text-[#800000] transition-colors border-b border-transparent hover:border-[#800000] pb-1 hidden sm:block uppercase tracking-wider">
+                    View All
+                  </Link>
+                </div>
+              </div>
+
+              {/* Horizontal Scroll Container */}
+              <div 
+                ref={kidsRef}
+                className="flex overflow-x-auto gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10 pb-10 snap-x scroll-smooth"
+                style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
+              >
+                {(products.filter(p => {
+                  const searchStr = `${p.category?.name || ''} ${p.name || ''}`.toLowerCase();
+                  return searchStr.includes('kid') || searchStr.includes('girl') || searchStr.includes('boy');
+                }).length > 0 
+                  ? products.filter(p => {
+                      const searchStr = `${p.category?.name || ''} ${p.name || ''}`.toLowerCase();
+                      return searchStr.includes('kid') || searchStr.includes('girl') || searchStr.includes('boy');
+                    }) 
+                  : products
+                ).slice(0, 10).map((product) => (
+                  <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+
         </main>
+
+        {/* Full-width Premium Sections */}
+
+        <LimitedTimeOffer />
+        <PremiumWhyChooseUs />
+        <CustomerReviews />
+        <InstagramGallery />
 
         <Suspense fallback={<div className="h-20 bg-[#0b1121]"></div>}>
           <Footer />

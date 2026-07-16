@@ -81,7 +81,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
   const hasSecondaryImage = !!secondaryImage;
 
   return (
-    <div className="group relative flex flex-col h-full bg-white transition-all duration-500 rounded-2xl border border-stone-100 hover:border-amber-200/50 hover:shadow-[0_20px_45px_rgba(184,147,78,0.08)] max-w-sm mx-auto overflow-hidden">
+    <div className="group relative flex flex-col h-full bg-white transition-all duration-500 rounded-2xl border border-stone-200 hover:border-black/50 hover:shadow-2xl max-w-sm mx-auto overflow-hidden">
       
       {/* Image Container */}
       <Link 
@@ -116,12 +116,12 @@ export const ProductCard = memo(function ProductCard({ product }) {
         {/* Luxury Badges (Pills) */}
         <div className="absolute top-2 left-2 md:top-4 md:left-4 z-20 flex flex-col gap-1 md:gap-2">
           {currentStock < 10 && currentStock > 0 && (
-            <span className="text-[#AA8C2C] bg-[#FCFAF8]/95 border border-[#AA8C2C]/30 backdrop-blur-md px-2 md:px-2.5 py-0.5 md:py-1 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.18em] shadow-sm rounded-full">
+            <span className="text-black bg-white/95 border border-black/30 backdrop-blur-md px-2.5 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm rounded-full">
               Limited
             </span>
           )}
           {currentStock === 0 && (
-            <span className="text-white bg-stone-900/90 backdrop-blur-md px-2 md:px-2.5 py-0.5 md:py-1 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.18em] shadow-sm rounded-full">
+            <span className="text-white bg-black/90 backdrop-blur-md px-2.5 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm rounded-full">
               Sold Out
             </span>
           )}
@@ -137,15 +137,15 @@ export const ProductCard = memo(function ProductCard({ product }) {
             }}
             aria-pressed={isWished}
             aria-label={isWished ? 'Remove from wishlist' : 'Add to wishlist'}
-            className="p-1.5 md:p-2.5 bg-white/80 hover:bg-white text-stone-700 hover:text-rose-600 border border-white/20 shadow-md backdrop-blur-md rounded-full transition-all duration-300 transform active:scale-90 hover:scale-105 flex items-center justify-center cursor-pointer"
+            className="p-1.5 md:p-2.5 bg-white/80 hover:bg-white text-stone-700 hover:text-black border border-white/20 shadow-md backdrop-blur-md rounded-full transition-all duration-300 transform active:scale-90 hover:scale-105 flex items-center justify-center cursor-pointer"
           >
-            <Heart className={`w-3.5 h-3.5 md:w-4 md:h-4 transition-colors duration-200 ${isWished ? "fill-rose-600 text-rose-600" : "text-stone-700"}`} />
+            <Heart className={`w-3.5 h-3.5 md:w-4 md:h-4 transition-colors duration-200 ${isWished ? "fill-black text-black" : "text-stone-700"}`} />
           </button>
 
           <button
             onClick={handleShare}
             aria-label="Share product"
-            className="p-1.5 md:p-2.5 bg-white/80 hover:bg-white text-stone-700 hover:text-[#AA8C2C] border border-white/20 shadow-md backdrop-blur-md rounded-full transition-all duration-300 transform hover:scale-105 flex items-center justify-center cursor-pointer"
+            className="p-1.5 md:p-2.5 bg-white/80 hover:bg-white text-stone-700 hover:text-black border border-white/20 shadow-md backdrop-blur-md rounded-full transition-all duration-300 transform hover:scale-105 flex items-center justify-center cursor-pointer"
           >
             <Share2 className={`w-3.5 h-3.5 md:w-4 md:h-4`} />
           </button>
@@ -156,7 +156,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
           <button
             onClick={handleAddToCart}
             disabled={currentStock === 0}
-            className="w-full py-3.5 bg-stone-900/95 hover:bg-[#800000] text-white rounded-xl shadow-xl font-bold text-[10px] tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-3.5 bg-black/95 hover:bg-stone-800 text-white rounded-xl shadow-xl font-bold text-[11px] tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
             <span>{currentStock === 0 ? "Out of Stock" : "Add to Bag"}</span>
@@ -167,12 +167,12 @@ export const ProductCard = memo(function ProductCard({ product }) {
 
       {/* Product Info */}
       <div className="pt-3 pb-4 md:pt-5 md:pb-6 px-3.5 md:px-5 flex flex-col flex-grow bg-white text-center">
-        <p className="text-[#AA8C2C] text-[9px] md:text-[10px] mb-1 md:mb-2 font-bold uppercase tracking-[0.2em] md:tracking-[0.25em]">
+        <p className="text-stone-500 text-[10px] md:text-xs mb-1 md:mb-2 font-bold uppercase tracking-[0.2em] md:tracking-[0.25em]">
           {product.category?.name || "Collection"}
         </p>
         
         <Link to={`/product/${product._id || product.id}`} className="focus:outline-none w-full mb-1.5 md:mb-2 inline-block">
-          <h3 className="font-serif text-stone-850 hover:text-[#AA8C2C] text-[13px] sm:text-sm md:text-base font-normal leading-snug transition-colors duration-300 line-clamp-2 px-1">
+          <h3 className="font-serif text-black hover:text-stone-600 text-sm sm:text-base md:text-lg font-medium leading-snug transition-colors duration-300 line-clamp-2 px-1">
             {product.name}
           </h3>
         </Link>
@@ -180,7 +180,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
         {/* Ratings & Reviews Stars Display */}
         {product.ratings !== undefined && product.ratings > 0 && (
           <div className="flex items-center justify-center gap-1 mb-2 md:mb-3">
-            <div className="flex text-amber-500 gap-0.5">
+            <div className="flex text-black gap-0.5">
               {[...Array(5)].map((_, i) => (
                 <svg
                   key={i}
@@ -201,7 +201,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
         )}
 
         <div className="mt-auto flex items-center justify-between w-full pt-1.5 md:pt-3">
-          <span className="text-stone-900 font-semibold tracking-wide text-xs sm:text-sm md:text-base text-left">
+          <span className="text-black font-bold tracking-wide text-sm sm:text-base md:text-lg text-left">
             {currentPrice != null ? formatPrice(currentPrice) : "Price Unavailable"}
           </span>
           
@@ -209,7 +209,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
           <button
             onClick={handleAddToCart}
             disabled={currentStock === 0}
-            className="md:hidden w-8 h-8 rounded-full bg-stone-900 hover:bg-[#800000] text-white flex items-center justify-center transition-all duration-300 disabled:bg-stone-200 disabled:text-stone-400 disabled:cursor-not-allowed cursor-pointer shrink-0"
+            className="md:hidden w-8 h-8 rounded-full bg-black hover:bg-stone-800 text-white flex items-center justify-center transition-all duration-300 disabled:bg-stone-200 disabled:text-stone-400 disabled:cursor-not-allowed cursor-pointer shrink-0"
             aria-label="Add to bag"
           >
              <ShoppingBag className="w-3.5 h-3.5" />
