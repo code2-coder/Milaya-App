@@ -502,7 +502,7 @@ export function Header() {
           <div className="flex items-center space-x-6 md:space-x-10">
             <Link to="/" className="flex items-center space-x-2 group relative z-[70]">
               <div className="flex items-center">
-                <img src="/logo.jpeg" alt="Milaya Logo" className="h-14 md:h-16 lg:h-20 w-auto object-contain rounded-xl sm:rounded-2xl shadow-sm border border-gray-100/50 bg-white/50 transition-all duration-300 group-hover:opacity-90 group-hover:shadow-md" />
+                <img src="/Milaya_Logo.jpg-removebg-preview.png" alt="Milaya Logo" className="h-16 md:h-20 lg:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
               </div>
             </Link>
 
@@ -856,7 +856,7 @@ export function Header() {
               {/* BRAND LOGO IN DRAWER */}
               <div className="pb-6 border-b border-gray-100 flex justify-center">
                 <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center">
-                  <img src="/logo.jpeg" alt="Milaya Logo" className="h-12 w-auto object-contain" />
+                  <img src="/Milaya_Logo.jpg-removebg-preview.png" alt="Milaya Logo" className="h-12 w-auto object-contain filter drop-shadow-sm" />
                 </Link>
               </div>
 

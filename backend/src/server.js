@@ -30,9 +30,8 @@ connectDB().then(() => {
 
 // Start the server
 const PORT = Number(process.env.PORT) || 8085;
-const HOST = process.env.HOST || "127.0.0.1"; // Explicitly bind to IPv4 to prevent Vite proxy ECONNRESET/ECONNREFUSED on Windows
-const server = app.listen(PORT, HOST, () => {
-  logger.info(`Server is running on http://${HOST}:${PORT} in ${process.env.NODE_ENV || "development"} mode.`);
+const server = app.listen(PORT, () => {
+  logger.info(`Server is running on http://localhost:${PORT} in ${process.env.NODE_ENV || "development"} mode.`);
 });
 
 // Handle Unhandled Promise Rejections

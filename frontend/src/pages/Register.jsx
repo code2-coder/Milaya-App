@@ -124,12 +124,7 @@ export function Register() {
             {/* Logo */}
             <motion.div variants={itemVariants} className="flex justify-center mb-6">
               <Link to="/" className="inline-flex flex-col items-center space-y-3 group">
-                <div className="relative p-1.5 transition-transform duration-500 group-hover:scale-105">
-                  {/* Subtle decorative premium circle behind logo */}
-                  <div className="absolute inset-0 rounded-full border border-premium-400/20 scale-90 group-hover:scale-110 transition-transform duration-700"></div>
-                  <img src="/logo.jpeg" alt="Milaya Logo" className="w-14 h-14 object-contain relative z-10 filter drop-shadow-sm" />
-                </div>
-                <span className="font-serif text-lg tracking-[0.3em] uppercase text-stone-900 group-hover:text-premium-500 transition-colors duration-500 font-semibold">
+                <span className="font-serif text-2xl tracking-[0.3em] uppercase text-stone-900 group-hover:text-premium-500 transition-colors duration-500 font-semibold">
                   Milaya
                 </span>
               </Link>

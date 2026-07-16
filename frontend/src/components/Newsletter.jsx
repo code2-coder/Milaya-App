@@ -65,10 +65,7 @@ export function Newsletter() {
             
              {/* Logo & Branding - Made prominently larger and framed beautifully */}
              <div className="flex flex-col items-center lg:items-start mb-6 w-full">
-               <div className="bg-white/95 backdrop-blur-sm px-6 py-3.5 sm:py-4 rounded-[1.25rem] shadow-[0_10px_30px_rgba(0,0,0,0.3)] mb-4 border border-[#B8934E]/30 relative group/logo transition-transform duration-500 hover:-translate-y-1">
-                 <div className="absolute inset-0 bg-gradient-to-r from-[#B8934E]/0 via-[#B8934E]/10 to-[#B8934E]/0 opacity-0 group-hover/logo:opacity-100 group-hover/logo:animate-[shimmer_2s_infinite] rounded-[1.25rem] transition-opacity"></div>
-                 <img src="/logo.jpeg" alt="Milaya Logo" className="h-14 sm:h-20 lg:h-24 w-auto object-contain relative z-10 drop-shadow-sm" />
-               </div>
+
                <div className="flex items-center gap-4 w-full justify-center lg:justify-start">
                  <div className="h-[1px] w-8 sm:w-12 bg-gradient-to-r from-transparent to-[#B8934E]"></div>
                  <h3 className="text-[#B8934E] font-serif text-lg sm:text-xl lg:text-2xl tracking-[0.25em] uppercase opacity-95 drop-shadow-sm text-center">

@@ -135,10 +135,7 @@ export function Login() {
             {/* Logo */}
             <div className="flex justify-center lg:justify-start mb-16">
               <Link to="/" className="inline-flex items-center space-x-3 group">
-                <div className="bg-stone-100 p-2 rounded-xl group-hover:bg-stone-200 transition-colors duration-300">
-                  <img src="/logo.jpeg" alt="Milaya Logo" className="w-12 h-12 sm:w-14 sm:h-14 object-contain" />
-                </div>
-                <span className="font-serif text-2xl tracking-[0.2em] uppercase text-stone-900 font-bold">
+                <span className="font-serif text-2xl tracking-[0.2em] uppercase text-stone-900 font-bold group-hover:text-black transition-colors">
                   Milaya
                 </span>
               </Link>
