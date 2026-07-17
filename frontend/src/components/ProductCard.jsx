@@ -128,7 +128,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
         </div>
 
         {/* Glassmorphic Floating Quick Actions */}
-        <div className="absolute top-2 right-2 md:top-4 md:right-4 z-20 flex flex-col gap-1.5 md:gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-x-4 md:group-hover:translate-x-0 transition-all duration-300">
+        <div className="absolute top-2 right-2 md:top-4 md:right-4 z-20 flex flex-col gap-1.5 md:gap-2 z-20 transition-all duration-300">
           <button
             onClick={(e) => {
                e.preventDefault();
@@ -139,7 +139,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
             aria-label={isWished ? 'Remove from wishlist' : 'Add to wishlist'}
             className="p-1.5 md:p-2.5 bg-white/80 hover:bg-white text-stone-700 hover:text-black border border-white/20 shadow-md backdrop-blur-md rounded-full transition-all duration-300 transform active:scale-90 hover:scale-105 flex items-center justify-center cursor-pointer"
           >
-            <Heart className={`w-3.5 h-3.5 md:w-4 md:h-4 transition-colors duration-200 ${isWished ? "fill-black text-black" : "text-stone-700"}`} />
+            <Heart className={`w-3.5 h-3.5 md:w-4 md:h-4 transition-colors duration-200 ${isWished ? "fill-red-500 text-red-500" : "text-stone-700"}`} />
           </button>
 
           <button
