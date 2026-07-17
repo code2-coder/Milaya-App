@@ -29,7 +29,7 @@ export function Footer() {
           <div className="flex flex-col items-start">
             <Link to="/" className="mb-8 block">
                <div className="w-32 h-32 rounded-2xl bg-white flex items-center justify-center shadow-lg overflow-hidden">
-                 <img src="/logo.jpeg" alt="Milaya Clothing" className="w-[85%] h-[85%] object-contain" />
+                 <img src="/loginlogo-removebg-preview.png" alt="Milaya Clothing" className="w-full h-full object-contain scale-[1.6]" />
                </div>
             </Link>
             <p className="text-stone-300 font-light text-[14px] leading-relaxed mb-8">

@@ -492,17 +492,17 @@ export function Header() {
     <div className="fixed top-0 left-0 right-0 z-50 w-full flex flex-col">
       {/* Top Announcement Bar Removed per request */}
       
-      <header className="bg-white/95 backdrop-blur-2xl border-b border-gray-100 transition-colors duration-500 font-sans w-full">
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="flex items-center justify-between h-24 relative">
+      <header className="bg-white/95 backdrop-blur-2xl border-b border-gray-100 transition-colors duration-500 font-sans w-full shadow-sm">
+      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-8 lg:px-10 xl:px-14">
+        <div className="flex items-center justify-between h-20 relative">
           
           {/* Middle Mobile Delivery Badge (Centered) */}
 
 
           <div className="flex items-center space-x-6 md:space-x-10">
-            <Link to="/" className="flex items-center space-x-2 group relative z-[70]">
+            <Link to="/" className="flex items-center space-x-2 group relative z-[70] ml-2">
               <div className="flex items-center">
-                <img src="/Milaya_Logo.jpg-removebg-preview.png" alt="Milaya Logo" className="h-16 md:h-20 lg:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
+                <img src="/loginlogo-removebg-preview.png" alt="Milaya Logo" className="h-14 md:h-16 lg:h-20 w-auto object-contain scale-150 md:scale-[1.75] transition-transform duration-300 group-hover:scale-[1.8] filter drop-shadow-sm" />
               </div>
             </Link>
 
