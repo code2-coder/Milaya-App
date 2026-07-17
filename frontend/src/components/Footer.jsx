@@ -51,10 +51,17 @@ export function Footer() {
               </li>
             </ul>
             <div className="flex items-center gap-5 mt-2">
-              {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
+              {[
+                { Icon: Facebook, url: "https://www.facebook.com/share/1cHuudiuvh/?mibextid=wwXIfr" },
+                { Icon: Instagram, url: "https://www.instagram.com/milayafashion?igsh=ZHA0NmJ5dTUzNGNs" },
+                { Icon: Twitter, url: "#" },
+                { Icon: Youtube, url: "#" }
+              ].map(({ Icon, url }, i) => (
                 <a 
                   key={i} 
-                  href="#" 
+                  href={url}
+                  target={url !== "#" ? "_blank" : undefined}
+                  rel={url !== "#" ? "noopener noreferrer" : undefined}
                   className="text-stone-400 hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
                 >
                   <Icon className="w-5 h-5" strokeWidth={1.5} />

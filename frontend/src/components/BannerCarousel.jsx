@@ -51,7 +51,7 @@ export function BannerCarousel({ banners }) {
   return (
     <div className="w-full pb-4 sm:pb-10 pt-0">
       <div
-        className="relative w-full aspect-[1800/480] overflow-hidden group bg-muted/30 rounded-xl sm:rounded-2xl shadow-[0_20px_40px_-15px_rgba(74,4,78,0.15)] border border-border/40 transition-shadow duration-700 hover:shadow-[0_30px_60px_-15px_rgba(74,4,78,0.25)]"
+        className="relative w-full aspect-[1800/720] overflow-hidden group bg-muted/30 rounded-xl sm:rounded-2xl shadow-[0_20px_40px_-15px_rgba(74,4,78,0.15)] border border-border/40 transition-shadow duration-700 hover:shadow-[0_30px_60px_-15px_rgba(74,4,78,0.25)]"
         onMouseEnter={() => { isHoveredRef.current = true; }}
         onMouseLeave={() => { isHoveredRef.current = false; }}
       >
@@ -96,30 +96,46 @@ export function BannerCarousel({ banners }) {
         })}
 
 
-      </div>
-
-      {/* Bottom: Arrows row */}
-      {banners.length > 1 && (
-        <div className="flex items-center justify-center mt-4 gap-3">
-          {/* Left Arrow */}
+        {/* Left Arrow */}
+        {banners.length > 1 && (
           <button
             onClick={goToPrev}
             aria-label="Previous banner"
-            className="w-8 h-8 rounded-full bg-[#800000] flex items-center justify-center text-white hover:bg-[#600000] active:scale-95 transition-all duration-200 shadow-sm"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md border border-black/30 text-white opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-500 hover:bg-white/40 hover:scale-110 shadow-[0_8px_30px_rgb(0,0,0,0.12)] cursor-pointer"
           >
-            <ChevronLeft className="w-4 h-4 stroke-[3]" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
           </button>
+        )}
 
-          {/* Right Arrow */}
+        {/* Right Arrow */}
+        {banners.length > 1 && (
           <button
             onClick={goToNext}
             aria-label="Next banner"
-            className="w-8 h-8 rounded-full bg-[#800000] flex items-center justify-center text-white hover:bg-[#600000] active:scale-95 transition-all duration-200 shadow-sm"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md border border-black/30 text-white opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-500 hover:bg-white/40 hover:scale-110 shadow-[0_8px_30px_rgb(0,0,0,0.12)] cursor-pointer"
           >
-            <ChevronRight className="w-4 h-4 stroke-[3]" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
           </button>
-        </div>
-      )}
+        )}
+
+        {/* Pagination Dots */}
+        {banners.length > 1 && (
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 sm:gap-3">
+            {banners.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={(e) => { e.preventDefault(); goTo(idx); }}
+                className={`transition-all duration-500 rounded-full cursor-pointer ${
+                  idx === currentIndex 
+                    ? "w-8 sm:w-10 h-1.5 sm:h-2 bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]" 
+                    : "w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/80 hover:scale-110"
+                }`}
+                aria-label={`Go to banner ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

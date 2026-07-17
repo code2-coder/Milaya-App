@@ -61,11 +61,11 @@ export function Home() {
       <div className="relative z-10">
         <Header />
 
-        <main className="max-w-[1600px] xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-[160px] lg:pt-[180px] w-full min-h-[60vh]">
+        <main className="max-w-[1600px] xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-[100px] lg:pt-[120px] w-full min-h-[60vh]">
           {banners.length > 0 && <BannerCarousel banners={banners} />}
 
           {categories.length > 0 && (
-            <section className="py-12 lg:py-16 mt-4">
+            <section className="pt-12 pb-4 lg:pt-16 lg:pb-6 mt-4">
               <div className="flex flex-col items-center mb-10 text-center">
                 <h2 className="text-2xl md:text-3xl font-serif text-obsidian tracking-wide">
                   Shop by Category
@@ -98,7 +98,7 @@ export function Home() {
           )}
 
           {/* Featured Collections */}
-          <section className="py-16 lg:py-24">
+          <section className="pt-0 pb-16 lg:pt-2 lg:pb-24">
             <div className="flex flex-col items-center mb-12 lg:mb-16 text-center">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-obsidian tracking-wide">
                 Featured Collections
