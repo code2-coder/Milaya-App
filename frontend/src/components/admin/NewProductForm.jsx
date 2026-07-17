@@ -53,6 +53,17 @@ export default function NewProductForm({
       weight: '',
       dimensions: '',
       countryOfOrigin: '',
+      fit: '',
+      sleeveType: '',
+      neckType: '',
+      occasion: '',
+      closureType: '',
+      length: '',
+      waistRise: '',
+      stretch: '',
+      transparency: '',
+      careInstructions: '',
+      season: '',
     }
   });
 
@@ -100,6 +111,17 @@ export default function NewProductForm({
         weight: editingProduct.weight || '',
         dimensions: editingProduct.dimensions || '',
         countryOfOrigin: editingProduct.countryOfOrigin || '',
+        fit: editingProduct.fit || '',
+        sleeveType: editingProduct.sleeveType || '',
+        neckType: editingProduct.neckType || '',
+        occasion: editingProduct.occasion || '',
+        closureType: editingProduct.closureType || '',
+        length: editingProduct.length || '',
+        waistRise: editingProduct.waistRise || '',
+        stretch: editingProduct.stretch || '',
+        transparency: editingProduct.transparency || '',
+        careInstructions: editingProduct.careInstructions || '',
+        season: editingProduct.season || '',
       });
     }
   }, [editingProduct, methods]);

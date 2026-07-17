@@ -190,7 +190,7 @@ export function Orders() {
                 <div className="p-6 sm:p-8 border-b border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-3 mb-1">
-                      <h3 className="font-semibold text-gray-900 text-lg">Order {order.id.slice(-8).toUpperCase()}</h3>
+                      <h3 className="font-semibold text-gray-900 text-lg">ORDER {order.id.slice(-8).toUpperCase()}</h3>
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 border w-fit ${
                           order.status === 'delivered' ? 'bg-green-50 text-green-700 border-green-200' :

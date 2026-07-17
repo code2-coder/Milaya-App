@@ -12,7 +12,7 @@ export function BestSellers() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-50">
         <div className="absolute top-[0%] right-[0%] w-[800px] h-[800px] bg-[#DDA7A5] rounded-full mix-blend-multiply filter blur-[200px] opacity-[0.15]"></div>
         <div className="absolute bottom-[0%] left-[-10%] w-[900px] h-[900px] bg-[#B8934E] rounded-full mix-blend-multiply filter blur-[200px] opacity-[0.08]"></div>
-        <div className="absolute inset-0 bg-[url('/lotus-bg.png')] bg-repeat opacity-[0.04] mix-blend-overlay"></div>
+
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -175,7 +175,7 @@ export function BestSellers() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="hidden lg:flex w-full bg-[#1A050A] rounded-[2.5rem] p-12 items-center justify-between shadow-2xl relative overflow-hidden"
         >
-          <div className="absolute inset-0 bg-[url('/lotus-bg.png')] opacity-[0.05] mix-blend-overlay"></div>
+
           
           <div className="flex items-center gap-8 relative z-10">
             <div className="w-24 h-24 rounded-full bg-white/5 border border-[#B8934E]/20 flex items-center justify-center shadow-lg">
@@ -290,7 +290,7 @@ export function BestSellers() {
              
              {/* Mobile CTA Banner */}
              <motion.div className="rounded-3xl bg-[#1A050A] p-10 flex flex-col items-center text-center mt-2 shadow-2xl border border-white/5 relative overflow-hidden">
-                 <div className="absolute inset-0 bg-[url('/lotus-bg.png')] opacity-[0.05] mix-blend-overlay"></div>
+
                  <div className="relative z-10">
                     <h4 className="font-serif text-[32px] font-bold text-white mb-4">Exclusive Best Sellers</h4>
                     <p className="font-light text-white/80 text-[14px] sm:text-[15px] leading-relaxed mb-8">The most loved deity shringar garments chosen by our customers.</p>

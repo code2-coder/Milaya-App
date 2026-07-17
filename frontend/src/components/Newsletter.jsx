@@ -38,7 +38,7 @@ export function Newsletter() {
           className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-[#800000] via-[#5C0000] to-[#3B0000] shadow-[0_20px_50px_rgba(128,0,0,0.25)] flex flex-col lg:flex-row group"
         >
           {/* Subtle lotus overlay for richness */}
-          <div className="absolute inset-0 bg-[url('/lotus-bg.png')] bg-cover bg-center opacity-5 mix-blend-overlay transition-opacity duration-1000 group-hover:opacity-10"></div>
+
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#800000]/60 pointer-events-none z-0"></div>
 
           {/* Left: Editorial Image Full Cover */}

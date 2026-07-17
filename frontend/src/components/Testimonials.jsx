@@ -150,7 +150,7 @@ export function Testimonials() {
             <div className="h-full rounded-[2.5rem] bg-[#4A0A18] p-10 lg:p-14 shadow-[0_20px_50px_rgba(74,10,24,0.15)] group-hover:shadow-[0_30px_60px_rgba(184,147,78,0.2)] relative overflow-hidden flex flex-col justify-between transition-all duration-500 border border-white/5 group-hover:border-[#B8934E]/30">
               {/* Internal subtle overlay */}
               <div className="absolute inset-0 bg-gradient-to-b from-[#5C1A1B] to-[#3B0000] opacity-85 pointer-events-none transition-opacity duration-500 group-hover:opacity-90"></div>
-              <div className="absolute inset-0 bg-[url('/lotus-bg.png')] opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
+
               
               <Quote className="absolute top-10 right-10 w-32 h-32 text-[#B8934E]/10 rotate-12 transition-all duration-700 group-hover:rotate-[20deg] group-hover:scale-110 pointer-events-none" />
               

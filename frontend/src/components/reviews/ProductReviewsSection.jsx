@@ -350,14 +350,14 @@ export default function ProductReviewsSection({ productId }) {
   return (
     <div className="w-full my-16 max-w-6xl mx-auto px-4 sm:px-6 font-sans">
       {/* SECTION HEADER */}
-      <div className="mb-10 text-center sm:text-left border-b border-stone-100 pb-6">
-        <h2 className="text-xl sm:text-2xl font-serif text-stone-900 tracking-wider uppercase font-light">
+      <div className="mb-10 text-center sm:text-left border-b border-gray-200 pb-6">
+        <h2 className="text-xl sm:text-2xl font-serif text-black tracking-wider uppercase font-light">
           Review and Rating
         </h2>
-        <p className="text-[10px] sm:text-xs text-stone-400 font-bold uppercase tracking-[0.2em] mt-2">
+        <p className="text-[10px] sm:text-xs text-gray-500 font-bold uppercase tracking-[0.2em] mt-2">
           Real buyer experiences and details
         </p>
-        <div className="h-[2px] w-12 bg-[#B8934E] mt-4 mx-auto sm:mx-0"></div>
+        <div className="h-[2px] w-12 bg-[black] mt-4 mx-auto sm:mx-0"></div>
       </div>
 
       {/* Two-Column Responsive Grid */}
@@ -366,42 +366,42 @@ export default function ProductReviewsSection({ productId }) {
         {/* LEFT COLUMN: Sticky Ratings Dashboard & CTA */}
         <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
           {/* Dashboard Summary Card */}
-          <div className="bg-white border border-stone-100 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.015)]">
-            <div className="text-center pb-6 border-b border-stone-100/80">
-              <span className="text-[9px] font-bold text-stone-450 uppercase tracking-widest block mb-1">
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.015)]">
+            <div className="text-center pb-6 border-b border-gray-200/80">
+              <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-1">
                 Average Rating
               </span>
               <div className="flex items-baseline justify-center gap-1">
-                <span className="text-6xl font-serif text-stone-950 font-extralight tracking-tight leading-none">
+                <span className="text-6xl font-serif text-black font-extralight tracking-tight leading-none">
                   {summary.averageRating.toFixed(1)}
                 </span>
-                <span className="text-xs font-semibold text-stone-400 font-sans">/ 5.0</span>
+                <span className="text-xs font-semibold text-gray-500 font-sans">/ 5.0</span>
               </div>
-              <div className="flex justify-center text-[#B8934E] mt-3 space-x-1">
+              <div className="flex justify-center text-[black] mt-3 space-x-1">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star
                     key={star}
                     className={`w-4 h-4 ${
                       star <= Math.round(summary.averageRating)
-                        ? "fill-[#B8934E] text-[#B8934E]"
-                        : "text-stone-100 stroke-stone-200"
+                        ? "fill-[black] text-[black]"
+                        : "text-gray-200 stroke-gray-300"
                     }`}
                   />
                 ))}
               </div>
-              <p className="text-xs text-stone-500 font-medium tracking-wide mt-3">
-                Out of <span className="font-bold text-stone-850">{summary.totalRatings} Verified Ratings</span>
+              <p className="text-xs text-gray-600 font-medium tracking-wide mt-3">
+                Out of <span className="font-bold text-gray-900">{summary.totalRatings} Verified Ratings</span>
               </p>
             </div>
             
             {/* Star breakdown */}
             <div className="pt-6 space-y-3">
-              <div className="flex items-center justify-between text-[10px] font-bold text-stone-450 uppercase tracking-widest mb-1.5">
+              <div className="flex items-center justify-between text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">
                 <span>Rating breakdown</span>
                 {ratingFilter !== "" && (
                   <button 
                     onClick={() => setRatingFilter("")} 
-                    className="text-[#B8934E] hover:text-[#a6803f] transition-colors cursor-pointer text-xs font-semibold uppercase tracking-wider"
+                    className="text-[black] hover:text-[#a6803f] transition-colors cursor-pointer text-xs font-semibold uppercase tracking-wider"
                   >
                     Clear Filter
                   </button>
@@ -416,28 +416,28 @@ export default function ProductReviewsSection({ productId }) {
                       onClick={() => setRatingFilter(isActive ? "" : row.stars)}
                       className={`w-full flex items-center gap-3.5 text-left text-xs px-3 py-2 rounded-xl transition-all cursor-pointer group border ${
                         isActive 
-                          ? "bg-stone-50 border-[#B8934E]/30 shadow-[0_2px_8px_rgba(184,147,78,0.04)]" 
-                          : "bg-white hover:bg-stone-50/50 border-transparent hover:border-stone-100"
+                          ? "bg-white border-[black]/30 shadow-[0_2px_8px_rgba(184,147,78,0.04)]" 
+                          : "bg-white hover:bg-white/50 border-transparent hover:border-gray-200"
                       }`}
                     >
-                      <div className="flex items-center gap-1.5 w-9 text-stone-500 font-bold">
+                      <div className="flex items-center gap-1.5 w-9 text-gray-600 font-bold">
                         <span>{row.stars}</span>
-                        <Star className="w-3.5 h-3.5 text-stone-300 fill-stone-300 group-hover:text-[#B8934E] group-hover:fill-[#B8934E] transition-colors" />
+                        <Star className="w-3.5 h-3.5 text-gray-400 fill-gray-300 group-hover:text-[black] group-hover:fill-[black] transition-colors" />
                       </div>
                       
-                      <div className="flex-1 h-1.5 bg-stone-50 rounded-full overflow-hidden border border-stone-100/50 relative">
+                      <div className="flex-1 h-1.5 bg-white rounded-full overflow-hidden border border-gray-200/50 relative">
                         <div
-                          className="h-full bg-gradient-to-r from-[#e0c082] to-[#B8934E] rounded-full transition-all duration-700"
+                          className="h-full bg-gradient-to-r from-[#333333] to-[black] rounded-full transition-all duration-700"
                           style={{ width: `${row.percentage}%` }}
                         ></div>
                       </div>
                       
-                      <div className="flex items-center justify-end gap-1.5 w-16 text-right text-stone-400 font-semibold group-hover:text-stone-750 transition-colors">
+                      <div className="flex items-center justify-end gap-1.5 w-16 text-right text-gray-500 font-semibold group-hover:text-gray-800 transition-colors">
                         <span>{row.percentage}%</span>
-                        <span className="text-[10px] text-stone-300 font-normal">({row.count})</span>
+                        <span className="text-[10px] text-gray-400 font-normal">({row.count})</span>
                       </div>
                       {isActive && (
-                        <span className="text-[#B8934E] text-[10px] font-bold">✓</span>
+                        <span className="text-[black] text-[10px] font-bold">✓</span>
                       )}
                     </button>
                   );
@@ -448,64 +448,62 @@ export default function ProductReviewsSection({ productId }) {
 
           {/* Submission and Login Status Block */}
           {!user ? (
-            <div className="bg-stone-50/80 border border-stone-200/50 rounded-3xl p-6 text-center space-y-4 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center mx-auto text-stone-400">
+            <div className="bg-white/80 border border-gray-300/50 rounded-3xl p-6 text-center space-y-4 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center mx-auto text-gray-500">
                 <MessageSquare className="w-5 h-5 stroke-[1.5]" />
               </div>
               <div>
-                <h3 className="text-sm font-serif text-stone-900 tracking-wider uppercase font-medium">
+                <h3 className="text-sm font-serif text-black tracking-wider uppercase font-medium">
                   Share Your Review
                 </h3>
-                <p className="text-xs text-stone-500 mt-2 leading-relaxed">
+                <p className="text-xs text-gray-600 mt-2 leading-relaxed">
                   Please sign in to submit a verified purchase review for this product.
                 </p>
               </div>
               <button
                 onClick={() => (window.location.href = `/login?redirect=/product/${productId}`)}
-                className="w-full py-3 bg-stone-950 hover:bg-black text-white text-[10px] font-bold uppercase tracking-widest rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
+                className="w-full py-3 bg-gray-900 hover:bg-black text-white text-[10px] font-bold uppercase tracking-widest rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
               >
                 Sign In to Account
               </button>
             </div>
           ) : eligibilityChecking ? (
-            <div className="bg-stone-50/80 border border-stone-200/50 rounded-3xl p-6 text-center shadow-sm flex flex-col items-center justify-center py-10">
-              <Loader2 className="w-6 h-6 animate-spin text-[#B8934E]" />
-              <p className="text-xs text-stone-450 mt-3 font-bold uppercase tracking-wider">
+            <div className="bg-white/80 border border-gray-300/50 rounded-3xl p-6 text-center shadow-sm flex flex-col items-center justify-center py-10">
+              <Loader2 className="w-6 h-6 animate-spin text-[black]" />
+              <p className="text-xs text-gray-500 mt-3 font-bold uppercase tracking-wider">
                 Checking order status...
               </p>
             </div>
-          ) : !isEligible ? (
-            <div className="bg-stone-50/80 border border-stone-200/50 rounded-3xl p-6 text-center space-y-4 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center mx-auto text-[#B8934E]/80">
+          ) : !isEligible && eligibilityReason === "already_reviewed" ? (
+            <div className="bg-white/80 border border-gray-300/50 rounded-3xl p-6 text-center space-y-4 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center mx-auto text-[black]/80">
                 <CheckCircle className="w-5 h-5 stroke-[1.5]" />
               </div>
               <div>
-                <h3 className="text-sm font-serif text-stone-900 tracking-wider uppercase font-medium">
-                  {eligibilityReason === "already_reviewed" ? "Review Submitted" : "Verification Required"}
+                <h3 className="text-sm font-serif text-black tracking-wider uppercase font-medium">
+                  Review Submitted
                 </h3>
-                <p className="text-xs text-stone-500 mt-2 leading-relaxed">
-                  {eligibilityReason === "already_reviewed"
-                    ? "Thank you for sharing your experience! You have already submitted a review. Only one review per client is allowed."
-                    : "Review submissions are reserved only for verified buyers who have received delivery of this product."}
+                <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+                  Thank you for sharing your experience! You have already submitted a review. Only one review per client is allowed.
                 </p>
               </div>
             </div>
           ) : (
-            <div className="bg-[#B8934E]/5 border border-[#B8934E]/15 rounded-3xl p-6 text-center space-y-4 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center mx-auto text-[#B8934E]">
+            <div className="bg-[black]/5 border border-[black]/15 rounded-3xl p-6 text-center space-y-4 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center mx-auto text-[black]">
                 <MessageSquare className="w-5 h-5 stroke-[1.5]" />
               </div>
               <div>
-                <h3 className="text-sm font-serif text-stone-900 tracking-wider uppercase font-medium">
+                <h3 className="text-sm font-serif text-black tracking-wider uppercase font-medium">
                   Share Your Review
                 </h3>
-                <p className="text-xs text-stone-500 mt-2 leading-relaxed">
+                <p className="text-xs text-gray-600 mt-2 leading-relaxed">
                   You have purchased this item! Share your craftsmanship, fit, and design feedback.
                 </p>
               </div>
               <button
                 onClick={() => setShowWriteModal(true)}
-                className="w-full py-3 bg-[#B8934E] hover:bg-[#a6803f] text-white text-[10px] font-bold uppercase tracking-widest rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
+                className="w-full py-3 bg-[black] hover:bg-[#a6803f] text-white text-[10px] font-bold uppercase tracking-widest rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
               >
                 Write a Review
               </button>
@@ -514,19 +512,19 @@ export default function ProductReviewsSection({ productId }) {
         </div>        {/* RIGHT COLUMN: Toolbar & List */}
         <div className="lg:col-span-8 space-y-6">
           {/* Filters & Sorting Toolbar */}
-          <div className="bg-stone-50/70 border border-stone-200/50 p-4 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4 animate-in fade-in duration-300">
+          <div className="bg-white/70 border border-gray-300/50 p-4 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4 animate-in fade-in duration-300">
             {/* Star filters */}
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] font-bold text-stone-450 uppercase tracking-wider mr-1.5 flex items-center gap-1">
-                <Filter className="w-3 h-3 text-[#B8934E]" /> Filter:
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mr-1.5 flex items-center gap-1">
+                <Filter className="w-3 h-3 text-[black]" /> Filter:
               </span>
               <button
                 id="star-filter-all"
                 onClick={() => setRatingFilter("")}
                 className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border ${
                   ratingFilter === ""
-                    ? "bg-stone-900 border-stone-900 text-white shadow-[0_2px_8px_rgba(0,0,0,0.1)]"
-                    : "bg-white border-stone-200/60 hover:border-stone-300 text-stone-600"
+                    ? "bg-gray-900 border-gray-900 text-white shadow-[0_2px_8px_rgba(0,0,0,0.1)]"
+                    : "bg-white border-gray-300/60 hover:border-gray-300 text-gray-700"
                 }`}
               >
                 All
@@ -538,8 +536,8 @@ export default function ProductReviewsSection({ productId }) {
                   onClick={() => setRatingFilter(stars)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-0.5 cursor-pointer border ${
                     ratingFilter === stars
-                      ? "bg-[#B8934E] border-[#B8934E] text-white shadow-[0_2px_8px_rgba(184,147,78,0.15)]"
-                      : "bg-white border-stone-200/60 hover:border-stone-300 text-stone-600"
+                      ? "bg-[black] border-[black] text-white shadow-[0_2px_8px_rgba(184,147,78,0.15)]"
+                      : "bg-white border-gray-300/60 hover:border-gray-300 text-gray-700"
                   }`}
                 >
                   {stars} ★
@@ -548,14 +546,14 @@ export default function ProductReviewsSection({ productId }) {
             </div>
 
             {/* Checkboxes / Toggles and Dropdown */}
-            <div className="flex flex-wrap items-center gap-3 pt-3.5 border-t border-stone-200/40 md:border-t-0 md:pt-0">
+            <div className="flex flex-wrap items-center gap-3 pt-3.5 border-t border-gray-300/40 md:border-t-0 md:pt-0">
               <button
                 id="photo-toggle"
                 onClick={() => setHasPhotos(prev => !prev)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
                   hasPhotos
-                    ? "bg-[#B8934E]/10 border-[#B8934E]/30 text-[#B8934E] shadow-[0_2px_8px_rgba(184,147,78,0.06)]"
-                    : "bg-white border-stone-200/60 hover:border-stone-300 text-stone-600"
+                    ? "bg-[black]/10 border-[black]/30 text-[black] shadow-[0_2px_8px_rgba(184,147,78,0.06)]"
+                    : "bg-white border-gray-300/60 hover:border-gray-300 text-gray-700"
                 }`}
               >
                 <ImageIcon className="w-3.5 h-3.5" />
@@ -568,22 +566,22 @@ export default function ProductReviewsSection({ productId }) {
                 className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
                   isVerified
                     ? "bg-emerald-50 border-emerald-500/20 text-emerald-700 shadow-[0_2px_8px_rgba(16,185,129,0.06)]"
-                    : "bg-white border-stone-200/60 hover:border-stone-300 text-stone-600"
+                    : "bg-white border-gray-300/60 hover:border-gray-300 text-gray-700"
                 }`}
               >
                 <CheckCircle className="w-3.5 h-3.5" />
                 Verified Buyers
               </button>
 
-              <div className="hidden md:block w-px h-5 bg-stone-200/50 mx-1"></div>
+              <div className="hidden md:block w-px h-5 bg-gray-100/50 mx-1"></div>
 
-              <div className="flex items-center gap-1.5 bg-white border border-stone-200/60 rounded-full px-3 py-1.5 shadow-sm">
-                <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider pl-1.5">Sort:</span>
+              <div className="flex items-center gap-1.5 bg-white border border-gray-300/60 rounded-full px-3 py-1.5 shadow-sm">
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider pl-1.5">Sort:</span>
                 <select
                   id="sort-dropdown"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-transparent text-xs font-bold text-stone-850 focus:outline-none cursor-pointer uppercase tracking-wider border-none p-0 pr-6 select-none"
+                  className="bg-transparent text-xs font-bold text-gray-900 focus:outline-none cursor-pointer uppercase tracking-wider border-none p-0 pr-6 select-none"
                 >
                   <option value="recent">Most Recent</option>
                   <option value="oldest">Oldest First</option>
@@ -595,48 +593,55 @@ export default function ProductReviewsSection({ productId }) {
           </div>
 
           {/* Review Cards List */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             {reviews.length > 0 ? (
               reviews.map((review) => (
                 <div
                   key={review._id}
-                  className="border border-stone-100/80 rounded-2xl p-6 bg-white shadow-sm hover:shadow-[0_10px_35px_rgba(0,0,0,0.015)] transition-all duration-300 animate-in fade-in slide-in-from-bottom-2 duration-300"
+                  className="border border-gray-100 rounded-[20px] p-6 lg:p-8 bg-white shadow-sm hover:shadow-md transition-all duration-300"
                 >
                   {/* Card Header */}
-                  <div className="flex flex-wrap items-start justify-between gap-4 border-b border-stone-50 pb-4 mb-4">
+                  <div className="flex flex-wrap items-start justify-between gap-4 border-b border-gray-100 pb-4 mb-4">
                     <div className="flex items-center gap-3">
                       {!avatarErrors[review._id] && review.user?.avatar?.url ? (
                         <img
                           src={review.user.avatar.url}
                           alt="Avatar"
                           onError={() => setAvatarErrors((prev) => ({ ...prev, [review._id]: true }))}
-                          className="w-10 h-10 rounded-full object-cover border border-stone-100 shadow-sm"
+                          className="w-10 h-10 rounded-full object-cover border border-gray-200 shadow-sm"
                         />
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-stone-100 to-stone-50 text-stone-600 border border-stone-200/60 flex items-center justify-center font-bold text-xs tracking-wider shadow-sm uppercase">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-gray-100 to-gray-50 text-gray-700 border border-gray-300/60 flex items-center justify-center font-bold text-xs tracking-wider shadow-sm uppercase">
                           {getInitials(review.user?.name)}
                         </div>
                       )}
 
                       <div>
-                        <h4 className="text-xs font-bold text-stone-900 tracking-wide">
-                          {review.user?.name || "Verified Client"}
-                        </h4>
+                        <div className="flex items-center gap-2">
+                          <h4 className="text-[14px] font-bold text-gray-900 tracking-wide">
+                            {review.user?.name || "Client"}
+                          </h4>
+                          {review.isVerifiedPurchase && (
+                            <span className="flex items-center gap-1 text-[9px] font-bold tracking-widest uppercase text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                              <CheckCircle className="w-2.5 h-2.5" /> Verified
+                            </span>
+                          )}
+                        </div>
                         <div className="flex items-center gap-2 mt-1">
-                          <div className="flex text-[#B8934E]">
+                          <div className="flex text-[black]">
                             {[1, 2, 3, 4, 5].map((star) => (
                               <Star
                                 key={star}
                                 className={`w-3 h-3 ${
                                   star <= review.rating
-                                    ? "fill-[#B8934E] text-[#B8934E]"
-                                    : "text-stone-200"
+                                    ? "fill-[black] text-[black]"
+                                    : "text-gray-300"
                                 }`}
                               />
                             ))}
                           </div>
-                          <span className="text-stone-200 text-[10px] font-light">|</span>
-                          <span className="text-[9px] font-bold text-stone-400 uppercase tracking-widest">
+                          <span className="text-gray-300 text-[10px] font-light">|</span>
+                          <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest">
                             {new Date(review.createdAt).toLocaleDateString("en-US", {
                               year: "numeric",
                               month: "short",
@@ -655,7 +660,7 @@ export default function ProductReviewsSection({ productId }) {
                   </div>
 
                   {/* Review Text */}
-                  <p className="text-xs sm:text-sm text-stone-700 font-medium leading-relaxed mb-4 whitespace-pre-wrap">
+                  <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed mb-4 whitespace-pre-wrap">
                     {review.comment}
                   </p>
 
@@ -667,7 +672,7 @@ export default function ProductReviewsSection({ productId }) {
                            <button
                              key={img.public_id}
                              onClick={() => openLightbox(review.images, idx)}
-                             className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden border border-stone-100 hover:border-[#B8934E] hover:scale-105 transition-all shadow-sm flex-shrink-0 group bg-stone-50 flex items-center justify-center cursor-pointer"
+                             className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden border border-gray-200 hover:border-[black] hover:scale-105 transition-all shadow-sm flex-shrink-0 group bg-white flex items-center justify-center cursor-pointer"
                            >
                              {!imageErrors[img.public_id] ? (
                                <img
@@ -678,7 +683,7 @@ export default function ProductReviewsSection({ productId }) {
                                  loading="lazy"
                                />
                              ) : (
-                               <div className="flex flex-col items-center justify-center p-2 text-stone-400">
+                               <div className="flex flex-col items-center justify-center p-2 text-gray-500">
                                  <ImageIcon className="w-4 h-4 stroke-[1.5]" />
                                </div>
                              )}
@@ -696,7 +701,7 @@ export default function ProductReviewsSection({ productId }) {
                            <button
                              key={vid.public_id}
                              onClick={() => setModalVideoUrl(vid.url)}
-                             className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden border border-stone-100 hover:border-[#B8934E] hover:scale-105 transition-all shadow-sm flex-shrink-0 relative group bg-black cursor-pointer"
+                             className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden border border-gray-200 hover:border-[black] hover:scale-105 transition-all shadow-sm flex-shrink-0 relative group bg-black cursor-pointer"
                            >
                              <video
                                src={vid.url}
@@ -714,12 +719,12 @@ export default function ProductReviewsSection({ productId }) {
 
                   {/* Official Store Response */}
                   {review.adminReply && review.adminReply.comment && (
-                    <div className="mt-4 bg-stone-50/80 border border-stone-100 rounded-xl p-4 pl-4.5 border-l-4 border-l-[#B8934E] shadow-[inset_0_1px_3px_rgba(0,0,0,0.01)] animate-in fade-in duration-200">
+                    <div className="mt-4 bg-white/80 border border-gray-200 rounded-xl p-4 pl-4.5 border-l-4 border-l-[black] shadow-[inset_0_1px_3px_rgba(0,0,0,0.01)] animate-in fade-in duration-200">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#B8934E] flex items-center gap-1.5">
+                        <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-[black] flex items-center gap-1.5">
                           <MessageSquare className="w-3.5 h-3.5 stroke-[1.5]" /> Official Store Response
                         </span>
-                        <span className="text-[9px] text-stone-400 font-bold uppercase tracking-wider">
+                        <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider">
                           {new Date(review.adminReply.repliedAt).toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "short",
@@ -727,7 +732,7 @@ export default function ProductReviewsSection({ productId }) {
                           })}
                         </span>
                       </div>
-                      <p className="text-xs text-stone-600 font-medium leading-relaxed whitespace-pre-wrap italic">
+                      <p className="text-xs text-gray-700 font-medium leading-relaxed whitespace-pre-wrap italic">
                         "{review.adminReply.comment}"
                       </p>
                     </div>
@@ -735,12 +740,12 @@ export default function ProductReviewsSection({ productId }) {
                 </div>
               ))
             ) : (
-              <div className="text-center py-20 border border-dashed border-stone-200 rounded-2xl bg-white shadow-sm">
-                <MessageSquare className="w-8 h-8 text-stone-300 mx-auto mb-4" />
-                <h4 className="text-xs font-bold text-stone-850 uppercase tracking-[0.15em] mb-1">
+              <div className="text-center py-20 border border-dashed border-gray-300 rounded-2xl bg-white shadow-sm">
+                <MessageSquare className="w-8 h-8 text-gray-400 mx-auto mb-4" />
+                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-[0.15em] mb-1">
                   No Reviews Published
                 </h4>
-                <p className="text-xs text-stone-400 max-w-sm mx-auto leading-relaxed px-4">
+                <p className="text-xs text-gray-500 max-w-sm mx-auto leading-relaxed px-4">
                   Match the selection criteria above or change the star filters to check for reviews.
                 </p>
               </div>
@@ -753,7 +758,7 @@ export default function ProductReviewsSection({ productId }) {
               <button
                 onClick={handleLoadMore}
                 disabled={loading}
-                className="inline-flex items-center gap-2 px-8 py-3 border border-stone-200 hover:border-stone-900 rounded-full text-[10px] font-bold uppercase tracking-widest text-stone-700 hover:text-stone-900 transition-all cursor-pointer shadow-sm disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-8 py-3 border border-gray-300 hover:border-gray-900 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-700 hover:text-black transition-all cursor-pointer shadow-sm disabled:opacity-50"
               >
                 {loading ? (
                   <>
@@ -771,29 +776,29 @@ export default function ProductReviewsSection({ productId }) {
       {/* ✍️ SUBMIT A REVIEW MODAL (OVERLAY) */}
       {showWriteModal && isEligible && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-10 shadow-2xl relative border border-stone-100 max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-10 shadow-2xl relative border border-gray-200 max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setShowWriteModal(false)}
-              className="absolute top-5 right-5 text-stone-400 hover:text-stone-700 p-2 rounded-full hover:bg-stone-50 transition-all cursor-pointer"
+              className="absolute top-5 right-5 text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-white transition-all cursor-pointer"
               aria-label="Close form"
             >
               <X className="w-5 h-5" />
             </button>
             
             <div className="text-center mb-8">
-              <h3 className="text-lg font-serif text-stone-950 tracking-wider uppercase font-light">
+              <h3 className="text-lg font-serif text-black tracking-wider uppercase font-light">
                 Submit a Review
               </h3>
-              <p className="text-[10px] text-stone-400 font-bold tracking-widest uppercase mt-1.5">
+              <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase mt-1.5">
                 Share your details and purchase experience
               </p>
-              <div className="h-[2px] w-8 bg-[#B8934E] mt-3 mx-auto"></div>
+              <div className="h-[2px] w-8 bg-[black] mt-3 mx-auto"></div>
             </div>
 
             <form onSubmit={handleSubmitReview} className="space-y-6">
               {/* Stars Selector */}
-              <div className="flex flex-col items-center bg-stone-50 border border-stone-100/50 p-5 rounded-2xl shadow-inner">
-                <span className="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-2.5">
+              <div className="flex flex-col items-center bg-white border border-gray-200/50 p-5 rounded-2xl shadow-inner">
+                <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-2.5">
                   Your Rating Selection
                 </span>
                 <div className="flex space-x-2.5">
@@ -807,8 +812,8 @@ export default function ProductReviewsSection({ productId }) {
                       <Star
                         className={`w-8 h-8 stroke-[1.2] ${
                           star <= writeRating
-                            ? "text-[#B8934E] fill-[#B8934E]"
-                            : "text-stone-200"
+                            ? "text-[black] fill-[black]"
+                            : "text-gray-300"
                         }`}
                       />
                     </button>
@@ -818,7 +823,7 @@ export default function ProductReviewsSection({ productId }) {
 
               {/* Review Text */}
               <div className="space-y-1.5">
-                <label className="text-[9px] font-bold text-stone-400 uppercase tracking-widest block pl-1">
+                <label className="text-[9px] font-bold text-gray-500 uppercase tracking-widest block pl-1">
                   Detailed Comment
                 </label>
                 <textarea
@@ -826,7 +831,7 @@ export default function ProductReviewsSection({ productId }) {
                   rows="4"
                   value={writeComment}
                   onChange={(e) => setWriteComment(e.target.value)}
-                  className="w-full bg-stone-50 border border-stone-200/80 rounded-xl p-4 text-xs sm:text-sm focus:outline-none focus:border-stone-905 focus:bg-white transition-colors placeholder:text-stone-300 font-medium resize-none shadow-sm"
+                  className="w-full bg-white border border-gray-300/80 rounded-xl p-4 text-xs sm:text-sm focus:outline-none focus:border-gray-900 focus:bg-white transition-colors placeholder:text-gray-400 font-medium resize-none shadow-sm"
                   placeholder="Tell us about the craftsmanship, fit, details, color variations, or design finish..."
                 />
               </div>
@@ -835,7 +840,7 @@ export default function ProductReviewsSection({ productId }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Images Upload */}
                 <div className="space-y-1.5">
-                  <span className="text-[9px] font-bold text-stone-400 uppercase tracking-widest block pl-1">
+                  <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest block pl-1">
                     Upload Photos (Max 10)
                   </span>
                   <input
@@ -851,12 +856,12 @@ export default function ProductReviewsSection({ productId }) {
                     type="button"
                     onClick={() => imageInputRef.current.click()}
                     disabled={uploadingImage || uploadedImages.length >= 10}
-                    className="w-full py-3 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-xl text-[10px] font-bold text-stone-700 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
+                    className="w-full py-3 bg-white hover:bg-gray-50 border border-gray-300 rounded-xl text-[10px] font-bold text-gray-700 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
                   >
                     {uploadingImage ? (
-                      <Loader2 className="w-3.5 h-3.5 animate-spin text-stone-500" />
+                      <Loader2 className="w-3.5 h-3.5 animate-spin text-gray-600" />
                     ) : (
-                      <Upload className="w-3.5 h-3.5 text-stone-400" />
+                      <Upload className="w-3.5 h-3.5 text-gray-500" />
                     )}
                     Select Images
                   </button>
@@ -864,7 +869,7 @@ export default function ProductReviewsSection({ productId }) {
 
                 {/* Videos Upload */}
                 <div className="space-y-1.5">
-                  <span className="text-[9px] font-bold text-stone-400 uppercase tracking-widest block pl-1">
+                  <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest block pl-1">
                     Upload Videos (Max 2, 30s limit)
                   </span>
                   <input
@@ -879,12 +884,12 @@ export default function ProductReviewsSection({ productId }) {
                     type="button"
                     onClick={() => videoInputRef.current.click()}
                     disabled={uploadingVideo || uploadedVideos.length >= 2}
-                    className="w-full py-3 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-xl text-[10px] font-bold text-stone-700 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
+                    className="w-full py-3 bg-white hover:bg-gray-50 border border-gray-300 rounded-xl text-[10px] font-bold text-gray-700 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
                   >
                     {uploadingVideo ? (
-                      <Loader2 className="w-3.5 h-3.5 animate-spin text-stone-500" />
+                      <Loader2 className="w-3.5 h-3.5 animate-spin text-gray-600" />
                     ) : (
-                      <Upload className="w-3.5 h-3.5 text-stone-400" />
+                      <Upload className="w-3.5 h-3.5 text-gray-500" />
                     )}
                     Select Videos
                   </button>
@@ -893,8 +898,8 @@ export default function ProductReviewsSection({ productId }) {
 
               {/* Uploaded Files Preview Thumbnails */}
               {(uploadedImages.length > 0 || uploadedVideos.length > 0) && (
-                <div className="space-y-2 bg-stone-50/50 border border-stone-100 p-4 rounded-xl shadow-inner">
-                  <h4 className="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">
+                <div className="space-y-2 bg-white/50 border border-gray-200 p-4 rounded-xl shadow-inner">
+                  <h4 className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">
                     Attached Files ({uploadedImages.length + uploadedVideos.length} / 12)
                   </h4>
                   <div className="flex flex-wrap gap-2">
@@ -902,7 +907,7 @@ export default function ProductReviewsSection({ productId }) {
                     {uploadedImages.map((img, idx) => (
                       <div
                         key={img.public_id}
-                        className="w-12 h-12 rounded-lg overflow-hidden border border-stone-200 relative group shadow-sm flex-shrink-0"
+                        className="w-12 h-12 rounded-lg overflow-hidden border border-gray-300 relative group shadow-sm flex-shrink-0"
                       >
                         <img src={img.url} alt="Attached" className="w-full h-full object-cover" />
                         <button
@@ -918,7 +923,7 @@ export default function ProductReviewsSection({ productId }) {
                     {uploadedVideos.map((vid, idx) => (
                       <div
                         key={vid.public_id}
-                        className="w-12 h-12 rounded-lg overflow-hidden border border-stone-200 relative group shadow-sm flex-shrink-0 bg-black"
+                        className="w-12 h-12 rounded-lg overflow-hidden border border-gray-300 relative group shadow-sm flex-shrink-0 bg-black"
                       >
                         <video src={vid.url} className="w-full h-full object-cover opacity-70" />
                         <button
@@ -942,7 +947,7 @@ export default function ProductReviewsSection({ productId }) {
                 id="review-submit-btn"
                 type="submit"
                 disabled={isSubmitting || uploadingImage || uploadingVideo}
-                className="w-full py-4 bg-[#B8934E] hover:bg-[#a6803f] text-white text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all shadow hover:shadow-md cursor-pointer disabled:bg-stone-100 disabled:text-stone-400 disabled:cursor-not-allowed flex items-center justify-center"
+                className="w-full py-4 bg-[black] hover:bg-[#a6803f] text-white text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all shadow hover:shadow-md cursor-pointer disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center justify-center"
               >
                 {isSubmitting ? (
                   <>

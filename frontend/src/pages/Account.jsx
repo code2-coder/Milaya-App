@@ -79,15 +79,15 @@ export function Account() {
    // Helper for Input Field
    const InputField = ({ label, icon: Icon, value, onChange, placeholder, type = "text" }) => (
       <div className="flex flex-col gap-1.5">
-         <label className="text-sm font-semibold text-gray-700 ml-1">{label}</label>
+         <label className="text-xs font-bold tracking-widest text-black uppercase ml-1">{label}</label>
          <div className="relative group">
-            {Icon && <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-900 transition-colors"><Icon className="w-5 h-5" /></div>}
+            {Icon && <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-black transition-colors"><Icon className="w-5 h-5" /></div>}
             <input 
                type={type}
                value={value}
                onChange={onChange}
                placeholder={placeholder}
-               className={`w-full bg-white border border-gray-300 text-gray-900 rounded-xl px-4 py-3 outline-none transition-all duration-200 focus:bg-white focus:ring-2 focus:ring-gray-900/20 focus:border-gray-900 hover:border-gray-400 shadow-sm ${Icon ? 'pl-11' : ''}`}
+               className={`w-full bg-white border border-gray-200 text-black rounded-xl px-4 py-3 outline-none transition-all duration-200 focus:bg-white focus:ring-1 focus:ring-black focus:border-black hover:border-black/40 shadow-sm font-medium ${Icon ? 'pl-11' : ''}`}
             />
          </div>
       </div>
@@ -95,13 +95,13 @@ export function Account() {
 
    // Helper for Display Field
    const DisplayField = ({ label, icon: Icon, value }) => (
-      <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100 transition-all duration-300">
-         <div className="p-3 bg-white text-gray-500 rounded-lg shadow-sm border border-gray-100">
+      <div className="flex items-center gap-4 p-4 rounded-xl bg-white border border-gray-100 hover:border-black/10 hover:shadow-sm transition-all duration-300 group">
+         <div className="p-3 bg-gray-50 text-gray-400 rounded-lg group-hover:bg-black group-hover:text-white transition-colors duration-300">
             <Icon className="w-5 h-5" />
          </div>
          <div className="flex-1">
-            <p className="text-[11px] font-bold tracking-wider text-gray-500 uppercase mb-0.5">{label}</p>
-            <p className="text-sm font-medium text-gray-900">{value || <span className="text-gray-400 italic">Not provided</span>}</p>
+            <p className="text-[10px] font-bold tracking-widest text-gray-400 uppercase mb-1">{label}</p>
+            <p className="text-sm font-semibold text-black">{value || <span className="text-gray-300 italic">Not provided</span>}</p>
          </div>
       </div>
    );
@@ -126,22 +126,22 @@ export function Account() {
                <div className="lg:w-80 flex-shrink-0 flex flex-col gap-6">
                   {/* User Card */}
                   <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
-                     <div className="relative mb-5">
-                        <div className="w-24 h-24 rounded-full bg-gray-100 p-1.5 shadow-sm border border-gray-200">
-                           <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
-                              <span className="text-3xl font-bold text-white">
+                     <div className="relative mb-5 group cursor-pointer">
+                        <div className="w-24 h-24 rounded-full bg-white p-1 border-2 border-black/10 group-hover:border-black transition-colors duration-300">
+                           <div className="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden">
+                              <span className="text-3xl font-serif font-bold text-white">
                                  {user.name?.charAt(0)?.toUpperCase() || 'U'}
                               </span>
                            </div>
                         </div>
-                        <button className="absolute bottom-0 right-0 p-2 bg-white rounded-full shadow-sm text-gray-500 hover:text-gray-900 transition-colors border border-gray-200 hover:scale-105 active:scale-95">
-                           <Camera className="w-4 h-4" />
+                        <button className="absolute bottom-0 right-0 p-2 bg-black rounded-full shadow-lg text-white hover:bg-gray-900 transition-colors border-2 border-white hover:scale-105 active:scale-95">
+                           <Camera className="w-3.5 h-3.5" />
                         </button>
                      </div>
-                     <h2 className="text-xl font-bold text-gray-900">{user.name}</h2>
+                     <h2 className="text-xl font-serif font-bold text-black">{user.name}</h2>
                      <p className="text-sm text-gray-500 mt-1">{user.email}</p>
-                     <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold uppercase tracking-wider">
-                        <Shield className="w-3.5 h-3.5" /> {user.role}
+                     <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1 bg-black text-white text-[10px] font-bold uppercase tracking-widest">
+                        <Shield className="w-3 h-3" /> {user.role}
                      </div>
                   </div>
 
@@ -151,16 +151,16 @@ export function Account() {
                         <button 
                            key={item.id}
                            onClick={item.onClick}
-                           className={`flex items-center gap-4 w-full p-3 rounded-xl transition-all duration-200 group ${item.active ? 'bg-gray-900 text-white' : 'hover:bg-gray-50 text-gray-700'}`}
+                           className={`flex items-center gap-4 w-full p-3 transition-all duration-200 group border-l-2 ${item.active ? 'bg-black/5 border-black text-black' : 'border-transparent hover:bg-gray-50 text-gray-500 hover:text-black'}`}
                         >
-                           <div className={`p-2 rounded-lg transition-colors ${item.active ? 'bg-gray-800 text-white' : 'bg-white text-gray-500 shadow-sm border border-gray-200 group-hover:text-gray-900 group-hover:border-gray-300'}`}>
+                           <div className={`p-2 transition-colors ${item.active ? 'text-black' : 'text-gray-400 group-hover:text-black'}`}>
                               <item.icon className="w-5 h-5" />
                            </div>
                            <div className="flex-1 text-left">
-                              <p className={`font-semibold text-sm ${item.active ? 'text-white' : 'text-gray-900'}`}>{item.label}</p>
-                              <p className={`text-xs mt-0.5 ${item.active ? 'text-gray-300' : 'text-gray-500'}`}>{item.desc}</p>
+                              <p className={`font-semibold text-sm ${item.active ? 'text-black' : 'text-gray-500 group-hover:text-black'}`}>{item.label}</p>
+                              <p className={`text-[10px] tracking-wide mt-0.5 ${item.active ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500'}`}>{item.desc}</p>
                            </div>
-                           {!item.active && <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-transform group-hover:translate-x-1" />}
+                           {!item.active && <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-black transition-transform group-hover:translate-x-1" />}
                         </button>
                      ))}
 
@@ -168,14 +168,14 @@ export function Account() {
                      
                      <button 
                         onClick={logout}
-                        className="flex items-center gap-4 w-full p-3 rounded-xl transition-all duration-200 hover:bg-red-50 group"
+                        className="flex items-center gap-4 w-full p-3 transition-all duration-200 hover:bg-red-50 group border-l-2 border-transparent hover:border-red-500"
                      >
-                        <div className="p-2 rounded-lg bg-white text-red-500 shadow-sm border border-red-100 group-hover:bg-red-100 transition-colors">
+                        <div className="p-2 text-red-400 group-hover:text-red-600 transition-colors">
                            <LogOut className="w-5 h-5" />
                         </div>
                         <div className="flex-1 text-left">
-                           <p className="font-semibold text-sm text-red-600 group-hover:text-red-700">Sign Out</p>
-                           <p className="text-xs mt-0.5 text-red-400">End your session</p>
+                           <p className="font-semibold text-sm text-gray-500 group-hover:text-red-600">Sign Out</p>
+                           <p className="text-[10px] tracking-wide mt-0.5 text-gray-400 group-hover:text-red-400">End your session</p>
                         </div>
                      </button>
                   </div>
@@ -188,14 +188,14 @@ export function Account() {
                      {/* Header */}
                      <div className="px-6 sm:px-10 py-8 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                         <div>
-                           <h1 className="text-2xl font-bold text-gray-900">Profile Settings</h1>
-                           <p className="text-sm text-gray-500 mt-1">Manage your personal information and delivery addresses.</p>
+                           <h1 className="text-3xl font-serif font-bold text-black">Profile Settings</h1>
+                           <p className="text-sm text-gray-500 mt-1">Manage your personal information and preferences.</p>
                         </div>
                         
                         {!isEditing ? (
                            <button 
                               onClick={() => setIsEditing(true)} 
-                              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-gray-900 text-white font-medium text-sm rounded-xl hover:bg-black transition-colors shadow-sm"
+                              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-black text-white font-bold text-xs uppercase tracking-widest rounded-none hover:bg-gray-900 transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
                            >
                               <Edit3 className="w-4 h-4" /> Edit Profile
                            </button>
@@ -203,14 +203,14 @@ export function Account() {
                            <div className="flex items-center gap-3">
                               <button 
                                  onClick={() => { setIsEditing(false); resetForm(); }} 
-                                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-gray-700 font-medium text-sm rounded-xl border border-gray-300 hover:bg-gray-50 transition-colors shadow-sm"
+                                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-bold text-xs uppercase tracking-widest border border-black hover:bg-gray-50 transition-colors"
                               >
                                  <X className="w-4 h-4" /> Cancel
                               </button>
                               <button 
                                  onClick={handleUpdateProfile}
                                  disabled={isSaving}
-                                 className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-gray-900 text-white font-medium text-sm rounded-xl hover:bg-black transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed"
+                                 className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-black text-white font-bold text-xs uppercase tracking-widest hover:bg-gray-900 transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                               >
                                  {isSaving ? (
                                     <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -228,7 +228,7 @@ export function Account() {
                            <div className="space-y-10">
                               {/* Form Section 1 */}
                               <div>
-                                 <h3 className="text-sm font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                                 <h3 className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-6 flex items-center gap-2">
                                     <User className="w-4 h-4 text-gray-400" /> Personal Information
                                  </h3>
                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
@@ -239,29 +239,12 @@ export function Account() {
                                  </div>
                               </div>
 
-                              <div className="h-px w-full bg-gray-100"></div>
-
-                              {/* Form Section 2 */}
-                              <div>
-                                 <h3 className="text-sm font-semibold text-gray-900 mb-6 flex items-center gap-2">
-                                    <MapPin className="w-4 h-4 text-gray-400" /> Default Shipping Address
-                                 </h3>
-                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                                    <div className="md:col-span-2">
-                                       <InputField label="Street Address" icon={Map} value={profileForm.street} onChange={e => setProfileForm({ ...profileForm, street: e.target.value })} placeholder="123 Main St, Apt 4B" />
-                                    </div>
-                                    <InputField label="Landmark" icon={MapPin} value={profileForm.landmark} onChange={e => setProfileForm({ ...profileForm, landmark: e.target.value })} placeholder="Near Central Park" />
-                                    <InputField label="City" icon={MapPin} value={profileForm.city} onChange={e => setProfileForm({ ...profileForm, city: e.target.value })} placeholder="New York" />
-                                    <InputField label="State" icon={MapPin} value={profileForm.state} onChange={e => setProfileForm({ ...profileForm, state: e.target.value })} placeholder="NY" />
-                                    <InputField label="Pin / Zip Code" icon={MapPin} value={profileForm.pinCode} onChange={e => setProfileForm({ ...profileForm, pinCode: e.target.value })} placeholder="10001" />
-                                 </div>
-                              </div>
                            </div>
                         ) : (
                            <div className="space-y-10">
                               {/* View Section 1 */}
                               <div>
-                                 <h3 className="text-sm font-semibold text-gray-900 mb-6">
+                                 <h3 className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-6">
                                     Basic Information
                                  </h3>
                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -272,42 +255,6 @@ export function Account() {
                                  </div>
                               </div>
 
-                              <div className="h-px w-full bg-gray-100"></div>
-
-                              {/* View Section 2 */}
-                              <div>
-                                 <h3 className="text-sm font-semibold text-gray-900 mb-6">
-                                    Shipping Address
-                                 </h3>
-                                 <div className="p-6 sm:p-8 rounded-2xl bg-gray-50 border border-gray-100 relative">
-                                    {(profileForm.street || profileForm.city || profileForm.state || profileForm.pinCode || profileForm.landmark) ? (
-                                       <div className="relative z-10 flex flex-col sm:flex-row gap-6 items-start">
-                                          <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center border border-gray-100 shrink-0">
-                                             <MapPin className="w-6 h-6 text-gray-400" />
-                                          </div>
-                                          <div>
-                                             <p className="font-bold text-gray-900 mb-2">{profileForm.name}</p>
-                                             <p className="text-gray-600 text-sm leading-relaxed max-w-md">
-                                                {profileForm.street && <>{profileForm.street}<br/></>}
-                                                {profileForm.landmark && <><span className="text-gray-500">Landmark:</span> {profileForm.landmark}<br/></>}
-                                                {[profileForm.city, profileForm.state, profileForm.pinCode].filter(Boolean).join(", ")}
-                                             </p>
-                                          </div>
-                                       </div>
-                                    ) : (
-                                       <div className="relative z-10 text-center py-6">
-                                          <div className="w-16 h-16 mx-auto bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-400 mb-4">
-                                             <Map className="w-8 h-8" />
-                                          </div>
-                                          <p className="text-gray-900 font-semibold mb-1">No address provided yet.</p>
-                                          <p className="text-gray-500 text-sm mb-6">Add your shipping details for faster checkout.</p>
-                                          <button onClick={() => setIsEditing(true)} className="px-6 py-2.5 bg-white border border-gray-300 shadow-sm rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors">
-                                             Add Address
-                                          </button>
-                                       </div>
-                                    )}
-                                 </div>
-                              </div>
                            </div>
                         )}
                      </div>

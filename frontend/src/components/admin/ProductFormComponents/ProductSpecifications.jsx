@@ -55,7 +55,7 @@ export default function ProductSpecifications({ attributes, onCreateAttr, onEdit
   const { register } = useFormContext();
 
   const dropdownSpecs = [
-    { name: 'material',      label: 'Material',          attributeType: 'material'       },
+    { name: 'material',      label: 'Fabric / Material', attributeType: 'material'       },
     { name: 'metal',         label: 'Metal',             attributeType: 'metal'          },
     { name: 'stoneType',     label: 'Stone Type',        attributeType: 'stoneType'      },
     { name: 'finish',        label: 'Finish',            attributeType: 'finish'         },
@@ -65,6 +65,17 @@ export default function ProductSpecifications({ attributes, onCreateAttr, onEdit
     { name: 'pattern',       label: 'Pattern',           attributeType: 'pattern'        },
     { name: 'shape',         label: 'Shape',             attributeType: 'shape'          },
     { name: 'countryOfOrigin', label: 'Country of Origin', attributeType: 'countryOfOrigin' },
+    { name: 'fit',           label: 'Fit',               attributeType: 'fit'            },
+    { name: 'sleeveType',    label: 'Sleeve Type',       attributeType: 'sleeveType'     },
+    { name: 'neckType',      label: 'Neck Type',         attributeType: 'neckType'       },
+    { name: 'occasion',      label: 'Occasion',          attributeType: 'occasion'       },
+    { name: 'closureType',   label: 'Closure Type',      attributeType: 'closureType'    },
+    { name: 'length',        label: 'Length',            attributeType: 'length'         },
+    { name: 'waistRise',     label: 'Waist Rise',        attributeType: 'waistRise'      },
+    { name: 'stretch',       label: 'Stretch',           attributeType: 'stretch'        },
+    { name: 'transparency',  label: 'Transparency',      attributeType: 'transparency'   },
+    { name: 'careInstructions', label: 'Care Instructions', attributeType: 'careInstructions' },
+    { name: 'season',        label: 'Season',            attributeType: 'season'         },
   ];
 
   return (

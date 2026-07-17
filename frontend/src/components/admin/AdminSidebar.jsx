@@ -94,25 +94,7 @@ import {
         <div className="px-4 pb-6 space-y-2">
 
   
-          <button 
-             onClick={() => {
-               if (location.pathname !== '/admin') {
-                 navigate('/admin', { state: { activeTab: "settings" } });
-               } else {
-                 setActiveTab("settings");
-               }
-               setIsMobileMenuOpen(false);
-             }}
-             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 ${
-               activeTab === "settings"
-                 ? "bg-gray-100 text-gray-900 font-medium" 
-                 : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-             }`}
-          >
-            <Settings className={`w-5 h-5 ${activeTab === "settings" ? "text-gray-900" : "text-gray-400"}`} />
-            <span className="text-sm font-medium">Settings</span>
-          </button>
-  
+
           <button 
              onClick={() => navigate("/")}
              className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-500 hover:bg-red-50 hover:text-red-600 transition-all duration-200"

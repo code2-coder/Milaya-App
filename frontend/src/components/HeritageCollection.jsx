@@ -12,7 +12,7 @@ export function HeritageCollection() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
         <div className="absolute top-[-10%] right-[-10%] w-[1000px] h-[1000px] bg-[#B8934E] rounded-full mix-blend-screen filter blur-[300px] opacity-[0.07]"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-[1000px] h-[1000px] bg-[#DDA7A5] rounded-full mix-blend-screen filter blur-[300px] opacity-[0.05]"></div>
-        <div className="absolute inset-0 bg-[url('/lotus-bg.png')] bg-repeat opacity-[0.02] mix-blend-overlay"></div>
+
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

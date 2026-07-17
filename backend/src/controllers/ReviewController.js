@@ -63,21 +63,14 @@ export class ReviewController {
       return next(new ErrorHandler("You have already submitted a review for this product", 400));
     }
 
-    // 2. Eligibility check: Customer must have purchased and received the product
+    // 2. Determine Verification Status (did they buy it?)
     const order = await Order.findOne({
       user: userId,
       orderStatus: "Delivered",
       "orderItems.product": productId,
     });
 
-    if (!order) {
-      return next(
-        new ErrorHandler(
-          "Only customers who have purchased and received this product can write a review",
-          403
-        )
-      );
-    }
+    const isVerifiedPurchase = !!order;
 
     // 3. Validation limits: Up to 10 images, up to 2 videos
     if (images.length > 10) {
@@ -97,11 +90,14 @@ export class ReviewController {
       comment: sanitizedComment,
       images,
       videos,
-      isVerifiedPurchase: true,
-      status: "Pending", // Always starts pending approval
+      isVerifiedPurchase,
+      status: "Approved", // Auto-approve for immediate display
     });
 
-    return sendResponse(res, 201, true, "Review submitted successfully and is pending administrator approval", {
+    // Recompute product ratings dynamically so the UI updates instantly
+    await recalculateProductRatings(productId);
+
+    return sendResponse(res, 201, true, "Review submitted and published successfully", {
       review,
     });
   });
@@ -460,25 +456,17 @@ export class ReviewController {
       });
     }
 
-    // 2. Check purchase & delivery status
+    // 2. Determine Verified Status
     const order = await Order.findOne({
       user: userId,
       orderStatus: "Delivered",
       "orderItems.product": productId
     });
 
-    if (!order) {
-      return res.status(200).json({
-        success: true,
-        eligible: false,
-        reason: "no_purchase",
-        message: "Only customers who have purchased and received this product can write a review."
-      });
-    }
-
     return res.status(200).json({
       success: true,
       eligible: true,
+      isVerifiedPurchase: !!order,
       message: "You are eligible to submit a review."
     });
   });

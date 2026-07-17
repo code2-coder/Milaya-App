@@ -61,7 +61,7 @@ export const PackagingSelector = ({
     return (
         <div className={`space-y-4 ${className}`}>
             <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
-                <Gift className="w-4 h-4 text-[#B8934E]" strokeWidth={2.5} />
+                <Gift className="w-4 h-4 text-[black]" strokeWidth={2.5} />
                 Select Packaging
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -72,8 +72,8 @@ export const PackagingSelector = ({
                             key={option.id}
                             className={`relative flex flex-col p-5 border rounded-2xl cursor-pointer transition-all duration-300 group
                                 ${isSelected 
-                                    ? 'border-[#B8934E] bg-[#FAF9F6] ring-1 ring-[#B8934E]/25 shadow-md scale-[1.01]' 
-                                    : 'border-gray-200 bg-white hover:border-[#B8934E]/40 hover:bg-[#FCFAF8]'}`}
+                                    ? 'border-[black] bg-[#ffffff] ring-1 ring-[black]/25 shadow-md scale-[1.01]' 
+                                    : 'border-gray-200 bg-white hover:border-[black]/40 hover:bg-[#f9fafb]'}`}
                         >
                             <input
                                 type="radio"
@@ -84,19 +84,19 @@ export const PackagingSelector = ({
                                 className="hidden"
                             />
                             {isSelected && (
-                                <div className="absolute top-4 right-4 text-[#B8934E] animate-fade-in">
+                                <div className="absolute top-4 right-4 text-[black] animate-fade-in">
                                     <CheckCircle2 className="w-5 h-5" />
                                 </div>
                             )}
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className={`p-2 rounded-xl transition-all ${isSelected ? 'bg-[#B8934E]/10 text-[#B8934E]' : 'bg-gray-100 text-gray-400 group-hover:bg-[#B8934E]/10 group-hover:text-[#B8934E]'}`}>
+                            <div className="flex items-start gap-3 mb-3 pr-6">
+                                <div className={`flex-shrink-0 p-2 rounded-xl transition-all ${isSelected ? 'bg-black/10 text-black' : 'bg-gray-100 text-gray-400 group-hover:bg-black/10 group-hover:text-black'}`}>
                                     {option.id === 'premium' ? (
                                         <Gift className="w-5 h-5" />
                                     ) : (
                                         <Package className="w-5 h-5" />
                                     )}
                                 </div>
-                                <div className="font-serif font-semibold text-base text-[#0B0F19]">{option.name}</div>
+                                <div className="font-serif font-semibold text-sm leading-snug break-words text-black mt-0.5">{option.name}</div>
                             </div>
                             {option.description && (
                                 <div className="text-xs text-gray-400/80 flex-1 mb-4 leading-relaxed font-sans">{option.description}</div>
@@ -104,7 +104,7 @@ export const PackagingSelector = ({
                             <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
                                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Price</span>
                                 {option.price > 0 ? (
-                                    <div className="font-bold text-base text-[#B8934E]">+{formatPrice(option.price)}</div>
+                                    <div className="font-bold text-base text-[black]">+{formatPrice(option.price)}</div>
                                 ) : (
                                     <div className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest bg-emerald-100/60 px-2 py-0.5 rounded-md">Included</div>
                                 )}
@@ -191,7 +191,7 @@ export const ShippingMethodSelector = ({
     return (
         <div className={`space-y-4 ${className}`}>
             <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
-                <Truck className="w-4 h-4 text-[#B8934E]" strokeWidth={2.5} />
+                <Truck className="w-4 h-4 text-[black]" strokeWidth={2.5} />
                 Shipping Method
             </h3>
             
@@ -210,13 +210,13 @@ export const ShippingMethodSelector = ({
                             key={option.id}
                             className={`flex items-center justify-between p-4 border rounded-2xl cursor-pointer transition-all duration-300
                                 ${isSelected 
-                                    ? 'border-[#B8934E] bg-[#FAF9F6] ring-1 ring-[#B8934E]/20 shadow-sm scale-[1.005]' 
-                                    : 'border-gray-200 bg-white hover:border-[#B8934E]/40 hover:bg-[#FCFAF8]'}`}
+                                    ? 'border-[black] bg-[#ffffff] ring-1 ring-[black]/20 shadow-sm scale-[1.005]' 
+                                    : 'border-gray-200 bg-white hover:border-[black]/40 hover:bg-[#f9fafb]'}`}
                         >
                             <div className="flex items-center gap-4">
                                 <div className={`flex flex-shrink-0 items-center justify-center w-5 h-5 rounded-full border-2 transition-colors
-                                    ${isSelected ? 'border-[#B8934E] bg-white' : 'border-gray-300'}`}>
-                                    {isSelected && <div className="w-2.5 h-2.5 bg-[#B8934E] rounded-full"></div>}
+                                    ${isSelected ? 'border-[black] bg-white' : 'border-gray-300'}`}>
+                                    {isSelected && <div className="w-2.5 h-2.5 bg-[black] rounded-full"></div>}
                                 </div>
                                 <input
                                     type="radio"
@@ -227,11 +227,11 @@ export const ShippingMethodSelector = ({
                                     className="hidden"
                                 />
                                 <div className="flex flex-col justify-center">
-                                    <div className="font-serif font-semibold text-[#0B0F19] text-base">{option.name}</div>
+                                    <div className="font-serif font-semibold text-[black] text-base">{option.name}</div>
                                     <div className="text-xs text-gray-400 mt-0.5 font-sans font-medium">{option.description}</div>
                                     {option.deliveryDays && (
                                         <div className="mt-2">
-                                            <span className="text-[10px] font-bold text-[#800000] bg-red-50 border border-[#800000]/15 px-2 py-0.5 rounded-md font-sans">
+                                            <span className="text-[10px] font-bold text-[black] bg-red-50 border border-[black]/15 px-2 py-0.5 rounded-md font-sans">
                                                 Est: {option.deliveryDays}
                                             </span>
                                         </div>
@@ -242,7 +242,7 @@ export const ShippingMethodSelector = ({
                                 {option.isFree ? (
                                     <div className="text-sm font-bold text-emerald-700 uppercase tracking-wider bg-emerald-100/60 px-2.5 py-1 rounded-md">Free</div>
                                 ) : (
-                                    <div className="text-base font-bold text-[#0B0F19] font-sans">{formatPrice(option.price)}</div>
+                                    <div className="text-base font-bold text-[black] font-sans">{formatPrice(option.price)}</div>
                                 )}
                             </div>
                         </label>

@@ -57,10 +57,9 @@ export const AdminShippingCreate = () => {
         fullName:    defaultAddr?.fullName    || order.shippingInfo?.fullName    || "",
         mobileNumber: defaultAddr?.phoneNo   || order.shippingInfo?.phoneNo     || "",
         addressLine1: defaultAddr?.address   || order.shippingInfo?.address     || "",
-        addressLine2: "",
-        landmark: "",
+        landmark: defaultAddr?.landmark      || order.shippingInfo?.landmark    || "",
         city:     defaultAddr?.city          || order.shippingInfo?.city        || "",
-        state:    defaultAddr?.state         || "",
+        state:    defaultAddr?.state         || order.shippingInfo?.state       || "",
         country:  defaultAddr?.country       || order.shippingInfo?.country     || "India",
         pincode:  defaultAddr?.zipCode       || order.shippingInfo?.zipCode     || "",
       },
@@ -155,8 +154,7 @@ export const AdminShippingCreate = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div><label className={labelClass}>Full Name</label><input value={form.shippingAddress.fullName} onChange={(e) => updateAddress("fullName", e.target.value)} className={inputClass} /></div>
               <div><label className={labelClass}>Mobile Number</label><input value={form.shippingAddress.mobileNumber} onChange={(e) => updateAddress("mobileNumber", e.target.value)} className={inputClass} /></div>
-              <div className="md:col-span-2"><label className={labelClass}>Address Line 1</label><input value={form.shippingAddress.addressLine1} onChange={(e) => updateAddress("addressLine1", e.target.value)} className={inputClass} /></div>
-              <div className="md:col-span-2"><label className={labelClass}>Address Line 2</label><input value={form.shippingAddress.addressLine2} onChange={(e) => updateAddress("addressLine2", e.target.value)} className={inputClass} /></div>
+              <div className="md:col-span-2"><label className={labelClass}>Street Address</label><input value={form.shippingAddress.addressLine1} onChange={(e) => updateAddress("addressLine1", e.target.value)} className={inputClass} /></div>
               <div><label className={labelClass}>Landmark</label><input value={form.shippingAddress.landmark} onChange={(e) => updateAddress("landmark", e.target.value)} className={inputClass} /></div>
               <div><label className={labelClass}>City</label><input value={form.shippingAddress.city} onChange={(e) => updateAddress("city", e.target.value)} className={inputClass} /></div>
               <div><label className={labelClass}>State</label><input value={form.shippingAddress.state} onChange={(e) => updateAddress("state", e.target.value)} className={inputClass} /></div>

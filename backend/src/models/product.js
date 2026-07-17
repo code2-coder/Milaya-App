@@ -103,6 +103,17 @@ const productSchema = new mongoose.Schema(
     shape: {
       type: String, // e.g. Round, Oval, Square
     },
+    fit: { type: String },
+    sleeveType: { type: String },
+    neckType: { type: String },
+    occasion: { type: String },
+    closureType: { type: String },
+    length: { type: String },
+    waistRise: { type: String },
+    stretch: { type: String },
+    transparency: { type: String },
+    careInstructions: { type: String },
+    season: { type: String },
     weight: {
       type: String, // e.g. 12g, 50g (string to allow units)
     },
