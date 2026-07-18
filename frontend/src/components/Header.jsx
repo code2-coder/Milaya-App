@@ -500,9 +500,9 @@ export function Header() {
 
 
           <div className="flex items-center space-x-6 md:space-x-10">
-            <Link to="/" className="flex items-center space-x-2 group relative z-[70] ml-2">
+            <Link to="/" className="flex items-center space-x-2 group relative z-[70] -ml-2 md:-ml-4 lg:-ml-6">
               <div className="flex items-center">
-                <img src="/loginlogo-removebg-preview.png" alt="Milaya Logo" className="h-14 md:h-16 lg:h-20 w-auto object-contain scale-150 md:scale-[1.75] transition-transform duration-300 group-hover:scale-[1.8] filter drop-shadow-sm" />
+                <img src="/loginlogo-removebg-preview.png" alt="Milaya Logo" className="h-10 md:h-12 lg:h-16 w-auto object-contain scale-125 md:scale-150 transition-transform duration-300 group-hover:scale-[1.55] filter drop-shadow-sm" />
               </div>
             </Link>
 
