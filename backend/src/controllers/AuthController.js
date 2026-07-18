@@ -240,9 +240,7 @@ export class AuthController {
   }
 
   async googleCallback(req, res, next) {
-    const clientUrl = process.env.CLIENT_URL === 'https://clothing-app-iota.vercel.app' || process.env.CLIENT_URL === 'https://milaya-frontend-fullstack.vercel.app'
-      ? process.env.CLIENT_URL 
-      : 'https://www.milaya.com';
+    const clientUrl = process.env.CLIENT_URL || 'https://milaya-app.vercel.app';
 
     try {
       if (!req.user) {
