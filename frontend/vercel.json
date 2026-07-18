@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api/:match*", "destination": "https://milaya.onrender.com/api/:match*" },
+    { "source": "/api/:match*", "destination": "https://milaya-app.onrender.com/api/:match*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

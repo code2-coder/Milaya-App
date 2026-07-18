@@ -9,7 +9,7 @@ const getBaseUrl = () => {
 
   // Fallback defaults
   if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-    return 'https://milaya.onrender.com/api/v1';
+    return 'https://milaya-app.onrender.com/api/v1';
   }
   
   return 'http://localhost:8085/api/v1';

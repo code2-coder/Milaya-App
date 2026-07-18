@@ -130,7 +130,7 @@ export function DropdownMenu({ className = '' }) {
                     ) : (
                         <div className="p-3 space-y-3 mt-1">
                             <button 
-                                onClick={() => window.location.href = `${(import.meta.env.VITE_API_URL || 'https://milaya.onrender.com/api/v1').replace(/\/api\/v1\/?$/, '')}/api/v1/auth/google`} 
+                                onClick={() => window.location.href = `${(import.meta.env.VITE_API_URL || 'https://milaya-app.onrender.com/api/v1').replace(/\/api\/v1\/?$/, '')}/api/v1/auth/google`} 
                                 className="w-full group flex items-center justify-center space-x-3 px-4 py-3 bg-white border border-gray-200 text-gray-700 font-medium text-sm hover:bg-gray-50 hover:border-gray-300 transition-all focus:outline-none rounded-xl shadow-sm hover:shadow active:scale-[0.98]"
                             >
                                 <svg className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24">

@@ -983,7 +983,7 @@ export function Header() {
                 ) : (
                   <div className="pt-4">
                     <button
-                      onClick={() => window.location.href = `${(import.meta.env.VITE_API_URL || 'https://milaya.onrender.com/api/v1').replace(/\/api\/v1\/?$/, '')}/api/v1/auth/google`} 
+                      onClick={() => window.location.href = `${(import.meta.env.VITE_API_URL || 'https://milaya-app.onrender.com/api/v1').replace(/\/api\/v1\/?$/, '')}/api/v1/auth/google`} 
                       className="w-full flex items-center justify-center p-4 bg-obsidian text-white text-xs uppercase tracking-widest hover:bg-gray-800 transition-all space-x-3"
                     >
                       <svg className="w-4 h-4" viewBox="0 0 24 24">

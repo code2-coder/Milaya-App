@@ -241,7 +241,7 @@ export function Login() {
           {/* Official Google Sign-In Button */}
           <motion.button
             variants={itemVariants}
-            onClick={() => window.location.href = `${(import.meta.env.VITE_API_URL || 'https://milaya.onrender.com/api/v1').replace(/\/api\/v1\/?$/, '')}/api/v1/auth/google`}
+            onClick={() => window.location.href = `${(import.meta.env.VITE_API_URL || 'https://milaya-app.onrender.com/api/v1').replace(/\/api\/v1\/?$/, '')}/api/v1/auth/google`}
             className="w-full flex items-center justify-center space-x-3 bg-white hover:bg-gray-50 border border-gray-200 py-3.5 text-black transition-colors duration-300 focus:outline-none focus:ring-1 focus:ring-black"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
