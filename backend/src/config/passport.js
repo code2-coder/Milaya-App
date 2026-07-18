@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "./.env" });
 
-const callbackURL = process.env.GOOGLE_CALLBACK_URL || "https://milaya.onrender.com/api/v1/auth/google/callback";
+const callbackURL = process.env.GOOGLE_CALLBACK_URL || "https://milaya-app.onrender.com/api/v1/auth/google/callback";
 
 // Only register Google OAuth strategy if credentials are present.
 // Skipping gracefully prevents a startup crash when env vars are missing.
