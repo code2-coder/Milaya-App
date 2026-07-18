@@ -651,7 +651,7 @@ export function Header() {
                 onFocus={() => setShowSearchDropdown(true)}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder=""
-                className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-none border-2 border-black bg-gray-50/50 hover:bg-white hover:border-black focus:bg-white focus:outline-none focus:border-black focus:ring-0 transition-all duration-500 font-medium text-obsidian shadow-sm focus:shadow-md relative z-10"
+                className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-xl border-2 border-black bg-gray-50/50 hover:bg-white hover:border-black focus:bg-white focus:outline-none focus:border-black focus:ring-0 transition-all duration-500 font-medium text-obsidian shadow-sm focus:shadow-md relative z-10"
               />
               
               {!searchQuery && (
@@ -792,7 +792,7 @@ export function Header() {
               onFocus={() => setShowSearchDropdown(true)}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder=""
-              className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-none border-2 border-black bg-gray-50/50 hover:bg-white hover:border-black focus:bg-white focus:outline-none focus:border-black focus:ring-0 transition-all duration-500 font-medium text-obsidian shadow-sm focus:shadow-md relative z-10"
+              className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-xl border-2 border-black bg-gray-50/50 hover:bg-white hover:border-black focus:bg-white focus:outline-none focus:border-black focus:ring-0 transition-all duration-500 font-medium text-obsidian shadow-sm focus:shadow-md relative z-10"
             />
 
             {!searchQuery && (
