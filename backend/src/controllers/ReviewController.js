@@ -435,6 +435,53 @@ export class ReviewController {
   });
   
   //
+  // ✍️ CUSTOMER UPDATE REVIEW
+  //
+  updateReview = catchAsyncErrors(async (req, res, next) => {
+    const reviewId = req.params.id;
+    const { rating, comment, images = [], videos = [] } = req.body;
+    const userId = req.user._id;
+
+    const review = await Review.findById(reviewId);
+    if (!review) {
+      return next(new ErrorHandler("Review not found", 404));
+    }
+
+    // Authorization check: Only the owner of the review can update it
+    if (review.user.toString() !== userId.toString() && req.user.role !== "admin") {
+      return next(new ErrorHandler("You are not authorized to update this review", 403));
+    }
+
+    // Validation limits: Up to 10 images, up to 2 videos
+    if (images.length > 10) {
+      return next(new ErrorHandler("You can upload a maximum of 10 images", 400));
+    }
+    if (videos.length > 2) {
+      return next(new ErrorHandler("You can upload a maximum of 2 videos", 400));
+    }
+
+    // Sanitize comment input for XSS safety
+    const sanitizedComment = sanitizeHtml(comment);
+
+    review.rating = Number(rating);
+    review.comment = sanitizedComment;
+    review.images = images;
+    review.videos = videos;
+
+    // Reset status to Approved for immediate update
+    review.status = "Approved";
+
+    await review.save();
+
+    // Recompute product ratings dynamically so the UI updates instantly
+    await recalculateProductRatings(review.product);
+
+    return sendResponse(res, 200, true, "Review updated successfully", {
+      review,
+    });
+  });
+
+  //
   // ✍️ CHECK ELIGIBILITY (FOR CUSTOMER WRITING COMPONENT)
   //
   checkReviewEligibility = catchAsyncErrors(async (req, res, next) => {

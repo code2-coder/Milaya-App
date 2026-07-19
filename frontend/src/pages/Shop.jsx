@@ -27,6 +27,7 @@ const PRICE_RANGES = [
 const SORT_OPTIONS = [
   { label: "Latest", value: "newest" },
   { label: "Popularity", value: "popular" },
+  { label: "Best Sellers", value: "bestselling" },
   { label: "Price: Low to High", value: "price_asc" },
   { label: "Price: High to Low", value: "price_desc" }
 ];
@@ -333,8 +334,6 @@ const SidebarContent = ({ activeFilters, updateFilter, toggleArrayFilter, catego
 );
 
 export function Shop() {
-  useSEO("Shop All Collections", "Browse our complete collection of premium clothing, filter by budget and category.");
-  
   const [searchParams, setSearchParams] = useSearchParams();
   const { categories } = useCategory();
   const currencySymbol = '₹';
@@ -348,6 +347,7 @@ export function Shop() {
   const [attributes, setAttributes] = useState([]);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isQuickFilterOpen, setIsQuickFilterOpen] = useState(false);
 
   // Sync state with URL params
   const activeFilters = useMemo(() => ({
@@ -361,7 +361,26 @@ export function Shop() {
     maxPrice: searchParams.get("price[lte]") || "",
     sort: searchParams.get("sort") || "newest",
     inStock: searchParams.get("inStock") === "true",
+    tag: searchParams.get("tag") || "",
   }), [searchParams]);
+
+  const getPageTitle = () => {
+    if (activeFilters.category && activeFilters.category.length === 1) {
+      return activeFilters.category[0];
+    }
+    if (activeFilters.tag === "trending") {
+      return "Trending Now";
+    }
+    if (searchParams.get("sort") === "newest") {
+      return "New Arrivals";
+    }
+    if (activeFilters.sort === "bestselling") {
+      return "Best Sellers";
+    }
+    return "The Collection";
+  };
+
+  useSEO(getPageTitle(), "Browse our complete collection of premium clothing, filter by budget and category.");
 
   // Derived unique filter options from attributes
   const uniqueMaterials = useMemo(() => attributes.filter(a => a.type === 'material').map(a => a.value), [attributes]);
@@ -448,6 +467,9 @@ export function Shop() {
       if (activeFilters.sizes.length > 0) url += `&sizes=${encodeURIComponent(activeFilters.sizes.join(','))}`;
       if (activeFilters.stoneTypes.length > 0) url += `&stoneTypes=${encodeURIComponent(activeFilters.stoneTypes.join(','))}`;
       if (activeFilters.inStock) url += `&inStock=true`;
+      if (activeFilters.tag === "trending") {
+        url += `&homeSection=Trending Product`;
+      }
       if (activeFilters.sort) url += `&sort=${activeFilters.sort}`;
 
       const { data } = await api.get(url);
@@ -537,6 +559,36 @@ export function Shop() {
     return chips;
   };
 
+  const getQuickFilterLabel = () => {
+    if (activeFilters.tag === "trending") return "Trending Now";
+    if (activeFilters.sort === "newest") return "New Arrivals";
+    if (activeFilters.sort === "bestselling") return "Best Sellers";
+    return "All Products";
+  };
+
+  const handleQuickFilterSelect = (type) => {
+    const newParams = new window.URLSearchParams(searchParams);
+    if (type === 'newest') {
+      newParams.set('sort', 'newest');
+      newParams.delete('tag');
+    } else if (type === 'trending') {
+      newParams.delete('sort');
+      newParams.set('tag', 'trending');
+    } else if (type === 'bestselling') {
+      newParams.set('sort', 'bestselling');
+      newParams.delete('tag');
+    } else {
+      newParams.delete('tag');
+      if (newParams.get('sort') === 'newest' || newParams.get('sort') === 'bestselling') {
+        newParams.delete('sort');
+      }
+    }
+    newParams.delete("page"); // reset pagination
+    setPage(1);
+    setSearchParams(newParams);
+    setIsQuickFilterOpen(false);
+  };
+
   const chips = getActiveChips();
 
   return (
@@ -563,7 +615,7 @@ export function Shop() {
             initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif text-obsidian tracking-wide mb-5"
           >
-            The Collection
+            {getPageTitle()}
           </motion.h1>
           
           <motion.p 
@@ -625,40 +677,93 @@ export function Shop() {
                   <span>Filters {chips.length > 0 && `(${chips.length})`}</span>
                 </button>
 
-                {/* Sort Dropdown */}
-                <div className="relative ml-auto">
-                   <button 
-                     onClick={() => setIsSortOpen(!isSortOpen)}
-                     className="flex items-center space-x-2 bg-white border border-gray-200 px-5 py-2.5 rounded-full text-xs font-bold text-obsidian shadow-sm hover:border-obsidian transition-colors focus:ring-4 focus:ring-obsidian/5"
-                   >
-                     <span>Sort by: {SORT_OPTIONS.find(o => o.value === activeFilters.sort)?.label || "Latest"}</span>
-                     <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isSortOpen ? 'rotate-180' : ''}`} />
-                   </button>
-                   
-                   <AnimatePresence>
-                      {isSortOpen && (
-                         <>
-                           <div className="fixed inset-0 z-10" onClick={() => setIsSortOpen(false)} />
-                           <motion.div 
-                             initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                             animate={{ opacity: 1, y: 0, scale: 1 }}
-                             exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                             transition={{ duration: 0.2 }}
-                             className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 p-2 z-20"
-                           >
-                              {SORT_OPTIONS.map(opt => (
-                                 <button
-                                   key={opt.value}
-                                   onClick={() => { updateFilter('sort', opt.value); setIsSortOpen(false); }}
-                                   className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-200 ${activeFilters.sort === opt.value ? 'bg-gray-50 text-obsidian font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-obsidian font-medium'}`}
-                                 >
-                                    {opt.label}
-                                 </button>
-                              ))}
-                           </motion.div>
-                         </>
-                      )}
-                   </AnimatePresence>
+                <div className="flex items-center gap-3 ml-auto">
+                    {/* Quick Filters Dropdown */}
+                    <div className="relative">
+                       <button 
+                         onClick={() => setIsQuickFilterOpen(!isQuickFilterOpen)}
+                         className="flex items-center space-x-2 bg-white border border-gray-200 px-5 py-2.5 rounded-full text-xs font-bold text-obsidian shadow-sm hover:border-obsidian transition-colors focus:ring-4 focus:ring-obsidian/5"
+                       >
+                         <span>Filter: {getQuickFilterLabel()}</span>
+                         <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isQuickFilterOpen ? 'rotate-180' : ''}`} />
+                       </button>
+                       
+                       <AnimatePresence>
+                          {isQuickFilterOpen && (
+                             <>
+                               <div className="fixed inset-0 z-10" onClick={() => setIsQuickFilterOpen(false)} />
+                               <motion.div 
+                                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                 animate={{ opacity: 1, y: 0, scale: 1 }}
+                                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                 transition={{ duration: 0.2 }}
+                                 className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 p-2 z-20"
+                               >
+                                  <button
+                                    onClick={() => handleQuickFilterSelect('all')}
+                                    className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-200 ${(!activeFilters.tag && activeFilters.sort !== 'newest' && activeFilters.sort !== 'bestselling') ? 'bg-gray-50 text-obsidian font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-obsidian font-medium'}`}
+                                  >
+                                     All Products
+                                  </button>
+                                  <button
+                                    onClick={() => handleQuickFilterSelect('newest')}
+                                    className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-200 ${(activeFilters.sort === 'newest' && !activeFilters.tag) ? 'bg-gray-50 text-obsidian font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-obsidian font-medium'}`}
+                                  >
+                                     New Arrivals
+                                  </button>
+                                  <button
+                                    onClick={() => handleQuickFilterSelect('trending')}
+                                    className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-200 ${(activeFilters.tag === 'trending') ? 'bg-gray-50 text-obsidian font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-obsidian font-medium'}`}
+                                  >
+                                     Trending Now
+                                  </button>
+                                  <button
+                                    onClick={() => handleQuickFilterSelect('bestselling')}
+                                    className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-200 ${(activeFilters.sort === 'bestselling' && !activeFilters.tag) ? 'bg-gray-50 text-obsidian font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-obsidian font-medium'}`}
+                                  >
+                                     Best Sellers
+                                  </button>
+                               </motion.div>
+                             </>
+                          )}
+                       </AnimatePresence>
+                    </div>
+
+                    {/* Sort Dropdown */}
+                    <div className="relative">
+                       <button 
+                         onClick={() => setIsSortOpen(!isSortOpen)}
+                         className="flex items-center space-x-2 bg-white border border-gray-200 px-5 py-2.5 rounded-full text-xs font-bold text-obsidian shadow-sm hover:border-obsidian transition-colors focus:ring-4 focus:ring-obsidian/5"
+                       >
+                         <span>Sort by: {SORT_OPTIONS.find(o => o.value === activeFilters.sort)?.label || "Latest"}</span>
+                         <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isSortOpen ? 'rotate-180' : ''}`} />
+                       </button>
+                       
+                       <AnimatePresence>
+                          {isSortOpen && (
+                             <>
+                               <div className="fixed inset-0 z-10" onClick={() => setIsSortOpen(false)} />
+                               <motion.div 
+                                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                 animate={{ opacity: 1, y: 0, scale: 1 }}
+                                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                 transition={{ duration: 0.2 }}
+                                 className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 p-2 z-20"
+                               >
+                                  {SORT_OPTIONS.map(opt => (
+                                     <button
+                                       key={opt.value}
+                                       onClick={() => { updateFilter('sort', opt.value); setIsSortOpen(false); }}
+                                       className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-200 ${activeFilters.sort === opt.value ? 'bg-gray-50 text-obsidian font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-obsidian font-medium'}`}
+                                     >
+                                        {opt.label}
+                                     </button>
+                                  ))}
+                               </motion.div>
+                             </>
+                          )}
+                       </AnimatePresence>
+                    </div>
                 </div>
              </div>
 

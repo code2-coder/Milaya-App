@@ -10,6 +10,7 @@ const router = express.Router();
 router.post("/reviews", isAuthenticatedUser, reviewController.createReview);
 router.post("/reviews/upload-media", isAuthenticatedUser, reviewController.uploadReviewMedia);
 router.get("/reviews/check-eligibility", isAuthenticatedUser, reviewController.checkReviewEligibility);
+router.put("/reviews/:id", isAuthenticatedUser, reviewController.updateReview);
 
 //
 // 👁️ PUBLIC PRODUCT REVIEWS & SUMMARIES

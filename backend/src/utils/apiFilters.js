@@ -125,6 +125,7 @@ class APIFilters {
                     this.query = this.query.sort({ createdAt: -1 });
                     break;
                 case 'popular':
+                case 'bestselling':
                     this.query = this.query.sort({ numOfReviews: -1 });
                     break;
                 default:

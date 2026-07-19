@@ -102,6 +102,7 @@ export default function ProductReviewsSection({ productId }) {
   const [writeComment, setWriteComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showWriteModal, setShowWriteModal] = useState(false);
+  const [editingReviewId, setEditingReviewId] = useState(null);
 
   // Image and Avatar Load Error States (prevents broken image icons and duplicate text)
   const [avatarErrors, setAvatarErrors] = useState({});
@@ -303,6 +304,15 @@ export default function ProductReviewsSection({ productId }) {
     setUploadedVideos((prev) => prev.filter((_, idx) => idx !== indexToRemove));
   };
 
+  const handleEditClick = (review) => {
+    setEditingReviewId(review._id);
+    setWriteRating(review.rating);
+    setWriteComment(review.comment);
+    setUploadedImages(review.images || []);
+    setUploadedVideos(review.videos || []);
+    setShowWriteModal(true);
+  };
+
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     if (!writeComment.trim()) {
@@ -312,24 +322,32 @@ export default function ProductReviewsSection({ productId }) {
 
     try {
       setIsSubmitting(true);
-      const { data } = await api.post("/reviews", {
+      const payload = {
         productId,
         rating: writeRating,
         comment: writeComment,
         images: uploadedImages,
         videos: uploadedVideos,
-      });
+      };
+
+      const { data } = editingReviewId
+        ? await api.put(`/reviews/${editingReviewId}`, payload)
+        : await api.post("/reviews", payload);
 
       if (data.success) {
-        toast.success("Review submitted! It will appear after admin approval.");
+        toast.success(editingReviewId ? "Review updated successfully!" : "Review submitted! It will appear after admin approval.");
         setWriteComment("");
         setWriteRating(5);
         setUploadedImages([]);
         setUploadedVideos([]);
-        setIsEligible(false);
-        setEligibilityReason("already_reviewed");
+        if (!editingReviewId) {
+          setIsEligible(false);
+          setEligibilityReason("already_reviewed");
+        }
+        setEditingReviewId(null);
         setShowWriteModal(false);
         fetchSummary();
+        fetchReviews(true);
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to submit review");
@@ -512,82 +530,87 @@ export default function ProductReviewsSection({ productId }) {
         </div>        {/* RIGHT COLUMN: Toolbar & List */}
         <div className="lg:col-span-8 space-y-6">
           {/* Filters & Sorting Toolbar */}
-          <div className="bg-white/70 border border-gray-300/50 p-4 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4 animate-in fade-in duration-300">
-            {/* Star filters */}
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mr-1.5 flex items-center gap-1">
-                <Filter className="w-3 h-3 text-[black]" /> Filter:
-              </span>
-              <button
-                id="star-filter-all"
-                onClick={() => setRatingFilter("")}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border ${
-                  ratingFilter === ""
-                    ? "bg-gray-900 border-gray-900 text-white shadow-[0_2px_8px_rgba(0,0,0,0.1)]"
-                    : "bg-white border-gray-300/60 hover:border-gray-300 text-gray-700"
-                }`}
-              >
-                All
-              </button>
-              {[5, 4, 3, 2, 1].map((stars) => (
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-stone-200 animate-in fade-in duration-300">
+            {/* Left side filters */}
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Rating filter pills */}
+              <div className="flex items-center bg-stone-100/60 p-1 rounded-xl">
                 <button
-                  key={stars}
-                  id={`star-filter-${stars}`}
-                  onClick={() => setRatingFilter(stars)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-0.5 cursor-pointer border ${
-                    ratingFilter === stars
-                      ? "bg-[black] border-[black] text-white shadow-[0_2px_8px_rgba(184,147,78,0.15)]"
-                      : "bg-white border-gray-300/60 hover:border-gray-300 text-gray-700"
+                  id="star-filter-all"
+                  onClick={() => setRatingFilter("")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all cursor-pointer ${
+                    ratingFilter === ""
+                      ? "bg-white text-stone-900 shadow-sm"
+                      : "text-stone-500 hover:text-stone-900"
                   }`}
                 >
-                  {stars} ★
+                  All
                 </button>
-              ))}
+                {[5, 4, 3, 2, 1].map((stars) => (
+                  <button
+                    key={stars}
+                    id={`star-filter-${stars}`}
+                    onClick={() => setRatingFilter(stars)}
+                    className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all flex items-center gap-0.5 cursor-pointer ${
+                      ratingFilter === stars
+                        ? "bg-white text-stone-900 shadow-sm"
+                        : "text-stone-500 hover:text-stone-900"
+                    }`}
+                  >
+                    {stars}★
+                  </button>
+                ))}
+              </div>
+
+              {/* Small divider */}
+              <div className="hidden sm:block w-[1px] h-5 bg-stone-200 mx-2"></div>
+
+              {/* Toggles */}
+              <div className="flex items-center gap-2">
+                <button
+                  id="photo-toggle"
+                  onClick={() => setHasPhotos(prev => !prev)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all border flex items-center gap-1.5 cursor-pointer ${
+                    hasPhotos
+                      ? "bg-stone-900 border-stone-900 text-white shadow-sm"
+                      : "bg-white border-stone-200 text-stone-500 hover:border-stone-400 hover:text-stone-900"
+                  }`}
+                >
+                  <ImageIcon className="w-3.5 h-3.5" />
+                  Media
+                </button>
+                
+                <button
+                  id="verified-toggle"
+                  onClick={() => setIsVerified(prev => !prev)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all border flex items-center gap-1.5 cursor-pointer ${
+                    isVerified
+                      ? "bg-stone-900 border-stone-900 text-white shadow-sm"
+                      : "bg-white border-stone-200 text-stone-500 hover:border-stone-400 hover:text-stone-900"
+                  }`}
+                >
+                  <CheckCircle className="w-3.5 h-3.5" />
+                  Verified
+                </button>
+              </div>
             </div>
 
-            {/* Checkboxes / Toggles and Dropdown */}
-            <div className="flex flex-wrap items-center gap-3 pt-3.5 border-t border-gray-300/40 md:border-t-0 md:pt-0">
-              <button
-                id="photo-toggle"
-                onClick={() => setHasPhotos(prev => !prev)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
-                  hasPhotos
-                    ? "bg-[black]/10 border-[black]/30 text-[black] shadow-[0_2px_8px_rgba(184,147,78,0.06)]"
-                    : "bg-white border-gray-300/60 hover:border-gray-300 text-gray-700"
-                }`}
-              >
-                <ImageIcon className="w-3.5 h-3.5" />
-                With Media
-              </button>
-              
-              <button
-                id="verified-toggle"
-                onClick={() => setIsVerified(prev => !prev)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
-                  isVerified
-                    ? "bg-emerald-50 border-emerald-500/20 text-emerald-700 shadow-[0_2px_8px_rgba(16,185,129,0.06)]"
-                    : "bg-white border-gray-300/60 hover:border-gray-300 text-gray-700"
-                }`}
-              >
-                <CheckCircle className="w-3.5 h-3.5" />
-                Verified Buyers
-              </button>
-
-              <div className="hidden md:block w-px h-5 bg-gray-100/50 mx-1"></div>
-
-              <div className="flex items-center gap-1.5 bg-white border border-gray-300/60 rounded-full px-3 py-1.5 shadow-sm">
-                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider pl-1.5">Sort:</span>
+            {/* Right side Sort dropdown */}
+            <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-lg px-3 py-1.5 hover:border-stone-400 transition-colors">
+              <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider">Sort:</span>
+              <div className="relative flex items-center">
                 <select
                   id="sort-dropdown"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-transparent text-xs font-bold text-gray-900 focus:outline-none cursor-pointer uppercase tracking-wider border-none p-0 pr-6 select-none"
+                  className="bg-transparent text-xs font-semibold text-stone-800 focus:outline-none cursor-pointer border-none p-0 pr-5 appearance-none"
                 >
                   <option value="recent">Most Recent</option>
                   <option value="oldest">Oldest First</option>
                   <option value="highest">Highest Star</option>
                   <option value="lowest">Lowest Star</option>
                 </select>
+                <ChevronDown className="w-3.5 h-3.5 text-stone-400 absolute right-0 pointer-events-none" />
               </div>
             </div>
           </div>
@@ -648,15 +671,22 @@ export default function ProductReviewsSection({ productId }) {
                               day: "numeric",
                             })}
                           </span>
+                          {user && (review.user?._id === user._id || review.user === user._id) && (
+                            <>
+                              <span className="text-gray-300 text-[10px] font-light">|</span>
+                              <button
+                                onClick={() => handleEditClick(review)}
+                                className="text-[9px] font-bold text-[#B8934E] hover:text-stone-900 uppercase tracking-widest transition-colors cursor-pointer"
+                              >
+                                Edit Review
+                              </button>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
 
-                    {review.isVerifiedPurchase && (
-                      <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-emerald-100/85">
-                        <CheckCircle className="w-3 h-3 fill-current" /> Verified Purchase
-                      </span>
-                    )}
+
                   </div>
 
                   {/* Review Text */}
@@ -774,11 +804,18 @@ export default function ProductReviewsSection({ productId }) {
       </div>
 
       {/* ✍️ SUBMIT A REVIEW MODAL (OVERLAY) */}
-      {showWriteModal && isEligible && (
+      {showWriteModal && (isEligible || editingReviewId) && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
           <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-10 shadow-2xl relative border border-gray-200 max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200">
             <button
-              onClick={() => setShowWriteModal(false)}
+              onClick={() => {
+                setShowWriteModal(false);
+                setEditingReviewId(null);
+                setWriteComment("");
+                setWriteRating(5);
+                setUploadedImages([]);
+                setUploadedVideos([]);
+              }}
               className="absolute top-5 right-5 text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-white transition-all cursor-pointer"
               aria-label="Close form"
             >
@@ -787,7 +824,7 @@ export default function ProductReviewsSection({ productId }) {
             
             <div className="text-center mb-8">
               <h3 className="text-lg font-serif text-black tracking-wider uppercase font-light">
-                Submit a Review
+                {editingReviewId ? "Edit Your Review" : "Submit a Review"}
               </h3>
               <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase mt-1.5">
                 Share your details and purchase experience
@@ -951,10 +988,10 @@ export default function ProductReviewsSection({ productId }) {
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin mr-2" /> Submitting review...
+                    <Loader2 className="w-3.5 h-3.5 animate-spin mr-2" /> Saving changes...
                   </>
                 ) : (
-                  "Submit Review"
+                  editingReviewId ? "Save Changes" : "Submit Review"
                 )}
               </button>
             </form>

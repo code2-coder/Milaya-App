@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, Link } from "react-router";
 import { useState, useEffect, useRef } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
@@ -57,6 +57,7 @@ export function ProductDetails() {
   const [selectedColorVariant, setSelectedColorVariant] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const { categories } = useCategory();
+  const mainCategories = (categories || []).filter(cat => !cat.parentCategory);
 
   const thumbnailsRef = useRef(null);
   const [packagingText, setPackagingText] = useState("Every piece arrives in our signature Milaya presentation sachet.");
@@ -610,14 +611,9 @@ export function ProductDetails() {
           </motion.div>
         </div>
 
-        {/* Customer Reviews Section */}
-        <div className="mt-16">
-          <ProductReviewsSection productId={product._id} />
-        </div>
-
         {/* Complete the Look / Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="mb-24 mt-32 border-t border-gray-200 pt-16">
+          <div className="mt-16 border-t border-gray-200 pt-16">
             <h2 className="text-lg font-serif text-gray-900 tracking-wider mb-8">Complete Look</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
@@ -628,6 +624,43 @@ export function ProductDetails() {
             </div>
           </div>
         )}
+
+        {/* Shop by Category (Main Categories) */}
+        {mainCategories.length > 0 && (
+          <div className="mt-24 border-t border-gray-200 pt-16">
+            <h2 className="text-lg font-serif text-gray-900 tracking-wider mb-8 text-center">Shop by Category</h2>
+            <div className="flex flex-wrap justify-center gap-8">
+              {mainCategories.map((cat) => (
+                <Link
+                  key={cat._id}
+                  to={`/shop?category=${cat.name}`}
+                  className="flex flex-col items-center group cursor-pointer"
+                >
+                  <div className="w-32 h-32 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border border-gray-200 group-hover:border-black group-hover:scale-105 transition-all duration-300 shadow-sm bg-stone-50 flex items-center justify-center">
+                    {cat.image?.url ? (
+                      <img
+                        src={cat.image.url}
+                        alt={cat.name}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <span className="text-sm text-stone-400 font-bold uppercase">{cat.name.slice(0, 2)}</span>
+                    )}
+                  </div>
+                  <span className="text-xs font-bold text-stone-500 mt-4 group-hover:text-black tracking-widest uppercase transition-colors">
+                    {cat.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Customer Reviews Section */}
+        <div className="mb-24 mt-32 border-t border-gray-200 pt-16">
+          <ProductReviewsSection productId={product._id} />
+        </div>
 
 
         {/* Mobile sticky Add-to-Cart */}

@@ -104,7 +104,14 @@ api.interceptors.response.use(
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('user');
-            window.location.href = '/login?session_expired=true';
+            
+            const protectedPrefixes = ['/admin', '/dashboard', '/orders', '/account', '/checkout', '/profile'];
+            const isProtected = protectedPrefixes.some(prefix => window.location.pathname.startsWith(prefix));
+            if (isProtected) {
+              window.location.href = '/login?session_expired=true';
+            } else {
+              window.location.reload();
+            }
             reject(refreshError);
           })
           .finally(() => {
