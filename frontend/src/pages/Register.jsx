@@ -89,7 +89,7 @@ export function Register() {
       </div>
 
       {/* Right Side: Register Form */}
-      <div className="w-full md:w-1/2 min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 lg:px-24 py-12 relative overflow-y-auto">
+      <div className="w-full md:w-1/2 min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 lg:px-24 py-10 pb-32 sm:py-0 relative overflow-y-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -97,80 +97,89 @@ export function Register() {
           className="w-full max-w-[420px] z-10 my-auto"
         >
           {/* Logo */}
-          <motion.div variants={itemVariants} className="flex justify-center mb-10">
+          <motion.div variants={itemVariants} className="flex justify-center mb-8">
             <Link to="/" className="inline-flex items-center group w-full justify-center">
               <img 
                 src="/loginlogo-removebg-preview.png" 
                 alt="Milaya Logo" 
-                className="h-40 sm:h-48 w-auto object-contain group-hover:opacity-70 transition-opacity duration-500"
+                className="h-28 sm:h-40 w-auto object-contain group-hover:opacity-70 transition-opacity duration-500"
               />
             </Link>
           </motion.div>
 
           <motion.div variants={itemVariants} className="mb-10 text-center">
-            <h3 className="text-3xl font-light text-black tracking-tight mb-2">Create Account</h3>
+            <h3 className="text-3xl sm:text-4xl font-serif text-[#1A050A] tracking-wide mb-2">Create Account</h3>
             <p className="text-sm text-gray-500 font-light">Experience the art of fine clothing.</p>
           </motion.div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <motion.div variants={itemVariants} className="space-y-1">
-              <label htmlFor="name" className="block text-black text-[11px] font-semibold uppercase tracking-widest">Full Name</label>
-              <div className={`relative flex items-center border-b ${errors.name ? 'border-red-500' : 'border-gray-300'} focus-within:border-black transition-colors duration-300`}>
+              <label htmlFor="name" className="block text-[#1A050A] text-[11px] font-semibold uppercase tracking-widest ml-1 mb-2">Full Name</label>
+              <div className={`relative flex items-center border ${errors.name ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-gray-50'} rounded-xl focus-within:border-[#800000] focus-within:ring-1 focus-within:ring-[#800000] transition-all duration-300`}>
+                <div className="pl-4 text-gray-400">
+                  <User className="w-5 h-5" strokeWidth={1.5} />
+                </div>
                 <input
                   id="name"
                   type="text"
                   {...register("name")}
-                  className="w-full py-3 bg-transparent border-none outline-none text-black text-sm placeholder:text-gray-400 focus:ring-0 px-0"
+                  className="w-full py-3.5 px-3 bg-transparent border-none outline-none text-black text-sm placeholder:text-gray-400 focus:ring-0"
                   placeholder="Enter your full name"
                 />
               </div>
               {errors.name && (
-                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5">
+                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5 ml-1">
                   {errors.name.message}
                 </motion.p>
               )}
             </motion.div>
 
             <motion.div variants={itemVariants} className="space-y-1">
-              <label htmlFor="email" className="block text-black text-[11px] font-semibold uppercase tracking-widest">Email Address</label>
-              <div className={`relative flex items-center border-b ${errors.email ? 'border-red-500' : 'border-gray-300'} focus-within:border-black transition-colors duration-300`}>
+              <label htmlFor="email" className="block text-[#1A050A] text-[11px] font-semibold uppercase tracking-widest ml-1 mb-2">Email Address</label>
+              <div className={`relative flex items-center border ${errors.email ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-gray-50'} rounded-xl focus-within:border-[#800000] focus-within:ring-1 focus-within:ring-[#800000] transition-all duration-300`}>
+                <div className="pl-4 text-gray-400">
+                  <Mail className="w-5 h-5" strokeWidth={1.5} />
+                </div>
                 <input
                   id="email"
                   type="email"
                   {...register("email")}
-                  className="w-full py-3 bg-transparent border-none outline-none text-black text-sm placeholder:text-gray-400 focus:ring-0 px-0"
+                  className="w-full py-3.5 px-3 bg-transparent border-none outline-none text-black text-sm placeholder:text-gray-400 focus:ring-0"
                   placeholder="Enter your email"
                 />
               </div>
               {errors.email && (
-                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5">
+                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5 ml-1">
                   {errors.email.message}
                 </motion.p>
               )}
             </motion.div>
 
             <motion.div variants={itemVariants} className="space-y-1">
-              <div className="flex justify-between items-end">
-                <label htmlFor="password" className="block text-black text-[11px] font-semibold uppercase tracking-widest">Password</label>
+              <div className="flex justify-between items-end mb-2">
+                <label htmlFor="password" className="block text-[#1A050A] text-[11px] font-semibold uppercase tracking-widest ml-1">Password</label>
               </div>
-              <div className={`relative flex items-center border-b ${errors.password ? 'border-red-500' : 'border-gray-300'} focus-within:border-black transition-colors duration-300`}>
+              <div className={`relative flex items-center border ${errors.password ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-gray-50'} rounded-xl focus-within:border-[#800000] focus-within:ring-1 focus-within:ring-[#800000] transition-all duration-300`}>
+                <div className="pl-4 text-gray-400">
+                  <Lock className="w-5 h-5" strokeWidth={1.5} />
+                </div>
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  className="w-full py-3 pr-10 bg-transparent border-none outline-none text-black text-sm placeholder:text-gray-400 focus:ring-0 px-0"
+                  className="w-full py-3.5 px-3 pr-10 bg-transparent border-none outline-none text-black text-sm placeholder:text-gray-400 focus:ring-0"
                   placeholder="Create a password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center text-gray-400 hover:text-black transition-colors cursor-pointer"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-black transition-colors cursor-pointer"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" strokeWidth={1.5} /> : <Eye className="w-4 h-4" strokeWidth={1.5} />}
                 </button>
               </div>
               {errors.password && (
-                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5">
+                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5 ml-1">
                   {errors.password.message}
                 </motion.p>
               )}
@@ -208,7 +217,7 @@ export function Register() {
               <button
                 type="submit"
                 disabled={isLoading || !isValid}
-                className="w-full bg-black text-white h-[52px] hover:bg-gray-900 transition-colors duration-300 font-semibold tracking-widest uppercase text-[11px] flex justify-center items-center disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+                className="w-full bg-[#1A050A] text-white h-[52px] rounded-xl hover:bg-[#2D0D18] hover:shadow-lg transition-all duration-300 font-semibold tracking-widest uppercase text-[12px] flex justify-center items-center disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <div className="w-4 h-4 border-2 border-white/80 border-t-transparent rounded-full animate-spin"></div>
@@ -221,7 +230,7 @@ export function Register() {
 
           <motion.div variants={itemVariants} className="mt-8 text-center text-sm text-gray-500 font-light">
             Already have an account?{" "}
-            <Link to="/login" className="font-medium text-black hover:underline underline-offset-4 decoration-gray-300 hover:decoration-black transition-all">
+            <Link to="/login" className="font-medium text-[#800000] hover:underline underline-offset-4 decoration-[#800000]/30 hover:decoration-[#800000] transition-all">
               Sign in
             </Link>
           </motion.div>
@@ -236,7 +245,7 @@ export function Register() {
           <motion.button
             variants={itemVariants}
             onClick={() => window.location.href = `${(import.meta.env.VITE_API_URL || 'https://milaya-app.onrender.com/api/v1').replace(/\/api\/v1\/?$/, '')}/api/v1/auth/google`}
-            className="w-full flex items-center justify-center space-x-3 bg-white hover:bg-gray-50 border border-gray-200 py-3.5 text-black transition-colors duration-300 focus:outline-none focus:ring-1 focus:ring-black"
+            className="w-full flex items-center justify-center space-x-3 bg-white hover:bg-gray-50 border border-gray-200 rounded-xl py-3.5 text-black transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-200 hover:shadow-sm"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -249,7 +258,7 @@ export function Register() {
         </motion.div>
 
         {/* Minimal Footer */}
-        <footer className="mt-12 mb-6 w-full text-center z-10">
+        <footer className="mt-12 sm:absolute sm:bottom-6 w-full text-center z-10 left-0 right-0">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-3 text-gray-400">
             <div className="text-[10px] uppercase tracking-widest">
               © {new Date().getFullYear()} Milaya

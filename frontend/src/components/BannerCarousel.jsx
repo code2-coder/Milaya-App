@@ -51,7 +51,7 @@ export function BannerCarousel({ banners }) {
   return (
     <div className="w-full pb-6 sm:pb-12 pt-0 px-2 sm:px-0">
       <div
-        className="relative w-full aspect-[4/3] sm:aspect-[16/9] lg:aspect-[1800/720] overflow-hidden group bg-gray-50 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-black/5 transition-all duration-700 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
+        className="relative w-full aspect-[4/3] sm:aspect-[16/9] lg:aspect-[1800/720] overflow-hidden group bg-transparent sm:bg-gray-50 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-black/5 transition-all duration-700 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
         onMouseEnter={() => { isHoveredRef.current = true; }}
         onMouseLeave={() => { isHoveredRef.current = false; }}
       >
@@ -60,9 +60,9 @@ export function BannerCarousel({ banners }) {
           const isActive = index === currentIndex;
           const content = (
             <div className="w-full h-full relative overflow-hidden flex items-center justify-center">
-              {/* Blurred background for mobile to fill aspect ratio gaps beautifully */}
+              {/* Blurred background for desktop to fill aspect ratio gaps beautifully */}
               <div 
-                className="absolute inset-0 bg-cover bg-center blur-3xl opacity-50 sm:opacity-30 scale-125"
+                className="hidden sm:block absolute inset-0 bg-cover bg-center blur-3xl opacity-30 scale-125"
                 style={{ backgroundImage: `url(${getBannerSrc(banner.image)})` }}
               />
               <img
