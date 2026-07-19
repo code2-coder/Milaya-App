@@ -156,9 +156,34 @@ export function Home() {
             </div>
           </section>
 
-          {/* Women's Collection */}
-          {products.length > 0 && (
-            <section className="py-16 lg:py-24 bg-gradient-to-b from-stone-50/50 to-white relative">
+          {/* Pre-filter products for sections */}
+          {(() => {
+            const womensProducts = products.filter(p => {
+              const catName = p.category?.name?.toLowerCase() || '';
+              const parentCatName = p.category?.parentCategory?.name?.toLowerCase() || '';
+              return catName.includes('women') || parentCatName.includes('women');
+            });
+
+            const mensProducts = products.filter(p => {
+              const catName = p.category?.name?.toLowerCase() || '';
+              const parentCatName = p.category?.parentCategory?.name?.toLowerCase() || '';
+              const isMen = catName.includes('men') || parentCatName.includes('men');
+              const isWomen = catName.includes('women') || parentCatName.includes('women');
+              return isMen && !isWomen;
+            });
+
+            const kidsProducts = products.filter(p => {
+              const catName = p.category?.name?.toLowerCase() || '';
+              const parentCatName = p.category?.parentCategory?.name?.toLowerCase() || '';
+              const searchStr = `${catName} ${parentCatName}`;
+              return searchStr.includes('kid') || searchStr.includes('girl') || searchStr.includes('boy');
+            });
+
+            return (
+              <>
+                {/* Women's Collection */}
+                {womensProducts.length > 0 && (
+                  <section className="py-16 lg:py-24 bg-gradient-to-b from-stone-50/50 to-white relative">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#B8934E]/5 rounded-full blur-[80px] pointer-events-none translate-x-1/3 -translate-y-1/2"></div>
               
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 lg:mb-14 px-4 sm:px-6 lg:px-10 relative z-10">
@@ -208,10 +233,7 @@ export function Home() {
                     display: none;
                   }
                 `}</style>
-                {(products.filter(p => p.category?.name?.toLowerCase().includes('women') || p.name?.toLowerCase().includes('women')).length > 0 
-                  ? products.filter(p => p.category?.name?.toLowerCase().includes('women') || p.name?.toLowerCase().includes('women')) 
-                  : products
-                ).slice(0, 10).map((product) => (
+                {womensProducts.slice(0, 10).map((product) => (
                   <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
                     <ProductCard product={product} />
                   </div>
@@ -221,7 +243,7 @@ export function Home() {
           )}
 
           {/* Men's Collection */}
-          {products.length > 0 && (
+          {mensProducts.length > 0 && (
             <section className="py-16 lg:py-24 bg-gradient-to-b from-gray-50/80 to-white relative">
               <div className="absolute top-0 left-0 w-64 h-64 bg-slate-400/5 rounded-full blur-[80px] pointer-events-none -translate-x-1/3 -translate-y-1/2"></div>
 
@@ -269,10 +291,7 @@ export function Home() {
                 className="flex overflow-x-auto gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10 pb-10 snap-x scroll-smooth"
                 style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
               >
-                {(products.filter(p => (p.category?.name?.toLowerCase().includes('men') && !p.category?.name?.toLowerCase().includes('women')) || (p.name?.toLowerCase().includes('men') && !p.name?.toLowerCase().includes('women'))).length > 0 
-                  ? products.filter(p => (p.category?.name?.toLowerCase().includes('men') && !p.category?.name?.toLowerCase().includes('women')) || (p.name?.toLowerCase().includes('men') && !p.name?.toLowerCase().includes('women'))) 
-                  : products
-                ).slice(0, 10).map((product) => (
+                {mensProducts.slice(0, 10).map((product) => (
                   <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
                     <ProductCard product={product} />
                   </div>
@@ -282,7 +301,7 @@ export function Home() {
           )}
 
           {/* Kids Collection */}
-          {products.length > 0 && (
+          {kidsProducts.length > 0 && (
             <section className="py-16 lg:py-24 bg-gradient-to-b from-[#FAF4F0] to-white relative">
               <div className="absolute top-0 right-1/4 w-64 h-64 bg-[#E8C5A8]/10 rounded-full blur-[80px] pointer-events-none -translate-y-1/2"></div>
 
@@ -327,16 +346,7 @@ export function Home() {
                 className="flex overflow-x-auto gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10 pb-10 snap-x scroll-smooth"
                 style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
               >
-                {(products.filter(p => {
-                  const searchStr = `${p.category?.name || ''} ${p.name || ''}`.toLowerCase();
-                  return searchStr.includes('kid') || searchStr.includes('girl') || searchStr.includes('boy');
-                }).length > 0 
-                  ? products.filter(p => {
-                      const searchStr = `${p.category?.name || ''} ${p.name || ''}`.toLowerCase();
-                      return searchStr.includes('kid') || searchStr.includes('girl') || searchStr.includes('boy');
-                    }) 
-                  : products
-                ).slice(0, 10).map((product) => (
+                {kidsProducts.slice(0, 10).map((product) => (
                   <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
                     <ProductCard product={product} />
                   </div>
@@ -344,6 +354,9 @@ export function Home() {
               </div>
             </section>
           )}
+              </>
+            );
+          })()}
 
 
         </main>
