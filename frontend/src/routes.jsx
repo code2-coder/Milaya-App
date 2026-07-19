@@ -49,12 +49,14 @@ const LazyComponent = ({ Component }) => (
 
 import { Outlet, ScrollRestoration } from "react-router";
 import { MobileBottomNav } from "./components/MobileBottomNav";
+import { AuthPopup } from "./components/AuthPopup";
 
 const RootLayout = () => (
   <div className="pb-16 md:pb-0">
     <ScrollRestoration />
     <Outlet />
     <MobileBottomNav />
+    <AuthPopup />
   </div>
 );
 
