@@ -132,13 +132,6 @@ export default function NewProductForm({
       return;
     }
 
-    // Validate product features
-    const validFeatures = data.features ? data.features.filter(f => f.trim().length > 0) : [];
-    if (validFeatures.length === 0) {
-      toast.error("At least one Product Feature is required");
-      return;
-    }
-
     // Filter out empty features
     if (data.features) {
       data.features = data.features.filter(f => typeof f === 'string' && f.trim().length > 0);

@@ -385,13 +385,18 @@ export function ProductDetails() {
                               setSelectedSize(null);
                             }
                           }}
-                          className="flex flex-col items-center gap-2 group"
+                          className="flex flex-col items-center gap-2.5 group outline-none"
                         >
                           <div 
-                            className={`w-10 h-10 rounded-full transition-all duration-300 ${isSelected ? 'ring-2 ring-offset-2 ring-gray-900' : 'ring-1 ring-gray-200 hover:ring-gray-400'}`}
-                            style={{ backgroundColor: displayColor }}
-                          />
-                          <span className={`text-[10px] sm:text-xs tracking-wide capitalize font-medium transition-colors ${isSelected ? 'text-gray-900' : 'text-gray-400 group-hover:text-gray-600'}`}>
+                            className={`w-14 h-16 sm:w-16 sm:h-20 rounded-xl overflow-hidden shrink-0 bg-gray-50 relative transition-all duration-300 ${isSelected ? 'ring-2 ring-offset-2 ring-gray-900 shadow-md' : 'ring-1 ring-gray-200 group-hover:ring-gray-300 group-hover:shadow-sm'}`}
+                          >
+                            {variant.images && variant.images.length > 0 ? (
+                              <img src={variant.images[0].url} alt={variant.variantName} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                            ) : (
+                              <div className="w-full h-full" style={{ backgroundColor: displayColor }} />
+                            )}
+                          </div>
+                          <span className={`text-[10px] sm:text-[11px] tracking-widest capitalize transition-colors ${isSelected ? 'text-gray-900 font-bold' : 'text-gray-400 font-medium group-hover:text-gray-700'}`}>
                             {variant.variantName}
                           </span>
                         </button>
@@ -490,22 +495,7 @@ export function ProductDetails() {
                   ].filter(s => s.value && typeof s.value === 'string' && s.value.trim() !== '');
 
                   return (
-                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-12 gap-y-10 mt-4">
-                      {/* Highlights */}
-                      {product.features?.length > 0 && (
-                        <div>
-                          <p className="font-semibold text-gray-900 text-[10px] tracking-wider uppercase mb-5">Highlights</p>
-                          <ul className="space-y-4">
-                            {product.features.map((feat, i) => (
-                              <li key={i} className="flex items-start gap-4 text-[13px] text-gray-700 font-light leading-relaxed">
-                                <div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 shrink-0"></div>
-                                <span>{feat}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
+                    <div className="grid grid-cols-1 gap-y-10 mt-4">
                       {/* Specs */}
                       {specsList.length > 0 && (
                         <div>
@@ -522,6 +512,21 @@ export function ProductDetails() {
                               </tbody>
                             </table>
                           </div>
+                        </div>
+                      )}
+
+                      {/* Highlights */}
+                      {product.features?.length > 0 && (
+                        <div>
+                          <p className="font-semibold text-gray-900 text-[10px] tracking-wider uppercase mb-5">Highlights</p>
+                          <ul className="space-y-4">
+                            {product.features.map((feat, i) => (
+                              <li key={i} className="flex items-start gap-4 text-[13px] text-gray-700 font-light leading-relaxed">
+                                <div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 shrink-0"></div>
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       )}
                     </div>

@@ -3,7 +3,7 @@ import { useFormContext, useFieldArray } from 'react-hook-form';
 import { Plus, Trash2, Copy, ChevronDown, ChevronUp } from 'lucide-react';
 import VariantCard from './VariantCard';
 
-export default function VariantManager({ openSizeModal, attributes = [], onCreateAttr, onEditAttr, onDeleteAttr }) {
+export default function VariantManager({ openSizeModal }) {
   const { control } = useFormContext();
   const { fields, append, remove, update } = useFieldArray({
     control,
@@ -15,7 +15,6 @@ export default function VariantManager({ openSizeModal, attributes = [], onCreat
   const addVariant = () => {
     append({
       variantName: '',
-      colorHex: '#000000',
       images: [],
       videos: [],
       sizes: []
@@ -56,7 +55,6 @@ export default function VariantManager({ openSizeModal, attributes = [], onCreat
                 onClick={() => setExpandedIndex(isExpanded ? null : index)}
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full border border-gray-300" style={{ backgroundColor: field.colorHex || '#ccc' }}></div>
                   <h4 className="font-bold text-gray-900">{field.variantName || `Variant ${index + 1}`}</h4>
                 </div>
                 <div className="flex items-center gap-3">
@@ -75,10 +73,6 @@ export default function VariantManager({ openSizeModal, attributes = [], onCreat
                   <VariantCard 
                     index={index} 
                     field={field} 
-                    attributes={attributes} 
-                    onCreateAttr={onCreateAttr} 
-                    onEditAttr={onEditAttr} 
-                    onDeleteAttr={onDeleteAttr} 
                   />
                 </div>
               )}
