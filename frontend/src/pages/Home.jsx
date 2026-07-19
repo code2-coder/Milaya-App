@@ -158,32 +158,55 @@ export function Home() {
 
           {/* Pre-filter products for sections */}
           {(() => {
+             const getCategoryInfo = (p) => {
+               const catId = p.category?._id || p.category;
+               const foundCat = categories.find(c => c._id === catId || c.id === catId);
+               
+               const catName = foundCat?.name?.toLowerCase() || p.category?.name?.toLowerCase() || '';
+               let parentCatName = '';
+               
+               const parentVal = foundCat?.parentCategory || p.category?.parentCategory;
+               if (parentVal) {
+                 if (typeof parentVal === 'object' && parentVal.name) {
+                   parentCatName = parentVal.name.toLowerCase();
+                 } else {
+                   // Fallback: lookup in the categories array if it's just an ID
+                   const foundParent = categories.find(c => c._id === parentVal || c.id === parentVal);
+                   if (foundParent) {
+                     parentCatName = foundParent.name?.toLowerCase() || '';
+                   }
+                 }
+               }
+               return { catName, parentCatName };
+             };
+
             const womensProducts = products.filter(p => {
-              const catName = p.category?.name?.toLowerCase() || '';
-              const parentCatName = p.category?.parentCategory?.name?.toLowerCase() || '';
-              return catName.includes('women') || parentCatName.includes('women');
+              const { catName, parentCatName } = getCategoryInfo(p);
+              return catName.includes('women') || parentCatName.includes('women') ||
+                     catName.includes('woman') || parentCatName.includes('woman') ||
+                     catName === 'ladies' || parentCatName === 'ladies';
             });
 
             const mensProducts = products.filter(p => {
-              const catName = p.category?.name?.toLowerCase() || '';
-              const parentCatName = p.category?.parentCategory?.name?.toLowerCase() || '';
-              const isMen = catName.includes('men') || parentCatName.includes('men');
-              const isWomen = catName.includes('women') || parentCatName.includes('women');
+              const { catName, parentCatName } = getCategoryInfo(p);
+              const isMen = catName.includes('men') || parentCatName.includes('men') || 
+                            catName.includes('man') || parentCatName.includes('man');
+              const isWomen = catName.includes('women') || parentCatName.includes('women') || 
+                              catName.includes('woman') || parentCatName.includes('woman') ||
+                              catName === 'ladies' || parentCatName === 'ladies';
               return isMen && !isWomen;
             });
 
             const kidsProducts = products.filter(p => {
-              const catName = p.category?.name?.toLowerCase() || '';
-              const parentCatName = p.category?.parentCategory?.name?.toLowerCase() || '';
+              const { catName, parentCatName } = getCategoryInfo(p);
               const searchStr = `${catName} ${parentCatName}`;
-              return searchStr.includes('kid') || searchStr.includes('girl') || searchStr.includes('boy');
+              return searchStr.includes('kid') || searchStr.includes('girl') || searchStr.includes('boy') || searchStr.includes('child') || searchStr.includes('baby');
             });
 
             return (
               <>
                 {/* Women's Collection */}
-                {womensProducts.length > 0 && (
-                  <section className="py-16 lg:py-24 bg-gradient-to-b from-stone-50/50 to-white relative">
+                <section className="py-16 lg:py-24 bg-gradient-to-b from-stone-50/50 to-white relative">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#B8934E]/5 rounded-full blur-[80px] pointer-events-none translate-x-1/3 -translate-y-1/2"></div>
               
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 lg:mb-14 px-4 sm:px-6 lg:px-10 relative z-10">
@@ -233,18 +256,22 @@ export function Home() {
                     display: none;
                   }
                 `}</style>
-                {womensProducts.slice(0, 10).map((product) => (
-                  <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
-                    <ProductCard product={product} />
+                {womensProducts.length > 0 ? (
+                  womensProducts.slice(0, 10).map((product) => (
+                    <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
+                      <ProductCard product={product} />
+                    </div>
+                  ))
+                ) : (
+                  <div className="w-full flex items-center justify-center py-12 text-gray-400">
+                    <p className="text-sm tracking-[0.2em] uppercase font-medium">New arrivals coming soon</p>
                   </div>
-                ))}
+                )}
               </div>
             </section>
-          )}
 
           {/* Men's Collection */}
-          {mensProducts.length > 0 && (
-            <section className="py-16 lg:py-24 bg-gradient-to-b from-gray-50/80 to-white relative">
+          <section className="py-16 lg:py-24 bg-gradient-to-b from-gray-50/80 to-white relative">
               <div className="absolute top-0 left-0 w-64 h-64 bg-slate-400/5 rounded-full blur-[80px] pointer-events-none -translate-x-1/3 -translate-y-1/2"></div>
 
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 lg:mb-14 px-4 sm:px-6 lg:px-10 relative z-10">
@@ -291,18 +318,22 @@ export function Home() {
                 className="flex overflow-x-auto gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10 pb-10 snap-x scroll-smooth"
                 style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
               >
-                {mensProducts.slice(0, 10).map((product) => (
-                  <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
-                    <ProductCard product={product} />
+                {mensProducts.length > 0 ? (
+                  mensProducts.slice(0, 10).map((product) => (
+                    <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
+                      <ProductCard product={product} />
+                    </div>
+                  ))
+                ) : (
+                  <div className="w-full flex items-center justify-center py-12 text-gray-400">
+                    <p className="text-sm tracking-[0.2em] uppercase font-medium">New arrivals coming soon</p>
                   </div>
-                ))}
+                )}
               </div>
             </section>
-          )}
 
           {/* Kids Collection */}
-          {kidsProducts.length > 0 && (
-            <section className="py-16 lg:py-24 bg-gradient-to-b from-[#FAF4F0] to-white relative">
+          <section className="py-16 lg:py-24 bg-gradient-to-b from-[#FAF4F0] to-white relative">
               <div className="absolute top-0 right-1/4 w-64 h-64 bg-[#E8C5A8]/10 rounded-full blur-[80px] pointer-events-none -translate-y-1/2"></div>
 
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 lg:mb-14 px-4 sm:px-6 lg:px-10 relative z-10">
@@ -346,14 +377,19 @@ export function Home() {
                 className="flex overflow-x-auto gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10 pb-10 snap-x scroll-smooth"
                 style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
               >
-                {kidsProducts.slice(0, 10).map((product) => (
-                  <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
-                    <ProductCard product={product} />
+                {kidsProducts.length > 0 ? (
+                  kidsProducts.slice(0, 10).map((product) => (
+                    <div key={product._id} className="w-[260px] sm:w-[280px] lg:w-[320px] snap-center flex-shrink-0 group">
+                      <ProductCard product={product} />
+                    </div>
+                  ))
+                ) : (
+                  <div className="w-full flex items-center justify-center py-12 text-gray-400">
+                    <p className="text-sm tracking-[0.2em] uppercase font-medium">New arrivals coming soon</p>
                   </div>
-                ))}
+                )}
               </div>
             </section>
-          )}
               </>
             );
           })()}

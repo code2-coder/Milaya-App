@@ -39,7 +39,14 @@ export class ProductService {
 
     const products = await apiFilters.query
       .select("name price description images video category ratings stock variants sizes numOfReviews homeSection features status")
-      .populate("category", "name")
+      .populate({
+        path: "category",
+        select: "name parentCategory",
+        populate: {
+          path: "parentCategory",
+          select: "name"
+        }
+      })
       .lean();
 
     products.forEach(p => { if (!p.features) p.features = []; });
@@ -55,7 +62,14 @@ export class ProductService {
 
   async getAdminProducts() {
     const products = await ProductRepository.find({}, {
-      populate: { path: "category", select: "name" },
+      populate: { 
+        path: "category", 
+        select: "name parentCategory",
+        populate: {
+          path: "parentCategory",
+          select: "name"
+        }
+      },
       lean: true
     });
     products.forEach(p => { if (!p.features) p.features = []; });
@@ -66,7 +80,14 @@ export class ProductService {
   async getProductById(id) {
     const product = await ProductRepository.findById(id, {
       populate: [
-        { path: "category", select: "name" },
+        { 
+          path: "category", 
+          select: "name parentCategory",
+          populate: {
+            path: "parentCategory",
+            select: "name"
+          }
+        },
         { path: "reviews.user", select: "name" }
       ],
       lean: true
