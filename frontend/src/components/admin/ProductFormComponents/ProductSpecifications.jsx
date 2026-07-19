@@ -56,26 +56,11 @@ export default function ProductSpecifications({ attributes, onCreateAttr, onEdit
 
   const dropdownSpecs = [
     { name: 'material',      label: 'Fabric / Material', attributeType: 'material'       },
-    { name: 'metal',         label: 'Metal',             attributeType: 'metal'          },
-    { name: 'stoneType',     label: 'Stone Type',        attributeType: 'stoneType'      },
     { name: 'finish',        label: 'Finish',            attributeType: 'finish'         },
     { name: 'color',         label: 'Color',             attributeType: 'color'          },
-    { name: 'theme',         label: 'Theme',             attributeType: 'theme'          },
     { name: 'style',         label: 'Style',             attributeType: 'style'          },
     { name: 'pattern',       label: 'Pattern',           attributeType: 'pattern'        },
-    { name: 'shape',         label: 'Shape',             attributeType: 'shape'          },
     { name: 'countryOfOrigin', label: 'Country of Origin', attributeType: 'countryOfOrigin' },
-    { name: 'fit',           label: 'Fit',               attributeType: 'fit'            },
-    { name: 'sleeveType',    label: 'Sleeve Type',       attributeType: 'sleeveType'     },
-    { name: 'neckType',      label: 'Neck Type',         attributeType: 'neckType'       },
-    { name: 'occasion',      label: 'Occasion',          attributeType: 'occasion'       },
-    { name: 'closureType',   label: 'Closure Type',      attributeType: 'closureType'    },
-    { name: 'length',        label: 'Length',            attributeType: 'length'         },
-    { name: 'waistRise',     label: 'Waist Rise',        attributeType: 'waistRise'      },
-    { name: 'stretch',       label: 'Stretch',           attributeType: 'stretch'        },
-    { name: 'transparency',  label: 'Transparency',      attributeType: 'transparency'   },
-    { name: 'careInstructions', label: 'Care Instructions', attributeType: 'careInstructions' },
-    { name: 'season',        label: 'Season',            attributeType: 'season'         },
   ];
 
   return (
@@ -105,7 +90,7 @@ export default function ProductSpecifications({ attributes, onCreateAttr, onEdit
       </div>
 
       {/* Text Fields Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-2">Weight</label>
           <input
@@ -119,6 +104,54 @@ export default function ProductSpecifications({ attributes, onCreateAttr, onEdit
           <input
             {...register('dimensions')}
             placeholder="e.g., 2.5cm × 1cm"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-gray-900 outline-none transition-all text-sm"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">Fit</label>
+          <input
+            {...register('fit')}
+            placeholder="e.g., Regular Fit, Slim Fit"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-gray-900 outline-none transition-all text-sm"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">Sleeve Type</label>
+          <input
+            {...register('sleeveType')}
+            placeholder="e.g., Half Sleeves, Full Sleeves"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-gray-900 outline-none transition-all text-sm"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">Neck Type</label>
+          <input
+            {...register('neckType')}
+            placeholder="e.g., Round Neck, V-Neck"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-gray-900 outline-none transition-all text-sm"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">Occasion</label>
+          <input
+            {...register('occasion')}
+            placeholder="e.g., Casual, Festive, Party"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-gray-900 outline-none transition-all text-sm"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">Transparency</label>
+          <input
+            {...register('transparency')}
+            placeholder="e.g., Opaque, Semi-Sheer"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-gray-900 outline-none transition-all text-sm"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">Season</label>
+          <input
+            {...register('season')}
+            placeholder="e.g., Summer, Winter, All Season"
             className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-gray-900 outline-none transition-all text-sm"
           />
         </div>

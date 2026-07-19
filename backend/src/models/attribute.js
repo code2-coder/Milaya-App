@@ -28,7 +28,13 @@ const attributeSchema = new mongoose.Schema(
         "braceletStyle",
         "bangleStyle",
         "generalStyle",
-        "metalSpecs"
+        "metalSpecs",
+        "sleeveType",
+        "fit",
+        "neckType",
+        "occasion",
+        "transparency",
+        "season"
       ],
     },
     value: {
