@@ -101,9 +101,9 @@ export function BannerCarousel({ banners }) {
           <button
             onClick={goToPrev}
             aria-label="Previous banner"
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md border border-black/30 text-white opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-500 hover:bg-white/40 hover:scale-110 shadow-[0_8px_30px_rgb(0,0,0,0.12)] cursor-pointer"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-md border border-white/30 text-white opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-500 hover:bg-white hover:text-black hover:border-white hover:scale-110 shadow-[0_8px_32px_rgba(0,0,0,0.3)] cursor-pointer group/arrow"
           >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] transition-colors duration-300" />
           </button>
         )}
 
@@ -112,9 +112,9 @@ export function BannerCarousel({ banners }) {
           <button
             onClick={goToNext}
             aria-label="Next banner"
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md border border-black/30 text-white opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-500 hover:bg-white/40 hover:scale-110 shadow-[0_8px_30px_rgb(0,0,0,0.12)] cursor-pointer"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-md border border-white/30 text-white opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-500 hover:bg-white hover:text-black hover:border-white hover:scale-110 shadow-[0_8px_32px_rgba(0,0,0,0.3)] cursor-pointer group/arrow"
           >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] transition-colors duration-300" />
           </button>
         )}
 

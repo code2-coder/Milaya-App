@@ -68,7 +68,7 @@ export function Home() {
             <section className="pt-12 pb-4 lg:pt-16 lg:pb-6 mt-4">
               <div className="flex flex-col items-center mb-10 text-center">
                 <h2 className="text-2xl md:text-3xl font-serif text-obsidian tracking-wide">
-                  Shop by Category
+                  Explore By Category
                 </h2>
                 <div className="w-16 h-[2px] bg-[#800000] mt-4 rounded-full"></div>
               </div>
@@ -158,22 +158,41 @@ export function Home() {
 
           {/* Women's Collection */}
           {products.length > 0 && (
-            <section className="py-12 lg:py-20 bg-gray-50/30">
-              <div className="flex justify-between items-end mb-8 lg:mb-12 px-4 sm:px-6 lg:px-10">
-                <div className="flex flex-col">
-                  <h2 className="text-3xl md:text-4xl font-serif text-obsidian tracking-wide">
+            <section className="py-16 lg:py-24 bg-gradient-to-b from-stone-50/50 to-white relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#B8934E]/5 rounded-full blur-[80px] pointer-events-none translate-x-1/3 -translate-y-1/2"></div>
+              
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 lg:mb-14 px-4 sm:px-6 lg:px-10 relative z-10">
+                <div className="flex flex-col mb-6 sm:mb-0 max-w-2xl">
+                  <span className="text-[10px] font-bold tracking-[0.25em] text-[#B8934E] uppercase mb-3">Curated Excellence</span>
+                  <h2 className="text-4xl md:text-5xl font-serif text-obsidian tracking-wide">
                     Women's Collection
                   </h2>
-                  <div className="w-16 h-[2px] bg-[#800000] mt-4 rounded-full"></div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="hidden sm:flex gap-2">
-                    <button onClick={() => scroll(womensRef, 'left')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronLeft size={20} /></button>
-                    <button onClick={() => scroll(womensRef, 'right')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronRight size={20} /></button>
-                  </div>
-                  <Link to="/shop?category=Women" className="text-sm font-medium text-gray-600 hover:text-[#800000] transition-colors border-b border-transparent hover:border-[#800000] pb-1 hidden sm:block uppercase tracking-wider">
-                    View All
+                <div className="flex items-center gap-6 w-full sm:w-auto justify-between sm:justify-end">
+                  <Link 
+                    to="/shop?category=Women" 
+                    className="group flex items-center gap-2 text-xs font-bold text-gray-900 uppercase tracking-widest hover:text-[#B8934E] transition-colors"
+                  >
+                    <span className="relative">
+                      View Entire Collection
+                      <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#B8934E] transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </Link>
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => scroll(womensRef, 'left')} 
+                      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-black hover:text-white hover:border-black transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)]"
+                    >
+                      <ChevronLeft size={20} className="stroke-[1.5]" />
+                    </button>
+                    <button 
+                      onClick={() => scroll(womensRef, 'right')} 
+                      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-black hover:text-white hover:border-black transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)]"
+                    >
+                      <ChevronRight size={20} className="stroke-[1.5]" />
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -203,22 +222,44 @@ export function Home() {
 
           {/* Men's Collection */}
           {products.length > 0 && (
-            <section className="py-12 lg:py-20 bg-white">
-              <div className="flex justify-between items-end mb-8 lg:mb-12 px-4 sm:px-6 lg:px-10">
-                <div className="flex flex-col">
-                  <h2 className="text-3xl md:text-4xl font-serif text-obsidian tracking-wide">
-                    Men's Collection
+            <section className="py-16 lg:py-24 bg-gradient-to-b from-gray-50/80 to-white relative">
+              <div className="absolute top-0 left-0 w-64 h-64 bg-slate-400/5 rounded-full blur-[80px] pointer-events-none -translate-x-1/3 -translate-y-1/2"></div>
+
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 lg:mb-14 px-4 sm:px-6 lg:px-10 relative z-10">
+                <div className="flex flex-col mb-6 sm:mb-0 max-w-2xl">
+                  <span className="text-[10px] font-bold tracking-[0.25em] text-slate-500 uppercase mb-3">Men's Collection</span>
+                  <h2 className="text-4xl md:text-5xl font-serif text-obsidian tracking-wide mb-4">
+                    The Men's Collection Edit
                   </h2>
-                  <div className="w-16 h-[2px] bg-[#800000] mt-4 rounded-full"></div>
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-xl font-medium">
+                    An exquisite curation of masterful design, where timeless tradition seamlessly meets modern brilliance.
+                  </p>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="hidden sm:flex gap-2">
-                    <button onClick={() => scroll(mensRef, 'left')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronLeft size={20} /></button>
-                    <button onClick={() => scroll(mensRef, 'right')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronRight size={20} /></button>
-                  </div>
-                  <Link to="/shop?category=Men" className="text-sm font-medium text-gray-600 hover:text-[#800000] transition-colors border-b border-transparent hover:border-[#800000] pb-1 hidden sm:block uppercase tracking-wider">
-                    View All
+                <div className="flex items-center gap-6 w-full sm:w-auto justify-between sm:justify-end">
+                  <Link 
+                    to="/shop?category=Men" 
+                    className="group flex items-center gap-2 text-xs font-bold text-gray-900 uppercase tracking-widest hover:text-slate-600 transition-colors"
+                  >
+                    <span className="relative">
+                      View Entire Collection
+                      <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-slate-600 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </Link>
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => scroll(mensRef, 'left')} 
+                      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-black hover:text-white hover:border-black transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)]"
+                    >
+                      <ChevronLeft size={20} className="stroke-[1.5]" />
+                    </button>
+                    <button 
+                      onClick={() => scroll(mensRef, 'right')} 
+                      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-black hover:text-white hover:border-black transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)]"
+                    >
+                      <ChevronRight size={20} className="stroke-[1.5]" />
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -242,22 +283,41 @@ export function Home() {
 
           {/* Kids Collection */}
           {products.length > 0 && (
-            <section className="py-12 lg:py-20 bg-gray-50/30">
-              <div className="flex justify-between items-end mb-8 lg:mb-12 px-4 sm:px-6 lg:px-10">
-                <div className="flex flex-col">
-                  <h2 className="text-3xl md:text-4xl font-serif text-obsidian tracking-wide">
+            <section className="py-16 lg:py-24 bg-gradient-to-b from-[#FAF4F0] to-white relative">
+              <div className="absolute top-0 right-1/4 w-64 h-64 bg-[#E8C5A8]/10 rounded-full blur-[80px] pointer-events-none -translate-y-1/2"></div>
+
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 lg:mb-14 px-4 sm:px-6 lg:px-10 relative z-10">
+                <div className="flex flex-col mb-6 sm:mb-0 max-w-2xl">
+                  <span className="text-[10px] font-bold tracking-[0.25em] text-[#D4A373] uppercase mb-3">Playful Styles</span>
+                  <h2 className="text-4xl md:text-5xl font-serif text-obsidian tracking-wide">
                     Kids Collection
                   </h2>
-                  <div className="w-16 h-[2px] bg-[#800000] mt-4 rounded-full"></div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="hidden sm:flex gap-2">
-                    <button onClick={() => scroll(kidsRef, 'left')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronLeft size={20} /></button>
-                    <button onClick={() => scroll(kidsRef, 'right')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-[#800000] transition-colors"><ChevronRight size={20} /></button>
-                  </div>
-                  <Link to="/shop?category=Kids" className="text-sm font-medium text-gray-600 hover:text-[#800000] transition-colors border-b border-transparent hover:border-[#800000] pb-1 hidden sm:block uppercase tracking-wider">
-                    View All
+                <div className="flex items-center gap-6 w-full sm:w-auto justify-between sm:justify-end">
+                  <Link 
+                    to="/shop?category=Kids" 
+                    className="group flex items-center gap-2 text-xs font-bold text-gray-900 uppercase tracking-widest hover:text-[#D4A373] transition-colors"
+                  >
+                    <span className="relative">
+                      View Entire Collection
+                      <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4A373] transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </Link>
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => scroll(kidsRef, 'left')} 
+                      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-black hover:text-white hover:border-black transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)]"
+                    >
+                      <ChevronLeft size={20} className="stroke-[1.5]" />
+                    </button>
+                    <button 
+                      onClick={() => scroll(kidsRef, 'right')} 
+                      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-black hover:text-white hover:border-black transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)]"
+                    >
+                      <ChevronRight size={20} className="stroke-[1.5]" />
+                    </button>
+                  </div>
                 </div>
               </div>
 

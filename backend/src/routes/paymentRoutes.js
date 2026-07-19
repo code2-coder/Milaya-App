@@ -1,7 +1,9 @@
 import express from "express";
 import {
   createStripeCheckoutSession,
-  verifyStripePayment
+  verifyStripePayment,
+  createRazorpayOrder,
+  verifyRazorpayPayment
 } from "../controllers/paymentController.js";
 import { isAuthenticatedUser } from "../middlewares/auth.js";
 
@@ -20,5 +22,9 @@ const paymentLimiter = rateLimit({
 // Stripe routes
 router.post("/payment/stripe/create-checkout-session", isAuthenticatedUser, paymentLimiter, createStripeCheckoutSession);
 router.post("/payment/stripe/verify", isAuthenticatedUser, paymentLimiter, verifyStripePayment);
+
+// Razorpay routes
+router.post("/payment/razorpay/create-order", isAuthenticatedUser, paymentLimiter, createRazorpayOrder);
+router.post("/payment/razorpay/verify", isAuthenticatedUser, paymentLimiter, verifyRazorpayPayment);
 
 export default router;

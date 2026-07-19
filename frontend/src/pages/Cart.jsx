@@ -50,6 +50,16 @@ export function Cart() {
     setCheckoutAddress(prev => ({ ...prev, [name]: value }));
   };
 
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   const buildOrderPayload = () => {
     const itemsPrice = convertedCartTotal;
     const shippingAmount = displayShippingAmount;
@@ -122,6 +132,67 @@ export function Cart() {
           toast.error("Failed to get Stripe checkout URL");
           setIsProcessing(false);
         }
+      } else if (paymentMethod === "Razorpay") {
+        const resScript = await loadRazorpayScript();
+        if (!resScript) {
+          toast.error("Razorpay SDK failed to load. Are you online?");
+          setIsProcessing(false);
+          return;
+        }
+
+        const { data: orderDataRes } = await api.post("/payment/razorpay/create-order", orderPayload);
+
+        if (!orderDataRes || !orderDataRes.success) {
+          toast.error("Server error. Please try again.");
+          setIsProcessing(false);
+          return;
+        }
+
+        const options = {
+          key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_YourKeyId", // Fallback for testing, remind user to set env
+          amount: orderDataRes.order.amount,
+          currency: orderDataRes.order.currency,
+          name: "Milaya",
+          description: "Test Transaction",
+          order_id: orderDataRes.order.id,
+          handler: async function (response) {
+            try {
+              const verifyRes = await api.post("/payment/razorpay/verify", {
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                orderData: orderPayload
+              });
+              
+              if (verifyRes.data.success) {
+                clearCart();
+                toast.success("Payment successful! Order placed.");
+                navigate("/orders");
+              }
+            } catch (err) {
+              toast.error("Payment verification failed.");
+              console.error(err);
+            }
+          },
+          prefill: {
+            name: checkoutAddress.fullName,
+            email: user?.email,
+            contact: checkoutAddress.phoneNo,
+          },
+          theme: {
+            color: "#000000",
+          },
+          modal: {
+            ondismiss: function() {
+              setIsProcessing(false);
+              toast.error("Payment cancelled.");
+            }
+          }
+        };
+
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+        
       } else if (paymentMethod === "COD") {
         await api.post("/orders/new", orderPayload);
         clearCart();
@@ -522,6 +593,25 @@ export function Cart() {
                         <Banknote className={`w-5 h-5 ${paymentMethod === "COD" ? "text-black" : "text-gray-400"}`} />
                       </label>
                     )}
+
+                    {/* Razorpay Option */}
+                    <label className={`relative flex items-center p-4 rounded-2xl cursor-pointer border transition-all duration-300 ${paymentMethod === "Razorpay" ? "border-black bg-white ring-1 ring-black/20" : "border-gray-250 bg-white hover:border-black/40 hover:bg-gray-50"}`}>
+                      <input
+                        type="radio"
+                        value="Razorpay"
+                        checked={paymentMethod === "Razorpay"}
+                        onChange={() => setPaymentMethod("Razorpay")}
+                        className="sr-only"
+                      />
+                      <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-4 transition-colors ${paymentMethod === "Razorpay" ? "border-black" : "border-gray-300"}`}>
+                        {paymentMethod === "Razorpay" && <div className="w-2 h-2 rounded-full bg-black"></div>}
+                      </div>
+                      <div className="flex-1">
+                        <span className="block text-sm font-semibold text-gray-900">Razorpay (India & Global)</span>
+                        <span className="block text-[11px] text-gray-400 mt-0.5">UPI, Cards, NetBanking</span>
+                      </div>
+                      <CreditCard className={`w-5 h-5 ${paymentMethod === "Razorpay" ? "text-black" : "text-gray-400"}`} />
+                    </label>
                   </div>
                 </div>
 
@@ -537,7 +627,7 @@ export function Cart() {
                     </div>
                   ) : (
                     <>
-                      <span>{(paymentMethod === "Card" || paymentMethod === "Stripe") ? `Pay ${formatPrice(totalAmountWithExtras)}` : `Place Order`}</span>
+                      <span>{(paymentMethod === "Card" || paymentMethod === "Stripe" || paymentMethod === "Razorpay") ? `Pay ${formatPrice(totalAmountWithExtras)}` : `Place Order`}</span>
                       <ArrowRight className="w-4 h-4 group-hover/checkout:translate-x-1.5 transition-transform duration-300" />
                     </>
                   )}
