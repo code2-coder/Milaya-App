@@ -499,10 +499,10 @@ export function Header() {
           {/* Middle Mobile Delivery Badge (Centered) */}
 
 
-          <div className="flex items-center space-x-6 md:space-x-10">
-            <Link to="/" className="flex items-center space-x-2 group relative z-[70] -ml-2 md:-ml-4 lg:-ml-6">
+          <div className="flex items-center space-x-6 md:space-x-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:transform-none">
+            <Link to="/" className="flex items-center space-x-2 group relative z-[70] md:-ml-4 lg:-ml-6">
               <div className="flex items-center">
-                <img src="/loginlogo-removebg-preview.png" alt="Milaya Logo" className="h-10 md:h-12 lg:h-16 w-auto object-contain scale-125 md:scale-150 transition-transform duration-300 group-hover:scale-[1.55] filter drop-shadow-sm" />
+                <img src="/loginlogo-removebg-preview.png" alt="Milaya Logo" className="h-16 sm:h-16 md:h-14 lg:h-20 w-auto object-contain scale-150 transition-transform duration-300 group-hover:scale-[1.55] filter drop-shadow-sm" />
               </div>
             </Link>
 
@@ -854,9 +854,9 @@ export function Header() {
 
             <div className="flex-1 overflow-y-auto p-8 space-y-10 custom-scrollbar">
               {/* BRAND LOGO IN DRAWER */}
-              <div className="pb-6 border-b border-gray-100 flex justify-center">
+              <div className="pb-6 border-b border-gray-100 flex justify-center mt-4">
                 <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center">
-                  <img src="/Milaya_Logo.jpg-removebg-preview.png" alt="Milaya Logo" className="h-12 w-auto object-contain filter drop-shadow-sm" />
+                  <img src="/loginlogo-removebg-preview.png" alt="Milaya Logo" className="h-16 w-auto object-contain filter drop-shadow-sm scale-150" />
                 </Link>
               </div>
 

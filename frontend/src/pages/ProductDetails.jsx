@@ -474,13 +474,19 @@ export function ProductDetails() {
                 {(() => {
                   const specsList = [
                     { label: 'Fabric / Material', value: product.material },
-                    { label: 'Fit', value: product.fit || product.style || product.productType },
+                    { label: 'Metal', value: product.metal },
+                    { label: 'Stone Type', value: product.stoneType },
+                    { label: 'Finish', value: product.finish },
+                    { label: 'Color', value: product.color },
+                    { label: 'Theme', value: product.theme },
+                    { label: 'Style', value: product.style || product.productType },
+                    { label: 'Pattern', value: product.pattern },
+                    { label: 'Shape', value: product.shape },
+                    { label: 'Country of Origin', value: product.countryOfOrigin },
+                    { label: 'Fit', value: product.fit },
                     { label: 'Sleeve Type', value: product.sleeveType },
                     { label: 'Neck Type', value: product.neckType },
-                    { label: 'Pattern', value: product.pattern },
-                    { label: 'Color', value: product.color },
                     { label: 'Occasion', value: product.occasion },
-                    { label: 'Style', value: product.style },
                     { label: 'Closure Type', value: product.closureType },
                     { label: 'Length', value: product.length },
                     { label: 'Waist Rise', value: product.waistRise },
@@ -488,7 +494,6 @@ export function ProductDetails() {
                     { label: 'Transparency', value: product.transparency },
                     { label: 'Care Instructions', value: product.careInstructions },
                     { label: 'Season', value: product.season },
-                    { label: 'Country of Origin', value: product.countryOfOrigin },
                     { label: 'Weight', value: product.weight },
                     { label: 'Dimensions', value: product.dimensions },
                   ].filter(s => s.value && typeof s.value === 'string' && s.value.trim() !== '');
@@ -514,13 +519,17 @@ export function ProductDetails() {
                       {specsList.length > 0 && (
                         <div>
                           <p className="font-semibold text-gray-900 text-[10px] tracking-wider uppercase mb-5">Specifications</p>
-                          <div className="flex flex-col border-t border-gray-100">
-                            {specsList.map((spec, idx) => (
-                              <div key={idx} className="flex py-3.5 border-b border-gray-100 text-[13px]">
-                                <span className="w-2/5 text-gray-400 font-light">{spec.label}</span>
-                                <span className="w-3/5 text-gray-900 font-medium">{spec.value}</span>
-                              </div>
-                            ))}
+                          <div className="border border-gray-200 rounded-lg overflow-hidden">
+                            <table className="w-full text-left text-[13px] border-collapse">
+                              <tbody>
+                                {specsList.map((spec, idx) => (
+                                  <tr key={idx} className="border-b border-gray-200 last:border-0 even:bg-gray-50/50">
+                                    <td className="py-3 px-4 w-2/5 text-gray-500 font-medium border-r border-gray-200">{spec.label}</td>
+                                    <td className="py-3 px-4 w-3/5 text-gray-900">{spec.value}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       )}
