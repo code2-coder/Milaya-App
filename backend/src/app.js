@@ -52,6 +52,8 @@ const allowedOrigins = [
   "https://milaya.com",
   "https://www.milaya.com",
   "https://milaya.onrender.com",
+  "https://milayafashion.com",
+  "https://www.milayafashion.com",
   process.env.CLIENT_URL
 ].filter(Boolean);
 
