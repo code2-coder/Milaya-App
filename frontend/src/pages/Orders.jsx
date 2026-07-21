@@ -65,24 +65,7 @@ export function Orders() {
 
     const verifyStripeAndFetch = async () => {
       const sessionId = searchParams.get("session_id");
-      const stripeSuccess = searchParams.get("stripe_success");
 
-      if (stripeSuccess === "true" && sessionId) {
-        try {
-          const orderData = JSON.parse(localStorage.getItem("stripeOrderPayload"));
-          if (!orderData) {
-             toast.error("Order data not found. Please contact support.");
-             return;
-          }
-          await api.post("/payment/stripe/verify", { sessionId, orderData });
-          localStorage.removeItem("stripeOrderPayload");
-          clearCart();
-          toast.success("Payment successful! Order placed.");
-          setSearchParams({});
-        } catch (err) {
-          toast.error("Error verifying payment");
-        }
-      }
       
       await fetchOrders();
     };

@@ -121,18 +121,7 @@ export function Cart() {
     const orderPayload = buildOrderPayload();
     try {
       setIsProcessing(true);
-
-      if (paymentMethod === "Stripe" || paymentMethod === "Card") {
-        localStorage.setItem("stripeOrderPayload", JSON.stringify(orderPayload));
-        const { data } = await api.post("/payment/stripe/create-checkout-session", orderPayload);
-
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          toast.error("Failed to get Stripe checkout URL");
-          setIsProcessing(false);
-        }
-      } else if (paymentMethod === "Razorpay") {
+      if (paymentMethod === "Razorpay") {
         const resScript = await loadRazorpayScript();
         if (!resScript) {
           toast.error("Razorpay SDK failed to load. Are you online?");
@@ -236,7 +225,7 @@ export function Cart() {
   // Auto-switch away from COD if Australia selected in header or non-India address
   useEffect(() => {
     if (paymentMethod === "COD" && !isCODAvailable) {
-      setPaymentMethod("Stripe");
+      setPaymentMethod("Razorpay");
     }
   }, [isCODAvailable]);
 
@@ -555,23 +544,7 @@ export function Cart() {
                   <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Payment Method</h3>
                   <div className="space-y-3">
 
-                    <label className={`relative flex items-center p-4 rounded-2xl cursor-pointer border transition-all duration-300 ${paymentMethod === "Stripe" ? "border-black bg-white ring-1 ring-black/20" : "border-gray-250 bg-white hover:border-black/40 hover:bg-gray-50"}`}>
-                      <input
-                        type="radio"
-                        value="Stripe"
-                        checked={paymentMethod === "Stripe"}
-                        onChange={() => setPaymentMethod("Stripe")}
-                        className="sr-only"
-                      />
-                      <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-4 transition-colors ${paymentMethod === "Stripe" ? "border-black" : "border-gray-300"}`}>
-                        {paymentMethod === "Stripe" && <div className="w-2 h-2 rounded-full bg-black"></div>}
-                      </div>
-                      <div className="flex-1">
-                        <span className="block text-sm font-semibold text-gray-900">Pay Online (Secure)</span>
-                        <span className="block text-[11px] text-gray-400 mt-0.5">Credit/Debit Cards</span>
-                      </div>
-                      <CreditCard className={`w-5 h-5 ${paymentMethod === "Stripe" ? "text-black" : "text-gray-400"}`} />
-                    </label>
+
 
                     {/* COD — India only */}
                     {isCODAvailable && (
@@ -627,7 +600,7 @@ export function Cart() {
                     </div>
                   ) : (
                     <>
-                      <span>{(paymentMethod === "Card" || paymentMethod === "Stripe" || paymentMethod === "Razorpay") ? `Pay ${formatPrice(totalAmountWithExtras)}` : `Place Order`}</span>
+                      <span>{(paymentMethod === "Card" || paymentMethod === "Razorpay") ? `Pay ${formatPrice(totalAmountWithExtras)}` : `Place Order`}</span>
                       <ArrowRight className="w-4 h-4 group-hover/checkout:translate-x-1.5 transition-transform duration-300" />
                     </>
                   )}

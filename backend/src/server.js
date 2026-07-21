@@ -30,7 +30,7 @@ connectDB().then(() => {
 
 // Start the server
 const PORT = Number(process.env.PORT) || 8085;
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   logger.info(`Server is running on http://localhost:${PORT} in ${process.env.NODE_ENV || "development"} mode.`);
 });
 
