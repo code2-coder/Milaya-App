@@ -240,7 +240,7 @@ export class AuthController {
   }
 
   async googleCallback(req, res, next) {
-    const clientUrl = process.env.CLIENT_URL || 'https://milaya-app.vercel.app';
+    const clientUrl = process.env.CLIENT_URL || 'https://www.milayafashion.com';
 
     try {
       if (!req.user) {

@@ -51,8 +51,8 @@ export const PackagingSelector = ({
             <div className={`animate-pulse space-y-4 ${className}`}>
                 <div className="h-6 bg-gray-200 rounded w-1/3"></div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="h-40 bg-gray-100 rounded-2xl border border-gray-200"></div>
-                    <div className="h-40 bg-gray-100 rounded-2xl border border-gray-200"></div>
+                    <div className="h-40 bg-gray-100 rounded-sm border border-gray-200"></div>
+                    <div className="h-40 bg-gray-100 rounded-sm border border-gray-200"></div>
                 </div>
             </div>
         );
@@ -70,10 +70,10 @@ export const PackagingSelector = ({
                     return (
                         <label
                             key={option.id}
-                            className={`relative flex flex-col p-5 border rounded-2xl cursor-pointer transition-all duration-300 group
+                            className={`relative flex flex-col p-5 border rounded-sm cursor-pointer transition-all duration-300 group
                                 ${isSelected 
-                                    ? 'border-[black] bg-[#ffffff] ring-1 ring-[black]/25 shadow-md scale-[1.01]' 
-                                    : 'border-gray-200 bg-white hover:border-[black]/40 hover:bg-[#f9fafb]'}`}
+                                    ? 'border-[black] bg-[#ffffff] border-black shadow-none scale-[1.01]' 
+                                    : 'border-gray-200 bg-white hover:border-black hover:bg-[#f9fafb]'}`}
                         >
                             <input
                                 type="radio"
@@ -89,7 +89,7 @@ export const PackagingSelector = ({
                                 </div>
                             )}
                             <div className="flex items-start gap-3 mb-3 pr-6">
-                                <div className={`flex-shrink-0 p-2 rounded-xl transition-all ${isSelected ? 'bg-black/10 text-black' : 'bg-gray-100 text-gray-400 group-hover:bg-black/10 group-hover:text-black'}`}>
+                                <div className={`flex-shrink-0 p-2 rounded-sm transition-all ${isSelected ? 'bg-black/10 text-black' : 'bg-gray-100 text-gray-400 group-hover:bg-black/10 group-hover:text-black'}`}>
                                     {option.id === 'premium' ? (
                                         <Gift className="w-5 h-5" />
                                     ) : (
@@ -101,12 +101,12 @@ export const PackagingSelector = ({
                             {option.description && (
                                 <div className="text-xs text-gray-400/80 flex-1 mb-4 leading-relaxed font-sans">{option.description}</div>
                             )}
-                            <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <div className="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
                                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Price</span>
                                 {option.price > 0 ? (
                                     <div className="font-bold text-base text-[black]">+{formatPrice(option.price)}</div>
                                 ) : (
-                                    <div className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest bg-emerald-100/60 px-2 py-0.5 rounded-md">Included</div>
+                                    <div className="text-[10px] font-bold text-black uppercase tracking-widest bg-gray-100 px-2 py-0.5 rounded-md">Included</div>
                                 )}
                             </div>
                         </label>
@@ -169,7 +169,7 @@ export const ShippingMethodSelector = ({
 
     if (!country || orderTotal <= 0) {
         return (
-            <div className={`p-8 border border-dashed border-gray-300 rounded-2xl bg-gray-50/50 text-center flex flex-col items-center justify-center ${className}`}>
+            <div className={`p-8 border border-dashed border-gray-300 rounded-sm bg-gray-50/50 text-center flex flex-col items-center justify-center ${className}`}>
                 <Info className="w-8 h-8 text-gray-400 mb-3" />
                 <p className="text-sm text-gray-500 font-medium max-w-sm">Add items to your cart and select a delivery address to view available shipping options.</p>
             </div>
@@ -181,8 +181,8 @@ export const ShippingMethodSelector = ({
             <div className={`animate-pulse space-y-4 ${className}`}>
                 <div className="h-6 bg-gray-200 rounded w-1/3"></div>
                 <div className="space-y-3">
-                    <div className="h-24 bg-gray-100 rounded-xl border border-gray-200"></div>
-                    <div className="h-24 bg-gray-100 rounded-xl border border-gray-200"></div>
+                    <div className="h-24 bg-gray-100 rounded-sm border border-gray-200"></div>
+                    <div className="h-24 bg-gray-100 rounded-sm border border-gray-200"></div>
                 </div>
             </div>
         );
@@ -196,8 +196,8 @@ export const ShippingMethodSelector = ({
             </h3>
             
             {options[0]?.freeThreshold && country.toLowerCase() === 'australia' && (
-                <div className="flex items-center gap-2.5 p-3.5 bg-emerald-50 border border-emerald-100 rounded-2xl text-xs font-semibold text-emerald-800 font-sans">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <div className="flex items-center gap-2.5 p-3.5 bg-gray-100 border border-gray-200 rounded-sm text-xs font-semibold text-black font-sans">
+                    <CheckCircle2 className="w-4 h-4 text-black flex-shrink-0" />
                     <span>Free standard shipping on orders over <strong className="font-bold">{formatPrice(options[0].freeThreshold)}</strong></span>
                 </div>
             )}
@@ -208,10 +208,10 @@ export const ShippingMethodSelector = ({
                     return (
                         <label
                             key={option.id}
-                            className={`flex items-center justify-between p-4 border rounded-2xl cursor-pointer transition-all duration-300
+                            className={`flex items-center justify-between p-4 border rounded-sm cursor-pointer transition-all duration-300
                                 ${isSelected 
-                                    ? 'border-[black] bg-[#ffffff] ring-1 ring-[black]/20 shadow-sm scale-[1.005]' 
-                                    : 'border-gray-200 bg-white hover:border-[black]/40 hover:bg-[#f9fafb]'}`}
+                                    ? 'border-[black] bg-[#ffffff] border-black shadow-none scale-[1.005]' 
+                                    : 'border-gray-200 bg-white hover:border-black hover:bg-[#f9fafb]'}`}
                         >
                             <div className="flex items-center gap-4">
                                 <div className={`flex flex-shrink-0 items-center justify-center w-5 h-5 rounded-full border-2 transition-colors
@@ -240,7 +240,7 @@ export const ShippingMethodSelector = ({
                             </div>
                             <div className="text-right pl-4">
                                 {option.isFree ? (
-                                    <div className="text-sm font-bold text-emerald-700 uppercase tracking-wider bg-emerald-100/60 px-2.5 py-1 rounded-md">Free</div>
+                                    <div className="text-sm font-bold text-black uppercase tracking-wider bg-gray-100 px-2.5 py-1 rounded-md">Free</div>
                                 ) : (
                                     <div className="text-base font-bold text-[black] font-sans">{formatPrice(option.price)}</div>
                                 )}
@@ -268,8 +268,8 @@ export const OrderSummary = ({
         const totalAmount = itemsPrice + taxAmount + shippingAmount + packagingAmount;
 
     return (
-        <div className={`bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow rounded-2xl p-6 md:p-7 space-y-6 ${className}`}>
-            <h3 className="text-xl font-serif font-bold text-gray-900 border-b border-gray-100 pb-4">Order Summary</h3>
+        <div className={`bg-white border border-gray-200 shadow-none hover:shadow-none transition-shadow rounded-sm p-6 md:p-7 space-y-6 ${className}`}>
+            <h3 className="text-xl font-serif font-bold text-gray-900 border-b border-gray-200 pb-4">Order Summary</h3>
 
             {showBreakdown && (
                 <div className="space-y-3.5 text-sm">
@@ -293,14 +293,14 @@ export const OrderSummary = ({
                     ) : (
                         <div className="flex justify-between items-center">
                             <span className="font-medium text-gray-600">Shipping</span>
-                            <span className="font-bold text-emerald-700 uppercase text-xs tracking-wider bg-emerald-100/60 px-2 py-1 rounded-md">Free</span>
+                            <span className="font-bold text-black uppercase text-xs tracking-wider bg-gray-100 px-2 py-1 rounded-md">Free</span>
                         </div>
                     )}
 
                     {packagingAmount > 0 && (
                         <div className="flex justify-between items-center text-gray-600">
                             <span className="font-medium">Premium Packaging</span>
-                            <span className="font-bold text-amber-700 text-base">+{formatPrice(packagingAmount)}</span>
+                            <span className="font-bold text-black text-base">+{formatPrice(packagingAmount)}</span>
                         </div>
                     )}
                 </div>
@@ -329,13 +329,13 @@ export const PackagingInfo = ({
     className = '',
 }) => {
     return (
-        <div className={`flex items-start gap-4 p-5 bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/60 rounded-2xl ${className}`}>
+        <div className={`flex items-start gap-4 p-5 bg-gradient-to-br from-amber-50 to-gray-100 border border-gray-200 rounded-sm ${className}`}>
             {showIcon && (
-                <div className="p-2.5 bg-white rounded-xl shadow-sm border border-amber-100 flex-shrink-0">
-                    <Gift className="w-5 h-5 text-amber-600" />
+                <div className="p-2.5 bg-white rounded-sm shadow-none border border-gray-200 flex-shrink-0">
+                    <Gift className="w-5 h-5 text-black" />
                 </div>
             )}
-            <p className="text-sm font-medium text-amber-900/80 leading-relaxed pt-1">{text}</p>
+            <p className="text-sm font-medium text-black leading-relaxed pt-1">{text}</p>
         </div>
     );
 };
