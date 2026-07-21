@@ -5,10 +5,14 @@ import App from "./App.jsx";
 import "./styles/index.css";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
+import { HelmetProvider } from 'react-helmet-async';
+
 createRoot(document.getElementById("root")).render(
   <ErrorBoundary>
     <Provider store={store}>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </Provider>
   </ErrorBoundary>
 );

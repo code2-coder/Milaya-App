@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { useSEO } from "../hooks/useSEO";
+import { SEO } from "../components/SEO";
 import api from "../api/axios";
 
 const DEFAULT_CONTENT = {
@@ -29,7 +29,7 @@ const DEFAULT_CONTENT = {
 
 export function PrivacyPolicy() {
   const [content, setContent] = useState(DEFAULT_CONTENT);
-  useSEO(content.title, "Read the Milaya privacy policy.");
+  
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -47,6 +47,7 @@ export function PrivacyPolicy() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      <SEO title={content.title} description={"Read the Milaya privacy policy."} />
       <Header />
       <main className="flex-grow max-w-4xl mx-auto px-4 pb-16 pt-[160px] lg:pt-[180px] w-full">
         <h1 className="text-4xl font-bold mb-8 text-gray-800">{content.title}</h1>

@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router";
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Trash2, Plus, Minus, ShoppingBag, ShieldCheck, Truck, CreditCard, Banknote, ChevronRight, Loader2, ArrowRight, MapPin } from "lucide-react";
 import { Header } from "../components/Header";
-import { useSEO } from "../hooks/useSEO";
+import { SEO } from "../components/SEO";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "sonner";
@@ -22,7 +22,7 @@ export function Cart() {
   const { user } = useAuth();
     const navigate = useNavigate();
 
-  useSEO("Secure Checkout | Milaya", `Complete your purchase securely. ${cart.length} luxury items waiting in your cart.`);
+  
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedShipping, setSelectedShipping] = useState(null);
@@ -267,6 +267,7 @@ export function Cart() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
+      <SEO title={"Secure Checkout | Milaya"} description={`Complete your purchase securely. ${cart.length} luxury items waiting in your cart.`} />
       <Header />
 
       <main className="flex-1 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-[160px] lg:pt-[180px] w-full">

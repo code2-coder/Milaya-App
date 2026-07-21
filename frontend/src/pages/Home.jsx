@@ -2,7 +2,7 @@ import { Header } from "../components/Header";
 import { lazy, Suspense, useState, useEffect, useRef } from "react";
 const Footer = lazy(() => import("../components/Footer").then(m => ({ default: m.Footer })));
 import { Flower2, ChevronLeft, ChevronRight } from "lucide-react";
-import { useSEO } from "../hooks/useSEO";
+import { SEO } from "../components/SEO";
 import api from "../api/axios";
 import { BannerCarousel } from "../components/BannerCarousel";
 import { Link } from "react-router";
@@ -14,7 +14,7 @@ import { CustomerReviews } from "../components/home/CustomerReviews";
 import { InstagramGallery } from "../components/home/InstagramGallery";
 
 export function Home() {
-  useSEO("Home", "Browse Milaya's expansive offering of highly-rated clothing pieces, elegant outerwear, and premium dresses.");
+  
 
   const womensRef = useRef(null);
   const mensRef = useRef(null);
@@ -58,6 +58,7 @@ export function Home() {
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
+      <SEO title={"Home"} description={"Browse Milaya's expansive offering of highly-rated clothing pieces, elegant outerwear, and premium dresses."} />
       <div className="relative z-10">
         <Header />
 

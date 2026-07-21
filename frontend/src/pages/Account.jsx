@@ -10,12 +10,12 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import api from "../api/axios";
-import { useSEO } from "../hooks/useSEO";
+import { SEO } from "../components/SEO";
 
 export function Account() {
    const { user, logout, setUser } = useAuth();
    const navigate = useNavigate();
-   useSEO("Account Center", "Manage your customer details, shipping addresses, or review your order history.");
+   
 
    const [isEditing, setIsEditing] = useState(false);
    const [isSaving, setIsSaving] = useState(false);
@@ -117,6 +117,7 @@ export function Account() {
 
    return (
       <div className="min-h-screen bg-gray-50 flex flex-col font-sans relative">
+      <SEO title={"Account Center"} description={"Manage your customer details, shipping addresses, or review your order history."} />
          <Header />
 
          <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-16 pt-[160px] lg:pt-[180px]">

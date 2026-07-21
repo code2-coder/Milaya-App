@@ -4,7 +4,7 @@ import { Footer } from '../components/Footer';
 import { motion } from 'motion/react';
 import { Truck, ShieldCheck, Clock, RefreshCcw, HandPlatter, AlertCircle } from 'lucide-react';
 import api from '../api/axios';
-import { useSEO } from '../hooks/useSEO';
+import { SEO } from "../components/SEO";
 
 const iconMap = {
   Truck,
@@ -33,7 +33,7 @@ const DEFAULT_CONTENT = {
 
 export function ReturnPolicy() {
   const [content, setContent] = useState(DEFAULT_CONTENT);
-  useSEO(content.title, content.subtitle);
+  
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -51,6 +51,7 @@ export function ReturnPolicy() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF9F6]">
+      <SEO title={content.title} description={content.subtitle} />
       <Header />
       
       <main className="flex-1 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full pt-[160px] lg:pt-[180px]">

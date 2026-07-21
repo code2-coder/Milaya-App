@@ -9,8 +9,10 @@ import { fileURLToPath } from "url";
 import passport from "./config/passport.js";
 import errorMiddleware from "./middlewares/errors.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import returnRoutes from "./routes/returnRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import seoRoutes from "./routes/seoRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
@@ -147,6 +149,7 @@ app.use("/api/v1", shipmentRoutes);
 app.use("/api/v1", uploadRoutes);
 app.use("/api/v1", reviewRoutes);
 app.use("/api/v1", pageRoutes);
+app.use("/api/v1/seo", seoRoutes);
 app.use("/api/v1/files", fileRoutes);
 
 

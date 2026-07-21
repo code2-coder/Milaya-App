@@ -4,7 +4,7 @@ import { Header } from "../components/Header";
 import { ProductCard } from "../components/ProductCard";
 import { useCategory } from "../context/CategoryContext";
 
-import { useSEO } from "../hooks/useSEO";
+import { SEO } from "../components/SEO";
 import api from "../api/axios";
 import { 
   Filter, X, ChevronDown, ChevronUp, ChevronRight, Search, 
@@ -39,6 +39,7 @@ const FilterSection = ({ title, items, stateKey, activeFilters, toggleArrayFilte
   if (!items || items.length === 0) return null;
   return (
     <div className="py-5 border-b border-gray-100">
+      <SEO title={getPageTitle(} description={""} />
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between group focus:outline-none"
@@ -380,7 +381,7 @@ export function Shop() {
     return "The Collection";
   };
 
-  useSEO(getPageTitle(), "Browse our complete collection of premium clothing, filter by budget and category.");
+  , "Browse our complete collection of premium clothing, filter by budget and category.");
 
   // Derived unique filter options from attributes
   const uniqueMaterials = useMemo(() => attributes.filter(a => a.type === 'material').map(a => a.value), [attributes]);

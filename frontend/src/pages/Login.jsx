@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
-import { useSEO } from "../hooks/useSEO";
+import { SEO } from "../components/SEO";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../validations/auth";
@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 export function Login() {
-  useSEO("Login", "Sign in to your Milaya account to track orders and manage your clothing.");
+  
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -120,6 +120,7 @@ export function Login() {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white selection:bg-black selection:text-white relative">
+      <SEO title={"Login"} description={"Sign in to your Milaya account to track orders and manage your clothing."} />
       
       {/* Left Side: Fashion Image Cover */}
       <div className="hidden md:block md:w-1/2 relative">

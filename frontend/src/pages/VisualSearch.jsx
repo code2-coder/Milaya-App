@@ -1,11 +1,11 @@
 import { useLocation, Link, Navigate } from "react-router";
 import { Header } from "../components/Header";
 import { ProductCard } from "../components/ProductCard";
-import { useSEO } from "../hooks/useSEO";
+import { SEO } from "../components/SEO";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export function VisualSearch() {
-  useSEO("Visual Match Results", "Products visually matching your uploaded image.");
+  
   const location = useLocation();
   const products = location.state?.results;
 
@@ -15,6 +15,7 @@ export function VisualSearch() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO title={"Visual Match Results"} description={"Products visually matching your uploaded image."} />
       <Header />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-[160px] lg:pt-[180px]">
         <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">

@@ -30,7 +30,7 @@ import { useCart } from "../context/CartContext";
 import { toast } from "sonner";
 import { ProductCard } from "../components/ProductCard";
 import { useAuth } from "../context/AuthContext";
-import { useSEO } from "../hooks/useSEO";
+import { SEO } from "../components/SEO";
 import { ProductSchema } from "../components/ProductSchema";
 import { motion, AnimatePresence } from "motion/react";
 import { useCategory } from "../context/CategoryContext";
@@ -197,16 +197,6 @@ export function ProductDetails() {
     }
   };
 
-  useSEO(
-    product ? product.name : "Loading Product...",
-    product ? `${product.name} - ${product.description.substring(0, 150)}...` : "Premium Tech Product",
-    {
-      image: product?.images?.[0]?.url || product?.image,
-      type: "product",
-      keywords: product ? `${product.name}, tech, hardware, Milaya` : "tech, hardware"
-    }
-  );
-
   const getVariantAccent = (variantName = "") => {
     const name = variantName.toLowerCase();
     if (name.includes("emerald") || name.includes("green")) {
@@ -228,8 +218,42 @@ export function ProductDetails() {
   };
 
   if (loading && !product) {
+    const productSchema = product ? {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": product.name,
+      "image": product.images?.[0]?.url || product.image,
+      "description": product.description,
+      "sku": product._id,
+      "brand": {
+        "@type": "Brand",
+        "name": "Milaya"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": window.location.href,
+        "priceCurrency": "INR",
+        "price": displayPrice || product.price,
+        "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": displayStock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
+      },
+      ...(product.numOfReviews > 0 && {
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": product.ratings,
+          "reviewCount": product.numOfReviews
+        }
+      })
+    } : null;
+
     return (
       <div className="min-h-screen bg-white">
+      <SEO 
+        title={product ? product.name : "Product Details"} 
+        description={product ? `${product.name} - ${product.description?.substring(0, 150)}...` : "Premium Clothing Product"} 
+        schema={productSchema}
+      />
         <Header />
         <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-[120px]">
           <div className="animate-pulse">
@@ -251,10 +275,43 @@ export function ProductDetails() {
     );
   }
 
+  const productSchemaMain = product ? {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": product.name,
+    "image": product.images?.[0]?.url || product.image,
+    "description": product.description,
+    "sku": product._id,
+    "brand": {
+      "@type": "Brand",
+      "name": "Milaya"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": window.location.href,
+      "priceCurrency": "INR",
+      "price": displayPrice || product.price,
+      "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": displayStock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
+    },
+    ...(product.numOfReviews > 0 && {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": product.ratings,
+        "reviewCount": product.numOfReviews
+      }
+    })
+  } : null;
+
   return (
     <div className="min-h-screen bg-[#F9F9F9]">
+      <SEO 
+        title={product ? product.name : "Product Details"} 
+        description={product ? `${product.name} - ${product.description?.substring(0, 150)}...` : "Premium Clothing Product"} 
+        schema={productSchemaMain}
+      />
       <Header />
-      <ProductSchema product={product} />
 
       <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-[140px] lg:pt-[160px]">
         {/* Breadcrumb / Back */}
