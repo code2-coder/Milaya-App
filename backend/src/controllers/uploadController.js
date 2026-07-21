@@ -1,5 +1,5 @@
 import ErrorHandler from "../utils/errorHandler.js";
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import uploadService from "../services/UploadService.js";
 
 // Upload a single media file (Image or Video)

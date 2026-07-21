@@ -1,11 +1,11 @@
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import Courier from "../models/courier.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 export const getAllCouriers = catchAsyncErrors(async (req, res) => {
   const { activeOnly } = req.query;
   const filter = activeOnly === "true" ? { isActive: true } : {};
-  const couriers = await Courier.find(filter).sort({ name: 1 });
+  const couriers = await Courier.find(filter).sort({ name: 1 }).lean();
 
   res.status(200).json({ success: true, couriers });
 });

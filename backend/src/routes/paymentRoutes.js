@@ -3,7 +3,7 @@ import {
   createRazorpayOrder,
   verifyRazorpayPayment
 } from "../controllers/paymentController.js";
-import { isAuthenticatedUser } from "../middlewares/auth.js";
+import { isAuthenticatedUser } from "../middleware/auth.js";
 
 import rateLimit from "express-rate-limit";
 

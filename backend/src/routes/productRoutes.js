@@ -1,10 +1,10 @@
 import express from "express";
 import productController from "../controllers/ProductController.js";
-import { cacheMiddleware } from "../middlewares/cache.js";
+import { cacheMiddleware } from "../middleware/cache.js";
 import {
   isAuthenticatedUser,
   authorizeRoles,
-} from "../middlewares/auth.js";
+} from "../middleware/auth.js";
 
 const router = express.Router();
 

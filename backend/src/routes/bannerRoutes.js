@@ -10,9 +10,9 @@ import {
 import {
   isAuthenticatedUser,
   authorizeRoles,
-} from "../middlewares/auth.js";
+} from "../middleware/auth.js";
 
-import { cacheMiddleware } from "../middlewares/cache.js";
+import { cacheMiddleware } from "../middleware/cache.js";
 
 const router = express.Router();
 

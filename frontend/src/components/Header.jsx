@@ -34,7 +34,7 @@ import { useCategory } from "../context/CategoryContext";
 import { useState, useEffect, useRef } from "react";
 import api from "../api/axios";
 import { formatPrice } from '../utils/priceUtils';
-import { DropdownMenu } from "../ui/DropdownMenu";
+import { DropdownMenu } from "../components/ui/DropdownMenu";
 import {
   Select,
   SelectContent,

@@ -1,6 +1,6 @@
 import express from "express";
 import { uploadMedia, deleteMedia } from "../controllers/uploadController.js";
-import { authorizeRoles, isAuthenticatedUser } from "../middlewares/auth.js";
+import { authorizeRoles, isAuthenticatedUser } from "../middleware/auth.js";
 
 const router = express.Router();
 

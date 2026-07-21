@@ -1,4 +1,4 @@
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import User from "../models/User.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { checkServiceability } from "../utils/delhiveryService.js";

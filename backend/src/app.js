@@ -7,7 +7,7 @@ import helmet from "helmet";
 import path from "path";
 import { fileURLToPath } from "url";
 import passport from "./config/passport.js";
-import errorMiddleware from "./middlewares/errors.js";
+import errorMiddleware from "./middleware/errors.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import authRoutes from "./routes/authRoutes.js";

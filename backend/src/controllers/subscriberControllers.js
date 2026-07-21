@@ -1,6 +1,6 @@
 import Subscriber from "../models/subscriber.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 
 //
 // 📧 SUBSCRIBE TO NEWSLETTER

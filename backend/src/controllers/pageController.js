@@ -1,10 +1,10 @@
 import Page from "../models/page.js";
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 // GET all pages (slugs and basic info)
 export const getPages = catchAsyncErrors(async (req, res, next) => {
-  const pages = await Page.find().select("slug title subtitle");
+  const pages = await Page.find().select("slug title subtitle").lean();
   res.status(200).json({
     success: true,
     pages,
@@ -13,7 +13,7 @@ export const getPages = catchAsyncErrors(async (req, res, next) => {
 
 // GET a single page by slug
 export const getPageBySlug = catchAsyncErrors(async (req, res, next) => {
-  const page = await Page.findOne({ slug: req.params.slug.toLowerCase() });
+  const page = await Page.findOne({ slug: req.params.slug.toLowerCase() }).lean();
 
   if (!page) {
     return next(new ErrorHandler("Page not found", 404));

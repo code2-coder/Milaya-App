@@ -8,7 +8,7 @@ import {
   selectCartItems,
   selectCartCount,
   selectCartTotal
-} from "../redux/slices/cartSlice.js";
+} from "../store/slices/cartSlice.js";
 
 const CartContext = createContext(undefined);
 

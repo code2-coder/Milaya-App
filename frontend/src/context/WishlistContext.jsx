@@ -5,7 +5,7 @@ import {
   removeFromWishlist as removeFromWishlistAction,
   clearWishlist as clearWishlistAction,
   selectWishlistItems
-} from "../redux/slices/wishlistSlice.js";
+} from "../store/slices/wishlistSlice.js";
 
 const WishlistContext = createContext(undefined);
 

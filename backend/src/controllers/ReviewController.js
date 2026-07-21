@@ -3,7 +3,7 @@ import Product from "../models/product.js";
 import Order from "../models/order.js";
 import UploadService from "../services/UploadService.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import { sendResponse } from "../helpers/response.js";
 import mongoose from "mongoose";
 

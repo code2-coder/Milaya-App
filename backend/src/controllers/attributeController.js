@@ -1,11 +1,11 @@
 import Attribute from "../models/attribute.js";
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 
 // @desc    Get all attributes
 // @route   GET /api/v1/attributes
 // @access  Public
 export const getAttributes = catchAsyncErrors(async (req, res, next) => {
-  const attributes = await Attribute.find();
+  const attributes = await Attribute.find().lean();
   
   res.status(200).json({
     success: true,

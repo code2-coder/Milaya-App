@@ -1,6 +1,6 @@
 import ProductService from "../services/ProductService.js";
 import { sendResponse } from "../helpers/response.js";
-import { clearCache } from "../middlewares/cache.js";
+import { clearCache } from "../middleware/cache.js";
 
 export class ProductController {
   async getProducts(req, res, next) {

@@ -1,7 +1,7 @@
 import { getGfsBucket } from "../utils/gridfs.js";
 import mongoose from "mongoose";
 import ErrorHandler from "../utils/errorHandler.js";
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 
 // @route   GET /api/v1/files/:id
 // @desc    Get file from GridFS by ID

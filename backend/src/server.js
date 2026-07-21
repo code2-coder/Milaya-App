@@ -20,7 +20,7 @@ process.on("uncaughtException", (err) => {
 });
 
 import app from "./app.js";
-import { connectDB } from "./database/connection.js";
+import { connectDB } from "./config/db.js";
 import { seedPages } from "./database/pageSeeder.js";
 
 // Connect to MongoDB

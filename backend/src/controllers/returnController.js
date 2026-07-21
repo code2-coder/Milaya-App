@@ -1,4 +1,4 @@
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import Return from "../models/return.js";
 import Order from "../models/order.js";
 import ErrorHandler from "../utils/errorHandler.js";

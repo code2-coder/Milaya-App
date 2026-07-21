@@ -1,4 +1,4 @@
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import Order from "../models/order.js";
 import Razorpay from "razorpay";

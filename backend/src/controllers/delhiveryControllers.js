@@ -1,4 +1,4 @@
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import { checkServiceability } from "../utils/delhiveryService.js";
 
 //

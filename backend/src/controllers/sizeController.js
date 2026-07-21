@@ -1,9 +1,9 @@
 import Size from "../models/size.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 
 export const getSizes = catchAsyncErrors(async (req, res, next) => {
-  const sizes = await Size.find().sort({ name: 1 });
+  const sizes = await Size.find().sort({ name: 1 }).lean();
   res.status(200).json({ success: true, sizes });
 });
 

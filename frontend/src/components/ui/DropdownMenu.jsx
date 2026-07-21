@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router";
 import { User, Package, LayoutDashboard, LogOut, ChevronRight, Mail, Sparkles } from "lucide-react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 export function DropdownMenu({ className = '' }) {
     const [open, setOpen] = useState(false);

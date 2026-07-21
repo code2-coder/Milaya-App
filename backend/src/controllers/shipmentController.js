@@ -1,4 +1,4 @@
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import Shipment, { SHIPMENT_STATUSES } from "../models/shipment.js";
 import Courier from "../models/courier.js";
 import Order from "../models/order.js";

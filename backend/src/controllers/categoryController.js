@@ -1,8 +1,8 @@
 import Category from "../models/category.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import uploadService from "../services/UploadService.js";
-import { clearCache } from "../middlewares/cache.js";
+import { clearCache } from "../middleware/cache.js";
 
 //
 // 🆕 CREATE CATEGORY (ADMIN)

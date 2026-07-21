@@ -39,7 +39,7 @@ import { formatPrice } from "../utils/priceUtils";
 import { PackagingInfo } from "../components/ShippingAndPackaging";
 import { getPackagingText } from "../api/shippingService";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleWishlist, selectIsInWishlist } from "../redux/slices/wishlistSlice";
+import { toggleWishlist, selectIsInWishlist } from "../store/slices/wishlistSlice";
 
 export function ProductDetails() {
   const { id } = useParams();

@@ -1,8 +1,8 @@
 import { ShoppingBag, Heart, Share2 } from "lucide-react";
 import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/slices/cartSlice";
-import { toggleWishlist, selectIsInWishlist } from "../redux/slices/wishlistSlice";
+import { addToCart } from "../store/slices/cartSlice";
+import { toggleWishlist, selectIsInWishlist } from "../store/slices/wishlistSlice";
 import { formatPrice } from "../utils/priceUtils";
 import { toast } from "sonner";
 import { memo, useState } from "react";

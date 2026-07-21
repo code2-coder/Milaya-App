@@ -1,6 +1,6 @@
 import express from "express";
 import { getSizes, createSize, deleteSize, updateSize } from "../controllers/sizeController.js";
-import { authorizeRoles, isAuthenticatedUser } from "../middlewares/auth.js";
+import { authorizeRoles, isAuthenticatedUser } from "../middleware/auth.js";
 
 const router = express.Router();
 
