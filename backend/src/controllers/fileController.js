@@ -25,6 +25,9 @@ export const getFile = catchAsyncErrors(async (req, res, next) => {
       res.set("Content-Type", file.contentType);
     }
     
+    // Add aggressive caching since these files are immutable in GridFS (they don't change, they get replaced with new IDs)
+    res.set("Cache-Control", "public, max-age=31536000, immutable");
+    
     const downloadStream = gfsBucket.openDownloadStream(fileId);
     downloadStream.on("error", (error) => {
       return next(new ErrorHandler("Error streaming file", 500));

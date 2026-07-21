@@ -9,6 +9,10 @@
       "destination": "https://milaya-app.onrender.com/api/v1/seo/robots.txt"
     },
     {
+      "source": "/api/:path*",
+      "destination": "https://milaya-app.onrender.com/api/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
