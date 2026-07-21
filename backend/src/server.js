@@ -21,7 +21,7 @@ process.on("uncaughtException", (err) => {
 
 import app from "./app.js";
 import { connectDB } from "./config/db.js";
-import { seedPages } from "./database/pageSeeder.js";
+import { seedPages } from "./config/pageSeeder.js";
 
 // Connect to MongoDB
 connectDB().then(() => {
