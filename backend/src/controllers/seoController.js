@@ -1,5 +1,5 @@
-import { Product } from "../models/productModel.js";
-import { Category } from "../models/categoryModel.js";
+import Product from "../models/product.js";
+import Category from "../models/category.js";
 
 export const getSitemap = async (req, res, next) => {
   try {

@@ -9,7 +9,6 @@ import { fileURLToPath } from "url";
 import passport from "./config/passport.js";
 import errorMiddleware from "./middlewares/errors.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
-import returnRoutes from "./routes/returnRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import seoRoutes from "./routes/seoRoutes.js";
