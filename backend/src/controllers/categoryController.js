@@ -119,7 +119,7 @@ export const deleteCategory = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Category not found", 404));
   }
 
-  // Delete category image from cloudinary if it exists
+  // Delete category image from GridFS if it exists
   if (category.image && category.image.public_id) {
     await uploadService.deleteMedia(category.image.public_id);
   }

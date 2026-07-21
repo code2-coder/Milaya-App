@@ -60,7 +60,7 @@ export default function ParentMediaUploader() {
       try {
         await api.delete('/admin/upload', { data: { public_id: removed.public_id, type } });
       } catch (err) {
-        console.error("Failed to delete from Cloudinary");
+        console.error("Failed to delete from GridFS");
       }
     }
     

@@ -34,8 +34,8 @@ export const MediaUploader = ({ onUpload, type = "video", maxFiles = 1, maxSizeM
 
     setIsUploading(true);
     
-    // Simulating Cloudinary upload by using FileReader to data URL for immediate preview
-    // In a real implementation, you would POST to your backend which uploads to Cloudinary
+    // Simulating file upload by using FileReader to data URL for immediate preview
+    // In a real implementation, you would POST to your backend
     // and returns the URL. For this component, we simulate the structure.
     
     try {

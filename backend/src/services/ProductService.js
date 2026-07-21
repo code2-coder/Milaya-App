@@ -160,7 +160,7 @@ export class ProductService {
         product.images.map(img => {
           if (img.public_id && !existingPublicIdsToKeep.includes(img.public_id)) {
             return UploadService.deleteMedia(img.public_id, "image").catch(err =>
-              console.error("Cloudinary delete image failed:", err.message)
+              console.error("GridFS delete image failed:", err.message)
             );
           }
           return Promise.resolve();
@@ -180,7 +180,7 @@ export class ProductService {
         product.videos.map(vid => {
           if (vid.public_id && !existingPublicIdsToKeep.includes(vid.public_id)) {
             return UploadService.deleteMedia(vid.public_id, "video").catch(err =>
-              console.error("Cloudinary delete video failed:", err.message)
+              console.error("GridFS delete video failed:", err.message)
             );
           }
           return Promise.resolve();
@@ -191,7 +191,7 @@ export class ProductService {
     
     // Process Variants Images/Videos
     if (variants !== undefined && Array.isArray(variants)) {
-      // NOTE: We don't automatically delete old variant images from Cloudinary here 
+      // NOTE: We don't automatically delete old variant images from GridFS here 
       // because tracking nested public_ids for deletions can be complex. 
       // They are just overwritten in DB and uploaded if new.
       for (const variant of variants) {

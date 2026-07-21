@@ -35,16 +35,10 @@ export function BannerCarousel({ banners }) {
   if (!banners || banners.length === 0) return null;
 
   const getBannerSrc = (url) => {
-    if (url && url.includes("cloudinary.com")) {
-      return url.replace("/upload/", "/upload/f_auto,q_auto,w_1920/");
-    }
     return url;
   };
 
   const getBannerSrcSet = (url) => {
-    if (url && url.includes("cloudinary.com")) {
-      return `${url.replace("/upload/", "/upload/f_auto,q_auto,w_600/")} 600w, ${url.replace("/upload/", "/upload/f_auto,q_auto,w_1200/")} 1200w, ${url.replace("/upload/", "/upload/f_auto,q_auto,w_1920/")} 1920w`;
-    }
     return undefined;
   };
 

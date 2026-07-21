@@ -120,9 +120,6 @@ export function ProductDetails() {
   };
 
   const getOptimizedUrl = (url, width) => {
-    if (url && url.includes("cloudinary.com")) {
-      return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width}/`);
-    }
     return url;
   };
 

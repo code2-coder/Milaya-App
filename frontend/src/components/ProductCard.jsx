@@ -54,26 +54,15 @@ export const ProductCard = memo(function ProductCard({ product }) {
 
   const getImageUrl = () => {
     const originalUrl = (product.images && product.images[0]?.url) || product.image;
-    if (originalUrl && originalUrl.includes("cloudinary.com")) {
-      return originalUrl.replace("/upload/", "/upload/f_auto,q_auto,w_400/");
-    }
     return originalUrl || "https://placehold.co/400x600?text=No+Image";
   };
 
   const getSecondaryImageUrl = () => {
     const originalUrl = product.images?.[1]?.url || product.images?.[1];
-    if (originalUrl && originalUrl.includes("cloudinary.com")) {
-      return originalUrl.replace("/upload/", "/upload/f_auto,q_auto,w_400/");
-    }
     return originalUrl || null;
   };
 
   const getSrcSet = () => {
-    const originalUrl = (product.images && product.images[0]?.url) || product.image;
-    if (originalUrl && originalUrl.includes("cloudinary.com")) {
-      return `${originalUrl.replace("/upload/", "/upload/f_auto,q_auto,w_400/")} 400w, 
-              ${originalUrl.replace("/upload/", "/upload/f_auto,q_auto,w_600/")} 600w`;
-    }
     return undefined;
   };
 

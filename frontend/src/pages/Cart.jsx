@@ -199,9 +199,6 @@ export function Cart() {
 
   const getOptimizedImage = (product) => {
     const url = (product.images && product.images[0]?.url) || product.image;
-    if (url && url.includes("cloudinary.com")) {
-      return url.replace("/upload/", "/upload/f_auto,q_auto,w_200/");
-    }
     return url || "https://placehold.co/200x200?text=No+Image";
   };
 

@@ -50,7 +50,7 @@ export function BestSellers() {
             onClick={() => navigate('/shop')} className="col-span-5 row-span-2 cursor-pointer relative rounded-3xl overflow-hidden group shadow-[0_20px_50px_rgba(45,13,24,0.08)] bg-[#1A0B10] border border-[#800000]/10"
           >
             <img 
-              src="https://res.cloudinary.com/dg4pix57t/image/upload/v1782722459/milaya/products/hwliuthjrdpyizzhxxkn.jpg" 
+              src="https://placehold.co/800x800" 
               alt="Premium Deity Shringar" 
               className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]"
             />
@@ -110,7 +110,7 @@ export function BestSellers() {
              </div>
              
              <div className="w-1/2 h-full relative flex items-center justify-center p-8 bg-[#2D0D18]/30">
-                 <img src="https://res.cloudinary.com/dg4pix57t/image/upload/v1782091008/milaya/products/va4itpnjtej851hy1fit.jpg" alt="Divine Jacket" className="w-[110%] h-[110%] object-cover rounded-xl drop-shadow-2xl group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                 <img src="https://placehold.co/800x800" alt="Divine Jacket" className="w-[110%] h-[110%] object-cover rounded-xl drop-shadow-2xl group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]" />
               </div>
           </motion.div>
 
@@ -131,7 +131,7 @@ export function BestSellers() {
              </div>
 
              <div className="flex-1 w-full relative flex items-center justify-center pt-16 pb-4">
-                 <img src="https://res.cloudinary.com/dg4pix57t/image/upload/v1781105671/milaya/products/zfxxljdhbsh3gmruw459.webp" alt="Deity Naths & Kundals" className="w-[85%] h-[85%] object-cover rounded-2xl drop-shadow-[0_15px_30px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                 <img src="https://placehold.co/800x800" alt="Deity Naths & Kundals" className="w-[85%] h-[85%] object-cover rounded-2xl drop-shadow-[0_15px_30px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]" />
               </div>
               <div className="p-8 pt-0 relative z-10 text-center">
                 <h4 className="font-serif text-[24px] text-[#2D0D18] mb-2">Deity Naths & Kundals</h4>
@@ -155,7 +155,7 @@ export function BestSellers() {
              </div>
 
               <div className="flex-1 w-full relative flex items-center justify-center pt-16 pb-2">
-                 <img src="https://res.cloudinary.com/dg4pix57t/image/upload/v1782091845/milaya/products/vspo0wtgx10m9guqmoqw.jpg" alt="Deity Bangles & Kangans" className="w-[85%] h-[85%] object-cover rounded-2xl drop-shadow-xl group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                 <img src="https://placehold.co/800x800" alt="Deity Bangles & Kangans" className="w-[85%] h-[85%] object-cover rounded-2xl drop-shadow-xl group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]" />
               </div>
               <div className="p-8 pt-0 relative z-10 text-center">
                 <h4 className="font-serif text-[24px] text-[#2D0D18] mb-2">Deity Bangles & Kangans</h4>
@@ -213,7 +213,7 @@ export function BestSellers() {
            >
              <div className="relative w-full aspect-[4/5] sm:aspect-square">
                <img 
-                 src="https://res.cloudinary.com/dg4pix57t/image/upload/v1782722459/milaya/products/hwliuthjrdpyizzhxxkn.jpg" 
+                 src="https://placehold.co/800x800" 
                  alt="Premium Deity Shringar" 
                  className="absolute inset-0 w-full h-full object-cover object-top opacity-90"
                />
@@ -253,7 +253,7 @@ export function BestSellers() {
                     <p className="font-light text-white/90 text-[14px] leading-relaxed">Timeless outerwear and chokers designed for exquisite deity shringar.</p>
                 </div>
                  <div className="w-full relative aspect-video flex justify-center items-end bg-[#2D0D18]/30 pt-4">
-                   <img src="https://res.cloudinary.com/dg4pix57t/image/upload/v1782091008/milaya/products/va4itpnjtej851hy1fit.jpg" alt="Jacket" className="w-[85%] h-[95%] object-cover rounded-t-xl drop-shadow-2xl" />
+                   <img src="https://placehold.co/800x800" alt="Jacket" className="w-[85%] h-[95%] object-cover rounded-t-xl drop-shadow-2xl" />
                  </div>
              </motion.div>
 
@@ -264,7 +264,7 @@ export function BestSellers() {
                       <Heart className="w-5 h-5 text-[#DDA7A5]" />
                    </div>
                     <div className="relative w-full aspect-square bg-[#FAF9F6] flex items-center justify-center p-6">
-                      <img src="https://res.cloudinary.com/dg4pix57t/image/upload/v1781105671/milaya/products/zfxxljdhbsh3gmruw459.webp" alt="Deity Naths & Kundals" className="w-[85%] h-[85%] object-cover rounded-2xl drop-shadow-lg" />
+                      <img src="https://placehold.co/800x800" alt="Deity Naths & Kundals" className="w-[85%] h-[85%] object-cover rounded-2xl drop-shadow-lg" />
                     </div>
                     <div className="p-8 text-center bg-white">
                       <h4 className="font-serif text-[26px] font-bold text-[#2D0D18] mb-2">Deity Naths & Kundals</h4>
@@ -279,7 +279,7 @@ export function BestSellers() {
                       <span className="text-[#4A0A18] text-[9px] font-bold uppercase tracking-widest">Trending</span>
                    </div>
                     <div className="relative w-full aspect-square flex items-center justify-center p-6">
-                      <img src="https://res.cloudinary.com/dg4pix57t/image/upload/v1782091845/milaya/products/vspo0wtgx10m9guqmoqw.jpg" alt="Deity Bangles & Kangans" className="w-[85%] h-[85%] object-cover rounded-2xl drop-shadow-xl" />
+                      <img src="https://placehold.co/800x800" alt="Deity Bangles & Kangans" className="w-[85%] h-[85%] object-cover rounded-2xl drop-shadow-xl" />
                     </div>
                     <div className="p-8 text-center bg-[#E5B5B3]">
                       <h4 className="font-serif text-[26px] font-bold text-[#2D0D18] mb-2">Deity Bangles & Kangans</h4>

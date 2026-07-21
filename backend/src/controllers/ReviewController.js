@@ -262,7 +262,7 @@ export class ReviewController {
       }
     }
 
-    // Upload to Cloudinary under the 'milaya/reviews' folder
+    // Upload to GridFS under the 'milaya/reviews' folder
     try {
       const result = await UploadService.uploadMedia(file, {
         type,
@@ -276,7 +276,7 @@ export class ReviewController {
         },
       });
     } catch (uploadError) {
-      return next(new ErrorHandler(uploadError.message || "Media upload to Cloudinary failed", 500));
+      return next(new ErrorHandler(uploadError.message || "Media upload failed", 500));
     }
   });
 
@@ -384,7 +384,7 @@ export class ReviewController {
       return next(new ErrorHandler("Review not found", 404));
     }
 
-    // Remove from Cloudinary
+    // Remove from GridFS
     await UploadService.deleteMedia(public_id, type);
 
     // Remove from mongoose arrays
@@ -412,14 +412,14 @@ export class ReviewController {
       return next(new ErrorHandler("Review not found", 404));
     }
 
-    // Delete images from Cloudinary
+    // Delete images from GridFS
     for (const image of review.images) {
       await UploadService.deleteMedia(image.public_id, "image").catch((err) =>
         console.error(`Failed to delete review image ${image.public_id}:`, err.message)
       );
     }
 
-    // Delete videos from Cloudinary
+    // Delete videos from GridFS
     for (const video of review.videos) {
       await UploadService.deleteMedia(video.public_id, "video").catch((err) =>
         console.error(`Failed to delete review video ${video.public_id}:`, err.message)

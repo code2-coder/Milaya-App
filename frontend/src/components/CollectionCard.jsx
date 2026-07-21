@@ -4,8 +4,6 @@ import { memo } from "react";
 export const CollectionCard = memo(function CollectionCard({ category }) {
     const imageUrl = category?.image?.url || `https://placehold.co/800x600?text=${encodeURIComponent(category?.name || 'Collection')}`;
     const getOptimized = (url) => {
-        if (!url) return url;
-        if (url.includes("cloudinary.com")) return url.replace("/upload/", "/upload/f_auto,q_auto,w_800/");
         return url;
     };
 

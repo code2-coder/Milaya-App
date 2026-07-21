@@ -99,6 +99,9 @@ export class AuthController {
         refreshToken: result.refreshToken
       });
     } catch (error) {
+      if (error.message === "Invalid or expired refresh token") {
+        return res.status(401).json({ success: false, message: error.message });
+      }
       next(error);
     }
   }

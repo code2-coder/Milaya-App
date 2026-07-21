@@ -86,8 +86,8 @@ export function AdPostersDisplay({ adPosters }) {
               <div className={`w-full relative ${isFeatured ? 'aspect-[4/3] md:aspect-[21/9] lg:aspect-[4/5]' : 'aspect-[4/5] sm:aspect-square lg:aspect-[4/5]'}`}>
                  {/* Image with slow elegant zoom */}
                  <img 
-                   src={poster.image && poster.image.includes("cloudinary.com") ? poster.image.replace("/upload/", "/upload/f_auto,q_auto,w_800/") : poster.image}
-                   srcSet={poster.image && poster.image.includes("cloudinary.com") ? `${poster.image.replace("/upload/", "/upload/f_auto,q_auto,w_400/")} 400w, ${poster.image.replace("/upload/", "/upload/f_auto,q_auto,w_800/")} 800w` : undefined}
+                   src={poster.image}
+                   srcSet={undefined}
                    sizes="(max-width: 768px) 100vw, 33vw"
                    alt={poster.title || style.label} 
                    loading="lazy"
