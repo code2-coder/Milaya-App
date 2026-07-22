@@ -505,7 +505,7 @@ export function Header() {
                   <img 
                     src="/updatelogo.jpeg" 
                     alt="Milaya Logo" 
-                    className="h-14 sm:h-14 md:h-16 w-auto object-contain origin-top transform scale-110 translate-y-4 lg:scale-[1.2] md:translate-y-6 lg:translate-y-8 transition-transform duration-300 group-hover:scale-[1.25] filter drop-shadow-sm rounded-xl" 
+                    className="h-14 sm:h-14 md:h-16 w-auto object-contain origin-top transform scale-110 translate-y-1 lg:scale-[1.2] md:translate-y-6 lg:translate-y-8 transition-transform duration-300 group-hover:scale-[1.25] filter drop-shadow-sm rounded-xl" 
                   />
               </div>
             </Link>
