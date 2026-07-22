@@ -45,14 +45,20 @@ class APIFilters {
         const removeFields = ["keyword", "page", "limit", "sort", "category", "sizes", "colors", "materials", "stoneTypes"];
         removeFields.forEach((el) => delete queryCopy[el]);
 
-        // Expand flat bracket keys from Express (e.g., { "price[lt]": "4000" } -> { "price": { "lt": "4000" } })
+        // Expand flat bracket keys from Express (e.g., { "price[lt]": "4000" } -> { "price": { "lt": 4000 } })
         for (const key in queryCopy) {
             const match = key.match(/^(.+)\[(gt|gte|lt|lte)\]$/);
             if (match) {
                 const field = match[1];
                 const op = match[2];
                 if (!queryCopy[field]) queryCopy[field] = {};
-                queryCopy[field][op] = queryCopy[key];
+                
+                let val = queryCopy[key];
+                if (!isNaN(val) && val !== "") {
+                    val = Number(val);
+                }
+                
+                queryCopy[field][op] = val;
                 delete queryCopy[key];
             }
         }
