@@ -494,7 +494,7 @@ export function Header() {
       
       <header className="bg-white/95 backdrop-blur-2xl border-b border-gray-100 transition-colors duration-500 font-sans w-full shadow-sm">
       <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-8 lg:px-10 xl:px-14">
-        <div className="flex items-center justify-between h-20 relative">
+        <div className="flex items-center justify-between h-24 md:h-28 relative">
           
           {/* Middle Mobile Delivery Badge (Centered) */}
 
@@ -502,11 +502,11 @@ export function Header() {
           <div className="flex items-center space-x-6 md:space-x-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:transform-none">
             <Link to="/" className="flex items-center space-x-2 group relative z-[70] md:ml-10 lg:ml-14">
               <div className="flex items-center">
-                <img 
-                  src="/loginlogo-removebg-preview.png" 
-                  alt="Milaya Logo" 
-                  className="h-16 sm:h-16 md:h-20 w-auto object-contain origin-top transform scale-125 lg:scale-[1.4] md:translate-y-4 lg:translate-y-6 transition-transform duration-300 group-hover:scale-[1.45] filter drop-shadow-sm" 
-                />
+                  <img 
+                    src="/updatelogo.jpeg" 
+                    alt="Milaya Logo" 
+                    className="h-14 sm:h-14 md:h-16 w-auto object-contain origin-top transform scale-110 translate-y-4 lg:scale-[1.2] md:translate-y-6 lg:translate-y-8 transition-transform duration-300 group-hover:scale-[1.25] filter drop-shadow-sm rounded-xl" 
+                  />
               </div>
             </Link>
 
@@ -522,7 +522,7 @@ export function Header() {
               onMouseLeave={() => setShowCategories(false)}
             >
               <button
-                className="flex items-center space-x-1.5 text-obsidian text-[14px] font-bold uppercase tracking-[0.1em] px-2 hover:text-[#B8934E] transition-colors duration-300"
+                className="flex items-center space-x-1.5 text-obsidian text-[16px] font-bold uppercase tracking-[0.1em] px-2 hover:text-[#B8934E] transition-colors duration-300"
                 onClick={() => setShowCategories(!showCategories)}
               >
                 <span>Collections</span>
@@ -859,9 +859,9 @@ export function Header() {
             <div className="flex-1 overflow-y-auto p-8 space-y-10 custom-scrollbar">
               {/* BRAND LOGO IN DRAWER */}
               <div className="pb-6 border-b border-gray-100 flex justify-center mt-4">
-                <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center">
-                  <img src="/loginlogo-removebg-preview.png" alt="Milaya Logo" className="h-16 w-auto object-contain filter drop-shadow-sm scale-150" />
-                </Link>
+                  <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center">
+                    <img src="/updatelogo.jpeg" alt="Milaya Logo" className="h-14 w-auto object-contain filter drop-shadow-sm scale-125 rounded-xl" />
+                  </Link>
               </div>
 
               {/* Mobile Search */}

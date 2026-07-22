@@ -101,7 +101,7 @@ export function Register() {
           <motion.div variants={itemVariants} className="flex justify-center mb-8">
             <Link to="/" className="inline-flex items-center group w-full justify-center">
               <img 
-                src="/loginlogo-removebg-preview.png" 
+                src="/updatelogo.jpeg" 
                 alt="Milaya Logo" 
                 className="h-28 sm:h-40 w-auto object-contain group-hover:opacity-70 transition-opacity duration-500"
               />

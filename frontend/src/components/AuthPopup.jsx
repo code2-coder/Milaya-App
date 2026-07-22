@@ -72,7 +72,7 @@ export function AuthPopup() {
 
             <div className="w-24 h-24 mb-4">
               <img 
-                src="/loginlogo-removebg-preview.png" 
+                src="/updatelogo.jpeg" 
                 alt="Milaya Logo" 
                 className="w-full h-full object-contain filter drop-shadow-sm scale-125"
               />

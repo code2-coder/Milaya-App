@@ -35,7 +35,7 @@ export default function App() {
              
              {/* Logo in center */}
              <img 
-               src="/loginlogo-removebg-preview.png" 
+               src="/updatelogo.jpeg" 
                alt="Milaya Clothing" 
                className="w-28 h-28 md:w-40 md:h-40 object-contain scale-[1.5] relative z-10 animate-[pulse_4s_ease-in-out_infinite]" 
                style={{ filter: 'drop-shadow(0px 10px 20px rgba(0,0,0,0.05))' }}

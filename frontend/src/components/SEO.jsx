@@ -19,7 +19,7 @@ export function SEO({ title, description, name, type, image, url, schema }) {
       <meta property="og:type" content={type || "website"} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={fullDesc} />
-      <meta property="og:image" content={image || "/loginlogo.png"} />
+      <meta property="og:image" content={image || "/updatelogo.jpeg"} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:site_name" content={baseTitle} />
       
@@ -27,7 +27,7 @@ export function SEO({ title, description, name, type, image, url, schema }) {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={fullDesc} />
-      <meta name="twitter:image" content={image || "/loginlogo.png"} />
+      <meta name="twitter:image" content={image || "/updatelogo.jpeg"} />
 
       {/* Structured Data (JSON-LD) */}
       {schema && (
