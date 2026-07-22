@@ -621,19 +621,14 @@ export function ProductDetails() {
                     <X className="w-3.5 h-3.5" /> {pincodeError}
                   </p>
                 )}
-                {checked && availability && (() => {
-                  const deliveryDate = new Date();
-                  deliveryDate.setDate(deliveryDate.getDate() + 4);
-                  const formattedDate = deliveryDate.toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' });
-                  return (
+                {checked && availability && (
                     <div className="flex flex-col gap-1.5 -mt-2 ml-3">
                       <p className="text-green-600 text-[13px] font-semibold flex items-center gap-2">
                         <Truck className="w-3.5 h-3.5" /> 
-                        Delivery by {formattedDate}
+                        7 working days minimum
                       </p>
                     </div>
-                  );
-                })()}
+                  )}
                 {checked && !availability && (
                   <p className="text-red-500 text-[13px] font-medium -mt-2 ml-3 flex items-center gap-2">
                     <X className="w-3.5 h-3.5" /> 
