@@ -23,7 +23,7 @@ export function Cart() {
     const navigate = useNavigate();
 
   
-  const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [paymentMethod, setPaymentMethod] = useState("Razorpay");
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedShipping, setSelectedShipping] = useState(null);
   const [selectedPackaging, setSelectedPackaging] = useState(null);
@@ -182,12 +182,6 @@ export function Cart() {
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
         
-      } else if (paymentMethod === "COD") {
-        await api.post("/orders/new", orderPayload);
-        clearCart();
-        toast.success("Order placed successfully via COD!");
-        setIsProcessing(false);
-        navigate("/orders");
       }
     } catch (error) {
       setIsProcessing(false);
@@ -215,16 +209,6 @@ export function Cart() {
   const displayPackagingAmount = selectedPackaging?.price ?? 0;
   const totalAmountWithExtras = convertedCartTotal + displayShippingAmount + displayPackagingAmount;
   const canShowShippingOptions = !!chosenAddress;
-
-  // COD is only for India: header must be INR AND address must be India (or not yet selected)
-  const isCODAvailable = isIndiaAddress || !chosenAddress;
-
-  // Auto-switch away from COD if Australia selected in header or non-India address
-  useEffect(() => {
-    if (paymentMethod === "COD" && !isCODAvailable) {
-      setPaymentMethod("Razorpay");
-    }
-  }, [isCODAvailable]);
 
   // Manual check for Pincode
   const handleCheckPincode = () => {
@@ -258,9 +242,7 @@ export function Cart() {
     isProcessing ||
     !isDeliveryAvailable ||
     isCheckingServiceability ||
-    (serviceability && !serviceability.isServiceable) ||
-    (paymentMethod === "COD" && serviceability && !serviceability.cod) ||
-    (paymentMethod === "COD" && !isCODAvailable);
+    (serviceability && !serviceability.isServiceable);
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -444,11 +426,6 @@ export function Cart() {
                         Delivery available to {checkoutAddress.zipCode}.
                       </p>
                     )}
-                    {!isCheckingServiceability && serviceability && serviceability.isServiceable && paymentMethod === "COD" && !serviceability.cod && (
-                      <p className="mt-1 text-xs text-orange-600 font-medium">
-                        COD is not available for this pincode.
-                      </p>
-                    )}
                   </div>
                   <div className="col-span-1 md:col-span-2 mt-4 flex justify-end">
                     <button
@@ -544,26 +521,7 @@ export function Cart() {
 
 
 
-                    {/* COD — India only */}
-                    {isCODAvailable && (
-                      <label className={`relative flex items-center p-4 rounded-sm cursor-pointer border transition-all duration-300 ${paymentMethod === "COD" ? "border-black bg-white border-black" : "border-gray-300 bg-white hover:border-black/40 hover:bg-gray-50"}`}>
-                        <input
-                          type="radio"
-                          value="COD"
-                          checked={paymentMethod === "COD"}
-                          onChange={() => setPaymentMethod("COD")}
-                          className="sr-only"
-                        />
-                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-4 transition-colors ${paymentMethod === "COD" ? "border-black" : "border-gray-300"}`}>
-                          {paymentMethod === "COD" && <div className="w-2 h-2 rounded-full bg-black"></div>}
-                        </div>
-                        <div className="flex-1">
-                          <span className="block text-sm font-semibold text-gray-900">Cash on Delivery</span>
-                          <span className="block text-[11px] text-gray-400 mt-0.5">Pay at your doorstep · India only</span>
-                        </div>
-                        <Banknote className={`w-5 h-5 ${paymentMethod === "COD" ? "text-black" : "text-gray-400"}`} />
-                      </label>
-                    )}
+
 
                     {/* Razorpay Option */}
                     <label className={`relative flex items-center p-4 rounded-sm cursor-pointer border transition-all duration-300 ${paymentMethod === "Razorpay" ? "border-black bg-white border-black" : "border-gray-300 bg-white hover:border-black/40 hover:bg-gray-50"}`}>
