@@ -300,29 +300,26 @@ export default function NewProductForm({
             attributes={attributes}
             onCreateAttr={async (type, label, val) => {
               try {
-                const { data } = await import('../../api/axios').then(m => m.default.post('/admin/attribute/new', { type, value: val }));
+                const { data } = await api.post('/admin/attribute/new', { type, value: val });
                 if (setAttributes) setAttributes(prev => [...(prev || []), data.attribute]);
                 methods.setValue(type === 'generalStyle' ? 'style' : type, val);
               } catch (err) {
-                const { toast } = await import('sonner');
                 toast.error(err.response?.data?.message || `Failed to add ${label}`);
               }
             }}
             onEditAttr={async (id, newValue) => {
               try {
-                const { data } = await import('../../api/axios').then(m => m.default.put(`/admin/attribute/${id}`, { value: newValue }));
+                const { data } = await api.put(`/admin/attribute/${id}`, { value: newValue });
                 if (setAttributes) setAttributes(prev => (prev || []).map(a => a._id === id ? data.attribute : a));
               } catch (err) {
-                const { toast } = await import('sonner');
                 toast.error(err.response?.data?.message || 'Failed to update');
               }
             }}
             onDeleteAttr={async (id) => {
               try {
-                await import('../../api/axios').then(m => m.default.delete(`/admin/attribute/${id}`));
+                await api.delete(`/admin/attribute/${id}`);
                 if (setAttributes) setAttributes(prev => (prev || []).filter(a => a._id !== id));
               } catch (err) {
-                const { toast } = await import('sonner');
                 toast.error(err.response?.data?.message || 'Failed to delete');
               }
             }}
@@ -338,29 +335,26 @@ export default function NewProductForm({
             attributes={attributes}
             onCreateAttr={async (type, label, val) => {
               try {
-                const { data } = await import('../../api/axios').then(m => m.default.post('/admin/attribute/new', { type, value: val }));
+                const { data } = await api.post('/admin/attribute/new', { type, value: val });
                 if (setAttributes) setAttributes(prev => [...(prev || []), data.attribute]);
                 if (type === 'generalStyle') methods.setValue('style', val);
               } catch (err) {
-                const { toast } = await import('sonner');
                 toast.error(err.response?.data?.message || `Failed to add ${label}`);
               }
             }}
             onEditAttr={async (id, newValue) => {
               try {
-                const { data } = await import('../../api/axios').then(m => m.default.put(`/admin/attribute/${id}`, { value: newValue }));
+                const { data } = await api.put(`/admin/attribute/${id}`, { value: newValue });
                 if (setAttributes) setAttributes(prev => (prev || []).map(a => a._id === id ? data.attribute : a));
               } catch (err) {
-                const { toast } = await import('sonner');
                 toast.error(err.response?.data?.message || 'Failed to update');
               }
             }}
             onDeleteAttr={async (id) => {
               try {
-                await import('../../api/axios').then(m => m.default.delete(`/admin/attribute/${id}`));
+                await api.delete(`/admin/attribute/${id}`);
                 if (setAttributes) setAttributes(prev => (prev || []).filter(a => a._id !== id));
               } catch (err) {
-                const { toast } = await import('sonner');
                 toast.error(err.response?.data?.message || 'Failed to delete');
               }
             }}
