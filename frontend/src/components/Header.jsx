@@ -505,7 +505,7 @@ export function Header() {
                   <img 
                     src="/updatelogo.jpeg" 
                     alt="Milaya Logo" 
-                    className="h-14 sm:h-14 md:h-16 w-auto object-contain origin-top transform scale-110 translate-y-1 lg:scale-[1.2] md:translate-y-6 lg:translate-y-8 transition-transform duration-300 group-hover:scale-[1.25] filter drop-shadow-sm rounded-xl" 
+                    className="h-14 sm:h-14 md:h-16 w-auto object-contain origin-top transform scale-110 -translate-y-1 lg:scale-[1.2] md:translate-y-6 lg:translate-y-8 transition-transform duration-300 group-hover:scale-[1.25] filter drop-shadow-sm rounded-xl" 
                   />
               </div>
             </Link>
@@ -858,7 +858,7 @@ export function Header() {
 
             <div className="flex-1 overflow-y-auto p-8 space-y-10 custom-scrollbar">
               {/* BRAND LOGO IN DRAWER */}
-              <div className="pb-6 border-b border-gray-100 flex justify-center mt-4">
+              <div className="pb-6 border-b border-gray-100 flex justify-center mt-2">
                   <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center">
                     <img src="/updatelogo.jpeg" alt="Milaya Logo" className="h-14 w-auto object-contain filter drop-shadow-sm scale-125 rounded-xl" />
                   </Link>

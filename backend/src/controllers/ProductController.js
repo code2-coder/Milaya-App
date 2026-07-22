@@ -5,12 +5,22 @@ import { clearCache } from "../middleware/cache.js";
 export class ProductController {
   async getProducts(req, res, next) {
     try {
+      console.log('REQ.QUERY:', JSON.stringify(req.query));
       const result = await ProductService.getProducts(req.query);
       return sendResponse(res, 200, true, "Products fetched successfully", {
         results: result.count,
         totalProducts: result.totalProducts,
         products: result.products
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getProductFacets(req, res, next) {
+    try {
+      const facets = await ProductService.getProductFacets(req.query);
+      return sendResponse(res, 200, true, "Facets fetched successfully", { facets });
     } catch (error) {
       next(error);
     }

@@ -107,8 +107,8 @@ export function ContactUs() {
                 <div>
                   <h4 className="text-sm font-bold text-obsidian uppercase tracking-widest mb-2">Visit Us</h4>
                   <p className="text-gray-600 font-light text-sm leading-relaxed">
-                    Vrindavan, District Mathura,<br />
-                    Uttar Pradesh, India 281121
+                    Aluva, Ernakulam,<br />
+                    Kerala, India
                   </p>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export function ContactUs() {
                 </div>
                  <div className="flex flex-col">
                   <h4 className="text-sm font-bold text-obsidian uppercase tracking-widest mb-2">Call Us</h4>
-                  <a href="tel:+919152350955" className="text-gray-600 font-light text-sm hover:text-[#B8934E] transition-colors mb-1">
+                  <a href="tel:+919544174140" className="text-gray-600 font-light text-sm hover:text-[#B8934E] transition-colors mb-1">
                     +91 91523 50955
                   </a>
                 </div>

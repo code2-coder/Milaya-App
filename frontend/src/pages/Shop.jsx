@@ -16,12 +16,14 @@ const Footer = lazy(() => import("../components/Footer").then(m => ({ default: m
 
 // Predefined filters
 const PRICE_RANGES = [
-  { label: "Under 5K", min: "", max: "5000" },
-  { label: "5K - 10K", min: "5000", max: "10000" },
-  { label: "10K - 15K", min: "10000", max: "15000" },
-  { label: "15K - 20K", min: "15000", max: "20000" },
-  { label: "20K - 25K", min: "20000", max: "25000" },
-  { label: "25K+", min: "25000", max: "" }
+  { label: "Under 2K", min: "", max: "2000" },
+  { label: "Under 4K", min: "", max: "4000" },
+  { label: "Under 6K", min: "", max: "6000" },
+  { label: "Under 8K", min: "", max: "8000" },
+  { label: "Under 10K", min: "", max: "10000" },
+  { label: "Under 12K", min: "", max: "12000" },
+  { label: "Under 14K", min: "", max: "14000" },
+  { label: "15K+", min: "15000", max: "" }
 ];
 
 const SORT_OPTIONS = [
@@ -33,7 +35,7 @@ const SORT_OPTIONS = [
 ];
 
 // Reusable Checkbox List Component with Accordion
-const FilterSection = ({ title, items, stateKey, activeFilters, toggleArrayFilter, defaultOpen = false }) => {
+const FilterSection = ({ title, items, stateKey, activeFilters, toggleArrayFilter, defaultOpen = false, facets }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   
   if (!items || items.length === 0) return null;
@@ -75,7 +77,7 @@ const FilterSection = ({ title, items, stateKey, activeFilters, toggleArrayFilte
 };
 
 // Extracted logic for Categories Accordion
-const CategoriesSection = ({ categories, activeFilters, toggleArrayFilter, defaultOpen = true }) => {
+const CategoriesSection = ({ categories, activeFilters, toggleArrayFilter, defaultOpen = true, facets }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   return (
     <div className="py-6 border-b border-gray-100">
@@ -99,14 +101,16 @@ const CategoriesSection = ({ categories, activeFilters, toggleArrayFilter, defau
               {categories.filter(c => !c.parentCategory).map(cat => {
                 const isActive = activeFilters.category.includes(cat.name);
                 const hasSubcategories = categories.some(sub => sub.parentCategory === cat._id);
+                const catCount = facets && facets.categories ? (facets.categories.find(f => f._id === cat._id)?.count || 0) : null;
+                const isCatDisabled = catCount === 0 && !isActive && !hasSubcategories;
                 return (
                 <div key={cat._id} className="flex flex-col">
                   <div 
-                    onClick={() => toggleArrayFilter('category', cat.name)}
-                    className={`flex items-center justify-between py-2.5 cursor-pointer group transition-all duration-300 ${isActive ? 'text-obsidian' : 'text-gray-500 hover:text-gray-900'}`}
+                    onClick={() => !isCatDisabled && toggleArrayFilter('category', cat.name)}
+                    className={`flex items-center justify-between py-2.5 group transition-all duration-300 ${isCatDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${isActive ? 'text-obsidian' : 'text-gray-500 hover:text-gray-900'}`}
                   >
                     <span className={`text-[13px] tracking-wide ${isActive ? 'font-bold' : 'font-medium'}`}>
-                      {cat.name}
+                      {cat.name} {catCount !== null && !hasSubcategories && <span className="text-[10px] text-gray-400 font-medium ml-1">({catCount})</span>}
                     </span>
                     <div className={`w-4 h-4 rounded-full border flex items-center justify-center transition-all duration-300 ${isActive ? 'border-obsidian bg-obsidian' : 'border-gray-300 group-hover:border-gray-500'}`}>
                       {isActive && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
@@ -117,13 +121,15 @@ const CategoriesSection = ({ categories, activeFilters, toggleArrayFilter, defau
                     <div className="pl-4 space-y-1 mt-1 mb-2 border-l border-gray-100 ml-2">
                       {categories.filter(sub => sub.parentCategory === cat._id).map(sub => {
                         const isSubActive = activeFilters.category.includes(sub.name);
+                        const subCount = facets && facets.categories ? (facets.categories.find(f => f._id === sub._id)?.count || 0) : null;
+                        const isSubDisabled = subCount === 0 && !isSubActive;
                         return (
                         <div 
                           key={sub._id} 
-                          onClick={() => toggleArrayFilter('category', sub.name)}
-                          className={`flex items-center justify-between py-1.5 cursor-pointer group transition-all duration-200 ${isSubActive ? 'text-obsidian' : 'text-gray-400 hover:text-gray-700'}`}
+                          onClick={() => !isSubDisabled && toggleArrayFilter('category', sub.name)}
+                          className={`flex items-center justify-between py-1.5 group transition-all duration-200 ${isSubDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${isSubActive ? 'text-obsidian' : 'text-gray-400 hover:text-gray-700'}`}
                         >
-                          <span className={`text-[11px] uppercase tracking-wider ${isSubActive ? 'font-bold' : 'font-medium'}`}>{sub.name}</span>
+                          <span className={`text-[11px] uppercase tracking-wider ${isSubActive ? 'font-bold' : 'font-medium'}`}>{sub.name} {subCount !== null && `(${subCount})`}</span>
                           {isSubActive && <Check className="w-3 h-3 text-obsidian" />}
                         </div>
                         );
@@ -141,7 +147,7 @@ const CategoriesSection = ({ categories, activeFilters, toggleArrayFilter, defau
 };
 
 // Extracted logic for Price Accordion
-const PriceSection = ({ PRICE_RANGES, activeFilters, updateFilter, defaultOpen = true }) => {
+const PriceSection = ({ PRICE_RANGES, activeFilters, updateFilter, defaultOpen = true, facets }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   return (
     <div className="py-5 border-b border-gray-100">
@@ -163,13 +169,31 @@ const PriceSection = ({ PRICE_RANGES, activeFilters, updateFilter, defaultOpen =
           >
             <div className="pt-3 space-y-2 mb-2">
               {PRICE_RANGES.map((range, i) => {
-                const isSelected = activeFilters.minPrice === range.min && activeFilters.maxPrice === range.max;
+                const isSelected = activeFilters.minPrice === range.min && (activeFilters.maxPrice === range.max || activeFilters.ltPrice === range.max);
+                let count = null;
+                if (facets && facets.prices) {
+                  count = 0;
+                  facets.prices.forEach(f => {
+                    if (f._id === "15000+") {
+                      if (range.min === "15000") count += f.count;
+                    } else {
+                      const bMin = Number(f._id);
+                      const rMin = range.min ? Number(range.min) : 0;
+                      const rMax = range.max ? Number(range.max) : Infinity;
+                      if (bMin >= rMin && bMin < rMax) {
+                        count += f.count;
+                      }
+                    }
+                  });
+                }
+                const isDisabled = count === 0 && !isSelected;
                 return (
-                  <label key={i} className="flex items-center group cursor-pointer">
-                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors mr-3 ${isSelected ? 'border-obsidian' : 'border-gray-300 group-hover:border-obsidian'}`} onClick={() => { updateFilter('price[gte]', range.min); updateFilter('price[lte]', range.max); }}>
+                  <label key={i} className={`flex items-center group ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors mr-3 ${isSelected ? 'border-obsidian' : 'border-gray-300 group-hover:border-obsidian'}`} onClick={() => { if(!isDisabled) { if(range.min === '') { updateFilter({ 'price[gte]': range.min, 'price[lt]': range.max, 'price[lte]': '' }); } else { updateFilter({ 'price[gte]': range.min, 'price[lte]': range.max, 'price[lt]': '' }); } } }}>
                       {isSelected && <div className="w-2 h-2 rounded-full bg-obsidian" />}
                     </div>
-                    <span className={`text-sm tracking-wide transition-colors ${isSelected ? 'text-obsidian font-semibold' : 'text-gray-600 group-hover:text-obsidian'}`}>{range.label}</span>
+                    <span className={`text-sm tracking-wide flex-1 transition-colors ${isSelected ? 'text-obsidian font-semibold' : 'text-gray-600 group-hover:text-obsidian'}`}>{range.label}</span>
+                    {count !== null && <span className="text-[10px] text-gray-400 font-medium">({count})</span>}
                   </label>
                 );
               })}
@@ -205,7 +229,7 @@ const getColorHex = (colorName) => {
   return CSS_COLORS[colorName] || colorName;
 };
 
-const ColorFilterSection = ({ title, items, stateKey, activeFilters, toggleArrayFilter, defaultOpen = false }) => {
+const ColorFilterSection = ({ title, items, stateKey, activeFilters, toggleArrayFilter, defaultOpen = false, facets }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   if (!items || items.length === 0) return null;
   
@@ -231,12 +255,15 @@ const ColorFilterSection = ({ title, items, stateKey, activeFilters, toggleArray
                 const isChecked = activeFilters[stateKey].includes(item);
                 const hex = getColorHex(item);
                 const isWhite = hex.toLowerCase() === '#ffffff' || item.toLowerCase() === 'white';
+                const count = facets && facets.colors ? (facets.colors.find(f => f._id === item)?.count || 0) : null;
+                const isDisabled = count === 0 && !isChecked;
                 return (
                   <button
                     key={item}
-                    onClick={() => toggleArrayFilter(stateKey, item)}
-                    title={item}
-                    className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isWhite ? 'border border-gray-300' : 'border border-transparent shadow-sm'} ${isChecked ? 'ring-2 ring-obsidian ring-offset-2 scale-110' : 'hover:scale-110'}`}
+                    onClick={() => !isDisabled && toggleArrayFilter(stateKey, item)}
+                    title={`${item} ${count !== null ? `(${count})` : ''}`}
+                    disabled={isDisabled}
+                    className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isWhite ? 'border border-gray-300' : 'border border-transparent shadow-sm'} ${isChecked ? 'ring-2 ring-obsidian ring-offset-2 scale-110' : 'hover:scale-110'} ${isDisabled ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer'}`}
                     style={{ backgroundColor: hex }}
                   >
                     {isChecked && <Check className={`w-4 h-4 ${isWhite ? 'text-black' : 'text-white drop-shadow-md'}`} />}
@@ -251,7 +278,7 @@ const ColorFilterSection = ({ title, items, stateKey, activeFilters, toggleArray
   );
 };
 
-const SizeFilterSection = ({ title, items, stateKey, activeFilters, toggleArrayFilter, defaultOpen = false }) => {
+const SizeFilterSection = ({ title, items, stateKey, activeFilters, toggleArrayFilter, defaultOpen = false, facets }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   if (!items || items.length === 0) return null;
   
@@ -275,11 +302,15 @@ const SizeFilterSection = ({ title, items, stateKey, activeFilters, toggleArrayF
             <div className="pt-3 flex flex-wrap gap-2">
               {items.map(item => {
                 const isChecked = activeFilters[stateKey].includes(item);
+                const count = facets && facets.sizes ? (facets.sizes.find(f => f._id === item)?.count || 0) : null;
+                const isDisabled = count === 0 && !isChecked;
                 return (
                   <button
                     key={item}
-                    onClick={() => toggleArrayFilter(stateKey, item)}
-                    className={`min-w-[40px] h-10 px-3 rounded-xl border text-xs font-bold transition-all duration-300 flex items-center justify-center ${isChecked ? 'bg-obsidian border-obsidian text-white shadow-md' : 'bg-white border-gray-200 text-gray-600 hover:border-obsidian hover:text-obsidian'}`}
+                    onClick={() => !isDisabled && toggleArrayFilter(stateKey, item)}
+                    title={count !== null ? `${count} items` : ''}
+                    disabled={isDisabled}
+                    className={`min-w-[40px] h-10 px-3 rounded-xl border text-xs font-bold transition-all duration-300 flex items-center justify-center ${isChecked ? 'bg-obsidian border-obsidian text-white shadow-md' : 'bg-white border-gray-200 text-gray-600 hover:border-obsidian hover:text-obsidian'} ${isDisabled ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer'}`}
                   >
                     {item}
                   </button>
@@ -293,7 +324,7 @@ const SizeFilterSection = ({ title, items, stateKey, activeFilters, toggleArrayF
   );
 };
 
-const SidebarContent = ({ activeFilters, updateFilter, toggleArrayFilter, categories, PRICE_RANGES, uniqueMaterials, uniqueStoneTypes, uniqueColors, uniqueSizes }) => (
+const SidebarContent = ({ activeFilters, updateFilter, toggleArrayFilter, categories, PRICE_RANGES, uniqueMaterials, uniqueStoneTypes, uniqueColors, uniqueSizes, facets }) => (
   <div className="flex flex-col h-full bg-white">
     {/* Search */}
     <div className="py-5 border-b border-gray-100">
@@ -310,16 +341,16 @@ const SidebarContent = ({ activeFilters, updateFilter, toggleArrayFilter, catego
     </div>
 
     {/* Collections */}
-    <CategoriesSection categories={categories} activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
+    <CategoriesSection facets={facets} categories={categories} activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
 
     {/* Price */}
-    <PriceSection PRICE_RANGES={PRICE_RANGES} activeFilters={activeFilters} updateFilter={updateFilter} />
+    <PriceSection facets={facets} PRICE_RANGES={PRICE_RANGES} activeFilters={activeFilters} updateFilter={updateFilter} />
 
     {/* Dynamic Filters */}
-    <ColorFilterSection title="Color" items={uniqueColors} stateKey="colors" activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
-    <SizeFilterSection title="Size" items={uniqueSizes} stateKey="sizes" activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
-    <FilterSection title="Material" items={uniqueMaterials} stateKey="materials" activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
-    <FilterSection title="Stone Type" items={uniqueStoneTypes} stateKey="stoneTypes" activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
+    <ColorFilterSection facets={facets} title="Color" items={uniqueColors} stateKey="colors" activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
+    <SizeFilterSection facets={facets} title="Size" items={uniqueSizes} stateKey="sizes" activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
+    <FilterSection facets={facets} title="Material" items={uniqueMaterials} stateKey="materials" activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
+    <FilterSection facets={facets} title="Stone Type" items={uniqueStoneTypes} stateKey="stoneTypes" activeFilters={activeFilters} toggleArrayFilter={toggleArrayFilter} />
 
     {/* Availability */}
     <div className="py-6 mt-2">
@@ -345,6 +376,7 @@ export function Shop() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [attributes, setAttributes] = useState([]);
+  const [facets, setFacets] = useState(null);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isQuickFilterOpen, setIsQuickFilterOpen] = useState(false);
@@ -359,6 +391,7 @@ export function Shop() {
     stoneTypes: searchParams.get("stoneTypes") ? searchParams.get("stoneTypes").split(',') : [],
     minPrice: searchParams.get("price[gte]") || "",
     maxPrice: searchParams.get("price[lte]") || "",
+    ltPrice: searchParams.get("price[lt]") || "",
     sort: searchParams.get("sort") || "newest",
     inStock: searchParams.get("inStock") === "true",
     tag: searchParams.get("tag") || "",
@@ -460,6 +493,7 @@ export function Shop() {
       if (activeFilters.keyword) url += `&keyword=${encodeURIComponent(activeFilters.keyword)}`;
       if (activeFilters.minPrice) url += `&price[gte]=${activeFilters.minPrice}`;
       if (activeFilters.maxPrice) url += `&price[lte]=${activeFilters.maxPrice}`;
+      if (activeFilters.ltPrice) url += `&price[lt]=${activeFilters.ltPrice}`;
       if (activeFilters.materials.length > 0) url += `&materials=${encodeURIComponent(activeFilters.materials.join(','))}`;
       if (activeFilters.colors.length > 0) url += `&colors=${encodeURIComponent(activeFilters.colors.join(','))}`;
       if (activeFilters.sizes.length > 0) url += `&sizes=${encodeURIComponent(activeFilters.sizes.join(','))}`;
@@ -470,7 +504,15 @@ export function Shop() {
       }
       if (activeFilters.sort) url += `&sort=${activeFilters.sort}`;
 
-      const { data } = await api.get(url);
+      const facetsUrl = url.replace('/products?', '/products/facets?').replace(/limit=\d+&page=\d+&?/, '');
+      const [productsRes, facetsRes] = await Promise.all([
+        api.get(url),
+        api.get(facetsUrl).catch(() => ({ data: { facets: null } }))
+      ]);
+      const { data } = productsRes;
+      if (facetsRes.data && facetsRes.data.facets) {
+        setFacets(facetsRes.data.facets);
+      }
       
       if (isLoadMore) {
         setProducts(prev => [...prev, ...data.products]);
@@ -490,22 +532,38 @@ export function Shop() {
 
   useEffect(() => {
     if (categories.length > 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      fetchProducts(page > 1);
+      const timer = setTimeout(() => {
+        fetchProducts(page > 1);
+      }, 300);
+      return () => clearTimeout(timer);
     }
   }, [fetchProducts, categories, page]);
 
   // Update URL helper
-  const updateFilter = useCallback((key, value) => {
+  const updateFilter = useCallback((keyOrObj, value) => {
     const newParams = new window.URLSearchParams(searchParams);
     
-    if (Array.isArray(value)) {
-      if (value.length > 0) newParams.set(key, value.join(','));
-      else newParams.delete(key);
-    } else if (value) {
-      newParams.set(key, value);
+    if (typeof keyOrObj === 'object' && keyOrObj !== null && !Array.isArray(keyOrObj)) {
+      Object.entries(keyOrObj).forEach(([k, v]) => {
+        if (Array.isArray(v)) {
+          if (v.length > 0) newParams.set(k, v.join(','));
+          else newParams.delete(k);
+        } else if (v !== "" && v !== null && v !== undefined) {
+          newParams.set(k, v);
+        } else {
+          newParams.delete(k);
+        }
+      });
     } else {
-      newParams.delete(key);
+      const key = keyOrObj;
+      if (Array.isArray(value)) {
+        if (value.length > 0) newParams.set(key, value.join(','));
+        else newParams.delete(key);
+      } else if (value !== "" && value !== null && value !== undefined) {
+        newParams.set(key, value);
+      } else {
+        newParams.delete(key);
+      }
     }
     
     newParams.delete("page"); // reset pagination
@@ -534,8 +592,7 @@ export function Shop() {
     } else {
       updateFilter(key, "");
       if (key === 'price') {
-        updateFilter('price[gte]', "");
-        updateFilter('price[lte]', "");
+        updateFilter({ 'price[gte]': "", 'price[lte]': "", 'price[lt]': "" });
       }
     }
   };
@@ -549,8 +606,8 @@ export function Shop() {
     activeFilters.sizes.forEach(s => chips.push({ key: 'sizes', val: s, label: `Size: ${s}` }));
     activeFilters.stoneTypes.forEach(st => chips.push({ key: 'stoneTypes', val: st, label: st }));
     
-    if (activeFilters.minPrice || activeFilters.maxPrice) {
-      chips.push({ key: 'price', label: `${activeFilters.minPrice ? `${currencySymbol}${activeFilters.minPrice}` : '0'} - ${activeFilters.maxPrice ? `${currencySymbol}${activeFilters.maxPrice}` : 'Max'}` });
+    if (activeFilters.minPrice || activeFilters.maxPrice || activeFilters.ltPrice) {
+      chips.push({ key: 'price', label: `${activeFilters.minPrice ? `${currencySymbol}${activeFilters.minPrice}` : '0'} - ${activeFilters.maxPrice ? `${currencySymbol}${activeFilters.maxPrice}` : activeFilters.ltPrice ? `${currencySymbol}${activeFilters.ltPrice}` : 'Max'}` });
     }
     if (activeFilters.inStock) chips.push({ key: 'inStock', label: 'In Stock' });
     
@@ -650,6 +707,7 @@ export function Shop() {
                    )}
                 </div>
                 <SidebarContent 
+                   facets={facets}
                    activeFilters={activeFilters} 
                    updateFilter={updateFilter} 
                    toggleArrayFilter={toggleArrayFilter} 
@@ -904,6 +962,7 @@ export function Shop() {
                
                <div className="flex-1 overflow-y-auto p-6 relative z-0">
                  <SidebarContent 
+                   facets={facets}
                    activeFilters={activeFilters} 
                    updateFilter={updateFilter} 
                    toggleArrayFilter={toggleArrayFilter} 

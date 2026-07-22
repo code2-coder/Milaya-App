@@ -12,6 +12,7 @@ const router = express.Router();
 // 📦 PUBLIC ROUTES
 //
 router.get("/products", cacheMiddleware(300), (req, res, next) => productController.getProducts(req, res, next)); // Cache for 5 mins
+router.get("/products/facets", cacheMiddleware(300), (req, res, next) => productController.getProductFacets(req, res, next)); // Get facets
 router.post("/products/visual-search", (req, res, next) => productController.visualSearchProducts(req, res, next));
 router.get("/products/:id", cacheMiddleware(300), (req, res, next) => productController.getProductById(req, res, next));
 

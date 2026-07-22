@@ -60,6 +60,62 @@ export class ProductService {
     };
   }
 
+  async getProductFacets(queryStr) {
+    if (queryStr.keyword) {
+      const regex = new RegExp(queryStr.keyword.trim(), 'i');
+      const matchedCategories = await Category.find({ name: { $regex: regex } }).select('_id').lean();
+      if (matchedCategories.length > 0) {
+        queryStr.matchedCategories = matchedCategories.map(c => c._id);
+      }
+    }
+
+    // Build the query using APIFilters but WITHOUT pagination and sorting
+    const baseQuery = Product.find({ status: "published" });
+    const apiFilters = new APIFilters(baseQuery, queryStr).search().filters();
+    
+    // Get the exact match object used by mongoose
+    const matchStage = apiFilters.query.getQuery();
+
+    const facets = await Product.aggregate([
+      { $match: matchStage },
+      {
+        $facet: {
+          categories: [
+            { $group: { _id: "$category", count: { $sum: 1 } } }
+          ],
+          materials: [
+            { $match: { material: { $ne: null, $ne: "" } } },
+            { $group: { _id: "$material", count: { $sum: 1 } } }
+          ],
+          stoneTypes: [
+            { $match: { stoneType: { $ne: null, $ne: "" } } },
+            { $group: { _id: "$stoneType", count: { $sum: 1 } } }
+          ],
+          colors: [
+            { $match: { color: { $ne: null, $ne: "" } } },
+            { $group: { _id: "$color", count: { $sum: 1 } } }
+          ],
+          sizes: [
+            { $unwind: { path: "$sizes", preserveNullAndEmptyArrays: false } },
+            { $match: { "sizes.size": { $ne: null, $ne: "" } } },
+            { $group: { _id: "$sizes.size", count: { $sum: 1 } } }
+          ],
+          prices: [
+            {
+              $bucket: {
+                groupBy: "$price",
+                boundaries: [0, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 15000],
+                default: "15000+"
+              }
+            }
+          ]
+        }
+      }
+    ]);
+
+    return facets[0];
+  }
+
   async getAdminProducts() {
     const products = await ProductRepository.find({}, {
       populate: { 

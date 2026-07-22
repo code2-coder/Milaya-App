@@ -45,6 +45,18 @@ class APIFilters {
         const removeFields = ["keyword", "page", "limit", "sort", "category", "sizes", "colors", "materials", "stoneTypes"];
         removeFields.forEach((el) => delete queryCopy[el]);
 
+        // Expand flat bracket keys from Express (e.g., { "price[lt]": "4000" } -> { "price": { "lt": "4000" } })
+        for (const key in queryCopy) {
+            const match = key.match(/^(.+)\[(gt|gte|lt|lte)\]$/);
+            if (match) {
+                const field = match[1];
+                const op = match[2];
+                if (!queryCopy[field]) queryCopy[field] = {};
+                queryCopy[field][op] = queryCopy[key];
+                delete queryCopy[key];
+            }
+        }
+
         // Advance filter
         let queryStr = JSON.stringify(queryCopy);
 
@@ -66,35 +78,45 @@ class APIFilters {
 
         // Handle sizes array
         if (this.queryStr.sizes) {
-            const sizes = this.queryStr.sizes.split(',').map(s => s.trim());
-            if (sizes.length > 0 && sizes[0] !== '') {
-                filterObj['$or'] = [
-                    { 'variants.sizes.size': { $in: sizes } },
-                    { 'sizes.size': { $in: sizes } }
-                ];
+            const sizes = this.queryStr.sizes.split(',').filter(s => s.trim() !== '').map(s => new RegExp(`^${s.trim()}$`, 'i'));
+            if (sizes.length > 0) {
+                filterObj['$and'] = filterObj['$and'] || [];
+                filterObj['$and'].push({
+                    $or: [
+                        { 'variants.sizes.size': { $in: sizes } },
+                        { 'sizes.size': { $in: sizes } }
+                    ]
+                });
             }
         }
 
         // Handle colors array
         if (this.queryStr.colors) {
-            const colors = this.queryStr.colors.split(',').map(c => c.trim());
-            if (colors.length > 0 && colors[0] !== '') {
-                filterObj['variants.colorHex'] = { $in: colors };
+            const colors = this.queryStr.colors.split(',').filter(c => c.trim() !== '').map(c => new RegExp(`^${c.trim()}$`, 'i'));
+            if (colors.length > 0) {
+                filterObj['$and'] = filterObj['$and'] || [];
+                filterObj['$and'].push({
+                    $or: [
+                        { 'variants.colorHex': { $in: colors } },
+                        { 'variants.colorName': { $in: colors } },
+                        { color: { $in: colors } }
+                    ]
+                });
             }
         }
 
         // Handle materials array
         if (this.queryStr.materials) {
-            const materials = this.queryStr.materials.split(',').map(m => m.trim());
-            if (materials.length > 0 && materials[0] !== '') {
+            const materials = this.queryStr.materials.split(',').filter(m => m.trim() !== '').map(m => new RegExp(`^${m.trim()}$`, 'i'));
+            if (materials.length > 0) {
                 filterObj.material = { $in: materials };
             }
         }
 
         // Handle stoneTypes array
         if (this.queryStr.stoneTypes) {
-            const stoneTypes = this.queryStr.stoneTypes.split(',').map(s => s.trim());
-            if (stoneTypes.length > 0 && stoneTypes[0] !== '') {
+            const stoneTypes = this.queryStr.stoneTypes.split(',').filter(s => s.trim() !== '').map(s => new RegExp(`^${s.trim()}$`, 'i'));
+            if (stoneTypes.length > 0) {
                 filterObj.stoneType = { $in: stoneTypes };
             }
         }
@@ -124,9 +146,18 @@ class APIFilters {
                 case 'newest':
                     this.query = this.query.sort({ createdAt: -1 });
                     break;
-                case 'popular':
                 case 'bestselling':
+                case 'popular':
                     this.query = this.query.sort({ numOfReviews: -1 });
+                    break;
+                case 'name_asc':
+                    this.query = this.query.sort({ name: 1 });
+                    break;
+                case 'name_desc':
+                    this.query = this.query.sort({ name: -1 });
+                    break;
+                case 'featured':
+                    this.query = this.query.sort({ homeSection: -1, createdAt: -1 });
                     break;
                 default:
                     this.query = this.query.sort({ createdAt: -1 });

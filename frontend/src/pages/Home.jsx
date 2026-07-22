@@ -62,7 +62,7 @@ export function Home() {
       <div className="relative z-10">
         <Header />
 
-        <main className="max-w-[1600px] xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-[130px] lg:pt-[150px] w-full min-h-[60vh]">
+        <main className="max-w-[1600px] xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-[160px] lg:pt-[190px] w-full min-h-[60vh]">
           {banners.length > 0 && <BannerCarousel banners={banners} />}
 
           {categories.length > 0 && (

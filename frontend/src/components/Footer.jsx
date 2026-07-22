@@ -38,16 +38,16 @@ export function Footer() {
             <ul className="space-y-4 mb-6 md:mb-8">
               <li className="flex items-start gap-3 md:gap-4 text-stone-400 text-[13px] md:text-[14px] font-light">
                 <MapPin className="w-4 h-4 md:w-5 md:h-5 text-white mt-0.5 shrink-0" />
-                <span>Aluva, Ernakulam, Kerala, India</span>
+                <span>Vrindavan, District Mathura, Uttar Pradesh, India 281121</span>
               </li>
               <li className="flex items-start gap-3 md:gap-4 text-stone-400 text-[13px] md:text-[14px] font-light">
                 <Phone className="w-4 h-4 md:w-5 md:h-5 text-white mt-0.5 shrink-0" />
-                <a href="tel:+919544174140" className="hover:text-white transition-colors">+91 95441 74140</a>
+                <a href="tel:+919544174140" className="hover:text-white transition-colors">+91 91523 50955</a>
               </li>
 
               <li className="flex items-center gap-3 md:gap-4 text-stone-400 text-[13px] md:text-[14px] font-light">
                 <Mail className="w-4 h-4 md:w-5 md:h-5 text-white shrink-0" />
-                <a href="mailto:milayfashion@gmail.com" className="hover:text-white transition-colors">milayfashion@gmail.com</a>
+                <a href="mailto:info@milaya.com" className="hover:text-white transition-colors">info@milaya.com</a>
               </li>
             </ul>
             <div className="flex items-center gap-4 md:gap-5 mt-2">
