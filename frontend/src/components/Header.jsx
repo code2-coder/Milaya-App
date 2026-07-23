@@ -505,7 +505,7 @@ export function Header() {
                   <img 
                     src="/updatelogo-removebg-preview.png" 
                     alt="Milaya Logo" 
-                    className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain origin-top transform scale-110 lg:scale-125 translate-y-4 md:translate-y-8 lg:translate-y-12 transition-transform duration-300 filter drop-shadow-sm" 
+                    className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain origin-top transform scale-110 lg:scale-125 -translate-y-2 md:translate-y-8 lg:translate-y-12 transition-transform duration-300 filter drop-shadow-sm" 
                   />
               </div>
             </Link>
@@ -647,7 +647,7 @@ export function Header() {
               </AnimatePresence>
             </div>
 
-            <form onSubmit={handleSearch} className="max-w-xs lg:max-w-md xl:max-w-lg w-full hidden md:block" ref={searchRef}>
+            <form onSubmit={handleSearch} className="flex-1 max-w-lg lg:max-w-2xl xl:max-w-4xl w-full hidden md:block mx-4 lg:mx-8" ref={searchRef}>
               <div className="relative group">
               <input
                 type="text"
@@ -787,8 +787,7 @@ export function Header() {
           </div>
         </div>
         
-        {/* Mobile Search Bar (Header Bottom) */}
-        <div className="md:hidden w-full px-4 pb-3 pt-1 border-t border-transparent relative z-[90]">
+        <div className="md:hidden w-auto -mx-3 sm:-mx-4 px-3 sm:px-4 pb-3 pt-0 -mt-4 border-t border-transparent relative z-[90]">
           <form onSubmit={handleSearch} className="relative group w-full">
             <input
               type="text"
@@ -796,7 +795,7 @@ export function Header() {
               onFocus={() => setShowSearchDropdown(true)}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder=""
-              className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-xl border-2 border-white/50 bg-white/10 hover:bg-white/20 hover:border-white focus:bg-white/20 focus:outline-none focus:border-white focus:ring-0 transition-all duration-500 font-medium text-white shadow-sm focus:shadow-md relative z-10 placeholder-white/70"
+              className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-xl border border-white/50 bg-white/10 hover:bg-white/20 hover:border-white focus:bg-white/20 focus:outline-none focus:border-white focus:ring-0 transition-all duration-500 font-medium text-white shadow-sm focus:shadow-md relative z-10 placeholder-white/70"
             />
 
             {!searchQuery && (
@@ -808,7 +807,7 @@ export function Header() {
                     animate={{ y: "-50%", opacity: 1 }}
                     exit={{ y: "50%", opacity: 0 }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className="absolute top-1/2 text-gray-400 text-sm font-medium whitespace-nowrap"
+                    className="absolute top-1/2 text-white/70 text-sm font-medium whitespace-nowrap"
                   >
                     {SEARCH_PLACEHOLDERS[placeholderIndex]}
                   </motion.span>
@@ -816,20 +815,20 @@ export function Header() {
               </div>
             )}
             
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 z-20 pointer-events-none group-focus-within:text-black transition-colors duration-500" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/70 w-4 h-4 z-20 pointer-events-none group-focus-within:text-white transition-colors duration-500" />
             
             <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center space-x-1 z-30">
               <button
                 type="button"
                 onClick={startVoiceSearch}
-                className={`p-1.5 transition-all duration-300 ${isListening ? 'text-red-500 animate-pulse' : 'text-black hover:scale-110 drop-shadow-sm'}`}
+                className={`p-1.5 transition-all duration-300 ${isListening ? 'text-red-500 animate-pulse' : 'text-white hover:scale-110 drop-shadow-sm'}`}
               >
                 <Mic className="w-4 h-4" strokeWidth={2.5} />
               </button>
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="p-1.5 text-black hover:scale-110 transition-all duration-300 drop-shadow-sm"
+                className="p-1.5 text-white hover:scale-110 transition-all duration-300 drop-shadow-sm"
               >
                 <Camera className="w-4 h-4" strokeWidth={2.5} />
               </button>
