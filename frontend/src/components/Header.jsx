@@ -503,7 +503,7 @@ export function Header() {
             <Link to="/" className="flex items-center space-x-2 group relative z-[70] md:ml-10 lg:ml-14">
               <div className="flex items-center">
                   <img 
-                    src="/updatelogo-removebg-preview.png" 
+                    src="/updatelogo.jpeg" 
                     alt="Milaya Logo" 
                     className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain origin-top transform scale-110 lg:scale-125 -translate-y-2 md:translate-y-8 lg:translate-y-12 transition-transform duration-300 filter drop-shadow-sm" 
                   />

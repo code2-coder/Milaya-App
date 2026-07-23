@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import { 
   Facebook, 
   Instagram, 
-  Twitter, 
   Youtube, 
   MapPin, 
   Phone, 
@@ -54,8 +53,7 @@ export function Footer() {
               {[
                 { Icon: Facebook, url: "https://www.facebook.com/share/1cHuudiuvh/?mibextid=wwXIfr" },
                 { Icon: Instagram, url: "https://www.instagram.com/milayafashion?igsh=ZHA0NmJ5dTUzNGNs" },
-                { Icon: Twitter, url: "#" },
-                { Icon: Youtube, url: "#" }
+                { Icon: Youtube, url: "https://youtube.com/@milayafashion6448?si=1Y3KLldU3deB0IsT" }
               ].map(({ Icon, url }, i) => (
                 <a 
                   key={i} 
