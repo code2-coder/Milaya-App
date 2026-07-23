@@ -492,7 +492,7 @@ export function Header() {
     <div className="fixed top-0 left-0 right-0 z-50 w-full flex flex-col">
       {/* Top Announcement Bar Removed per request */}
       
-      <header className="bg-white/95 backdrop-blur-2xl border-b border-gray-100 transition-colors duration-500 font-sans w-full shadow-sm">
+      <header className="bg-black/95 backdrop-blur-2xl border-b border-stone-800 transition-colors duration-500 font-sans w-full shadow-sm">
       <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-8 lg:px-10 xl:px-14">
         <div className="flex items-center justify-between h-24 md:h-28 relative">
           
@@ -503,9 +503,9 @@ export function Header() {
             <Link to="/" className="flex items-center space-x-2 group relative z-[70] md:ml-10 lg:ml-14">
               <div className="flex items-center">
                   <img 
-                    src="/updatelogo.jpeg" 
+                    src="/updatelogo-removebg-preview.png" 
                     alt="Milaya Logo" 
-                    className="h-14 sm:h-14 md:h-16 w-auto object-contain origin-top transform scale-110 -translate-y-1 lg:scale-[1.2] md:translate-y-6 lg:translate-y-8 transition-transform duration-300 group-hover:scale-[1.25] filter drop-shadow-sm rounded-xl" 
+                    className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain origin-top transform scale-110 lg:scale-125 translate-y-4 md:translate-y-8 lg:translate-y-12 transition-transform duration-300 filter drop-shadow-sm" 
                   />
               </div>
             </Link>
@@ -522,7 +522,7 @@ export function Header() {
               onMouseLeave={() => setShowCategories(false)}
             >
               <button
-                className="flex items-center space-x-1.5 text-obsidian text-[16px] font-bold uppercase tracking-[0.1em] px-2 hover:text-[#B8934E] transition-colors duration-300"
+                className="flex items-center space-x-1.5 text-white text-[16px] font-bold uppercase tracking-[0.1em] px-2 hover:text-[#B8934E] transition-colors duration-300"
                 onClick={() => setShowCategories(!showCategories)}
               >
                 <span>Collections</span>
@@ -655,7 +655,7 @@ export function Header() {
                 onFocus={() => setShowSearchDropdown(true)}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder=""
-                className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-xl border-2 border-black bg-gray-50/50 hover:bg-white hover:border-black focus:bg-white focus:outline-none focus:border-black focus:ring-0 transition-all duration-500 font-medium text-obsidian shadow-sm focus:shadow-md relative z-10"
+                className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-xl border-2 border-white/50 bg-white/10 hover:bg-white/20 hover:border-white focus:bg-white/20 focus:outline-none focus:border-white focus:ring-0 transition-all duration-500 font-medium text-white shadow-sm focus:shadow-md relative z-10 placeholder-white/70"
               />
               
               {!searchQuery && (
@@ -667,7 +667,7 @@ export function Header() {
                       animate={{ y: "-50%", opacity: 1 }}
                       exit={{ y: "-150%", opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="absolute top-1/2 text-gray-400 text-sm font-medium whitespace-nowrap"
+                      className="absolute top-1/2 text-white/70 text-sm font-medium whitespace-nowrap"
                     >
                       {SEARCH_PLACEHOLDERS[placeholderIndex]}
                     </motion.span>
@@ -675,7 +675,7 @@ export function Header() {
                 </div>
               )}
 
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 group-focus-within:text-black transition-colors duration-500 z-30 pointer-events-none" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/70 w-4 h-4 group-focus-within:text-white transition-colors duration-500 z-30 pointer-events-none" />
 
               <div className="absolute right-2.5 top-1/2 transform -translate-y-1/2 flex items-center space-x-1 sm:space-x-1.5 z-30">
                 {isSearching ? (
@@ -684,7 +684,7 @@ export function Header() {
                   <button
                     type="button"
                     onClick={() => { setSearchQuery(""); setShowSearchDropdown(false); }}
-                    className="text-gray-400 hover:text-obsidian transition-colors"
+                    className="text-white/70 hover:text-white transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -693,7 +693,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={startVoiceSearch}
-                  className={`p-1 transition-all duration-300 ${isListening ? 'text-red-500 animate-pulse' : 'text-black hover:scale-110 drop-shadow-sm'}`}
+                  className={`p-1 transition-all duration-300 ${isListening ? 'text-red-500 animate-pulse' : 'text-white hover:scale-110 drop-shadow-sm'}`}
                   title="Voice Search"
                 >
                   <Mic className="w-5 h-5" strokeWidth={2.5} />
@@ -702,7 +702,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="p-1 text-black hover:scale-110 transition-all duration-300 drop-shadow-sm"
+                  className="p-1 text-white hover:scale-110 transition-all duration-300 drop-shadow-sm"
                   title="Visual Search"
                 >
                   <Camera className="w-5 h-5" strokeWidth={2.5} />
@@ -735,7 +735,7 @@ export function Header() {
               <Link
                 to="/wishlist"
                 title="Wishlist"
-                className="relative hidden md:flex items-center justify-center p-2 text-black transition-colors duration-300 group"
+                className="relative hidden md:flex items-center justify-center p-2 text-white transition-colors duration-300 group"
               >
                 <Heart className="w-[22px] h-[22px] group-hover:scale-110 transition-transform duration-300" strokeWidth={2.5} />
                 {wishlistCount > 0 && (
@@ -748,7 +748,7 @@ export function Header() {
               <Link
                 to="/cart"
                 title="Shopping Cart"
-                className="relative hidden md:flex items-center justify-center p-2 text-black transition-colors duration-300 group"
+                className="relative hidden md:flex items-center justify-center p-2 text-white transition-colors duration-300 group"
               >
                 <ShoppingCart className="w-[22px] h-[22px] group-hover:scale-110 transition-transform duration-300" strokeWidth={2.5} />
                 {cartCount > 0 && (
@@ -761,7 +761,7 @@ export function Header() {
               <div className="flex items-center space-x-2 pl-1 sm:pl-2 border-l border-transparent sm:border-gray-100">
                 <DropdownMenu className="hidden md:block" />
                 <button
-                  className="lg:hidden p-2 text-gray-700 hover:text-obsidian relative z-[110] transition-transform"
+                  className="lg:hidden p-2 text-white/80 hover:text-white relative z-[110] transition-transform"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   aria-expanded={isMobileMenuOpen}
                   aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
@@ -796,7 +796,7 @@ export function Header() {
               onFocus={() => setShowSearchDropdown(true)}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder=""
-              className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-xl border-2 border-black bg-gray-50/50 hover:bg-white hover:border-black focus:bg-white focus:outline-none focus:border-black focus:ring-0 transition-all duration-500 font-medium text-obsidian shadow-sm focus:shadow-md relative z-10"
+              className="w-full px-5 py-2 pl-11 pr-24 text-sm rounded-xl border-2 border-white/50 bg-white/10 hover:bg-white/20 hover:border-white focus:bg-white/20 focus:outline-none focus:border-white focus:ring-0 transition-all duration-500 font-medium text-white shadow-sm focus:shadow-md relative z-10 placeholder-white/70"
             />
 
             {!searchQuery && (

@@ -29,7 +29,7 @@ export function DropdownMenu({ className = '' }) {
                 onClick={() => setOpen(v => !v)}
                 aria-haspopup="menu"
                 aria-expanded={open}
-                className="relative flex items-center justify-center p-2 text-black hover:text-gray-600 transition-colors duration-300 group focus:outline-none"
+                className="relative flex items-center justify-center p-2 text-white hover:text-gray-300 transition-colors duration-300 group focus:outline-none"
                 title="Account"
             >
                 <User className="w-[22px] h-[22px] group-hover:scale-110 transition-transform duration-300" strokeWidth={2} />
