@@ -500,7 +500,7 @@ export function Header() {
 
 
           <div className="flex items-center space-x-6 md:space-x-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:transform-none">
-            <Link to="/" className="flex items-center space-x-2 group relative z-[70] md:ml-10 lg:ml-14">
+            <Link to="/" className="flex items-center space-x-2 group relative z-[70] md:ml-16 lg:ml-24 xl:ml-32">
               <div className="flex items-center">
                   <img 
                     src="/updatelogo-removebg-preview.png" 

@@ -247,20 +247,26 @@ export function Cart() {
   const totalAmountWithExtras = convertedCartTotal + displayShippingAmount + displayPackagingAmount;
   const canShowShippingOptions = !!chosenAddress;
 
-  // Manual check for Pincode
-  const handleCheckPincode = () => {
+  // Auto-check Pincode
+  useEffect(() => {
     if (checkoutAddress.zipCode) {
-      checkPincodeServiceability(checkoutAddress.zipCode);
+      if (/^\d{6}$/.test(checkoutAddress.zipCode)) {
+        checkPincodeServiceability(checkoutAddress.zipCode);
+      } else if (checkoutAddress.zipCode.length === 6) {
+        toast.error("Please enter a valid 6-digit PIN code");
+        setServiceability(null);
+      } else {
+        setServiceability(null);
+      }
     } else {
-      toast.error("Please enter a PIN code");
+      setServiceability(null);
     }
-  };
+  }, [checkoutAddress.zipCode]);
 
   const checkPincodeServiceability = async (pincode) => {
     if (!isIndiaAddress) return;
 
     if (!pincode || pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
-      toast.error("Please enter a valid 6-digit PIN code");
       setServiceability(null);
       return;
     }
@@ -356,7 +362,7 @@ export function Cart() {
                     <div className="flex-1 flex flex-col justify-between">
                       <div className="flex justify-between items-start gap-4 mb-2">
                         <div className="space-y-1">
-                          <Link to={`/product/${item.product._id || item.product.id}`} className="text-base sm:text-lg font-serif font-medium text-[black] hover:text-[#e5e7eb] transition-colors line-clamp-2 leading-snug">
+                          <Link to={`/product/${item.product._id || item.product.id}`} className="text-base sm:text-lg font-serif font-medium text-black hover:text-gray-600 transition-colors line-clamp-2 leading-snug">
                             {item.product.name}
                           </Link>
                           {item.size && item.size !== 'undefined' && item.size !== 'null' && item.size !== '' && (
@@ -458,16 +464,7 @@ export function Cart() {
                   </div>
                   <div className="col-span-1">
                     <label className="block text-[10px] font-bold text-gray-700 uppercase tracking-widest mb-2.5">ZIP / Postal Code *</label>
-                    <div className="flex space-x-2">
-                      <input type="text" name="zipCode" value={checkoutAddress.zipCode} onChange={handleAddressChange} placeholder="6-digit Pincode" className="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-black focus:ring-0  transition-colors text-sm" />
-                      <button 
-                        type="button" 
-                        onClick={handleCheckPincode}
-                        className="bg-gray-100 text-gray-800 px-4 py-3 rounded-sm text-[10px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors whitespace-nowrap"
-                      >
-                        Check
-                      </button>
-                    </div>
+                    <input type="text" name="zipCode" value={checkoutAddress.zipCode} onChange={handleAddressChange} placeholder="6-digit Pincode" className="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-black focus:ring-0  transition-colors text-sm" />
                     {/* Inline Serviceability Alerts */}
                     {isCheckingServiceability && (
                       <p className="mt-2 text-xs text-blue-600 font-medium flex items-center">
