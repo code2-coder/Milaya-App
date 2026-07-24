@@ -17,6 +17,37 @@ import { formatPrice } from "../utils/priceUtils";
 
 const Footer = lazy(() => import("../components/Footer").then(m => ({ default: m.Footer })));
 
+const stateCityMap = {
+  "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Tirupati", "Kurnool", "Nellore", "Rajahmundry", "Kakinada", "Anantapur", "Kadapa"],
+  "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Tawang", "Pasighat", "Ziro", "Bomdila"],
+  "Assam": ["Guwahati", "Dibrugarh", "Silchar", "Jorhat", "Tezpur", "Nagaon", "Tinsukia"],
+  "Bihar": ["Patna", "Gaya", "Muzaffarpur", "Bhagalpur", "Darbhanga", "Purnia", "Begusarai"],
+  "Chhattisgarh": ["Raipur", "Bilaspur", "Durg", "Bhilai", "Korba", "Raigarh", "Jagdalpur"],
+  "Goa": ["Panaji", "Margao", "Vasco da Gama", "Mapusa", "Ponda"],
+  "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar", "Jamnagar", "Gandhinagar", "Junagadh", "Anand", "Bharuch"],
+  "Haryana": ["Gurugram", "Faridabad", "Panipat", "Karnal", "Hisar", "Ambala", "Rohtak", "Sonipat"],
+  "Himachal Pradesh": ["Shimla", "Dharamshala", "Solan", "Mandi", "Kullu", "Hamirpur"],
+  "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Hazaribagh", "Deoghar"],
+  "Karnataka": ["Bengaluru", "Mysuru", "Mangaluru", "Hubballi", "Belagavi", "Shivamogga", "Davanagere", "Ballari", "Udupi"],
+  "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Kollam", "Kannur", "Alappuzha"],
+  "Madhya Pradesh": ["Bhopal", "Indore", "Jabalpur", "Gwalior", "Ujjain", "Sagar", "Rewa"],
+  "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Thane", "Chhatrapati Sambhajinagar", "Kolhapur", "Solapur", "Amravati", "Jalgaon", "Sangli", "Satara", "Ahmednagar", "Latur", "Nanded"],
+  "Manipur": ["Imphal", "Thoubal", "Bishnupur", "Churachandpur"],
+  "Meghalaya": ["Shillong", "Tura", "Jowai", "Nongstoin"],
+  "Mizoram": ["Aizawl", "Lunglei", "Champhai", "Kolasib"],
+  "Nagaland": ["Kohima", "Dimapur", "Mokokchung", "Wokha"],
+  "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Sambalpur", "Puri", "Berhampur"],
+  "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda", "Mohali"],
+  "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Ajmer", "Bikaner", "Alwar"],
+  "Sikkim": ["Gangtok", "Namchi", "Gyalshing", "Mangan"],
+  "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Salem", "Tiruppur", "Vellore", "Erode"],
+  "Telangana": ["Hyderabad", "Warangal", "Karimnagar", "Nizamabad", "Khammam"],
+  "Tripura": ["Agartala", "Udaipur", "Dharmanagar", "Kailasahar"],
+  "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi", "Prayagraj", "Noida", "Ghaziabad", "Meerut", "Gorakhpur"],
+  "Uttarakhand": ["Dehradun", "Haridwar", "Roorkee", "Haldwani", "Rudrapur", "Nainital"],
+  "West Bengal": ["Kolkata", "Howrah", "Siliguri", "Durgapur", "Asansol", "Kharagpur", "Bardhaman"]
+};
+
 export function Cart() {
   const { cart, updateQuantity, removeFromCart, cartTotal, clearCart } = useCart();
   const { user } = useAuth();
@@ -47,7 +78,13 @@ export function Cart() {
 
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
-    setCheckoutAddress(prev => ({ ...prev, [name]: value }));
+    setCheckoutAddress(prev => {
+      const updated = { ...prev, [name]: value };
+      if (name === "state") {
+        updated.city = ""; // Reset city when state changes
+      }
+      return updated;
+    });
   };
 
   const loadRazorpayScript = () => {
@@ -214,11 +251,16 @@ export function Cart() {
   const handleCheckPincode = () => {
     if (checkoutAddress.zipCode) {
       checkPincodeServiceability(checkoutAddress.zipCode);
+    } else {
+      toast.error("Please enter a PIN code");
     }
   };
 
   const checkPincodeServiceability = async (pincode) => {
-    if (!isIndiaAddress || !pincode || pincode.length !== 6) {
+    if (!isIndiaAddress) return;
+
+    if (!pincode || pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
+      toast.error("Please enter a valid 6-digit PIN code");
       setServiceability(null);
       return;
     }
@@ -392,11 +434,27 @@ export function Cart() {
                   </div>
                   <div className="col-span-1">
                     <label className="block text-[10px] font-bold text-gray-700 uppercase tracking-widest mb-2.5">State / Province *</label>
-                    <input type="text" name="state" value={checkoutAddress.state} onChange={handleAddressChange} placeholder="Select State" className="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-black focus:ring-0  transition-colors text-sm" />
+                    <select name="state" value={checkoutAddress.state} onChange={handleAddressChange} className="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-black focus:ring-0 transition-colors text-sm bg-white">
+                      <option value="" disabled>Select State</option>
+                      {Object.keys(stateCityMap).map(state => (
+                        <option key={state} value={state}>{state}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="col-span-1">
                     <label className="block text-[10px] font-bold text-gray-700 uppercase tracking-widest mb-2.5">City *</label>
-                    <input type="text" name="city" value={checkoutAddress.city} onChange={handleAddressChange} placeholder="Select City" className="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-black focus:ring-0  transition-colors text-sm" />
+                    {checkoutAddress.state ? (
+                      <select name="city" value={checkoutAddress.city} onChange={handleAddressChange} className="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-black focus:ring-0 transition-colors text-sm bg-white">
+                        <option value="" disabled>Select City</option>
+                        {stateCityMap[checkoutAddress.state]?.map(city => (
+                          <option key={city} value={city}>{city}</option>
+                        ))}
+                      </select>
+                    ) : (
+                      <select name="city" disabled value="" className="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-black focus:ring-0 transition-colors text-sm bg-gray-50 opacity-50 cursor-not-allowed">
+                        <option value="" disabled>Select State First</option>
+                      </select>
+                    )}
                   </div>
                   <div className="col-span-1">
                     <label className="block text-[10px] font-bold text-gray-700 uppercase tracking-widest mb-2.5">ZIP / Postal Code *</label>
