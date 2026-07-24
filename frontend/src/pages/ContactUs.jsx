@@ -120,7 +120,7 @@ export function ContactUs() {
                  <div className="flex flex-col">
                   <h4 className="text-sm font-bold text-obsidian uppercase tracking-widest mb-2">Call Us</h4>
                   <a href="tel:+919544174140" className="text-gray-600 font-light text-sm hover:text-[#B8934E] transition-colors mb-1">
-                    +91 91523 50955
+                    +91 95441 74140
                   </a>
                 </div>
               </div>
@@ -131,8 +131,8 @@ export function ContactUs() {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-obsidian uppercase tracking-widest mb-2">Email Us</h4>
-                  <a href="mailto:info@milaya.com" className="text-gray-600 font-light text-sm hover:text-[#B8934E] transition-colors">
-                    info@milaya.com
+                  <a href="mailto:milayafashion@gmail.com" className="text-gray-600 font-light text-sm hover:text-[#B8934E] transition-colors">
+                    milayafashion@gmail.com
                   </a>
                 </div>
               </div>

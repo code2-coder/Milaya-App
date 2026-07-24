@@ -859,7 +859,7 @@ export function Header() {
               {/* BRAND LOGO IN DRAWER */}
               <div className="pb-6 border-b border-gray-100 flex justify-center mt-2">
                   <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center">
-                    <img src="/updatelogo-removebg-preview.png" alt="Milaya Logo" className="h-14 w-auto object-contain filter drop-shadow-sm scale-125 rounded-xl" />
+                    <img src="/menu.jpeg" alt="Milaya Logo" className="h-14 w-auto object-contain filter drop-shadow-sm scale-125 rounded-xl" />
                   </Link>
               </div>
 

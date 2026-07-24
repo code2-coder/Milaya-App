@@ -27,7 +27,7 @@ export function Footer() {
           {/* Column 1: Brand Story & Contact */}
           <div className="flex flex-col items-start">
             <Link to="/" className="mb-6 md:mb-8 block">
-               <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-white flex items-center justify-center shadow-lg overflow-hidden">
+               <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-black flex items-center justify-center shadow-lg overflow-hidden">
                  <img src="/updatelogo.jpeg" alt="Milaya Clothing" className="w-full h-full object-contain scale-[1.4] md:scale-[1.6]" />
                </div>
             </Link>

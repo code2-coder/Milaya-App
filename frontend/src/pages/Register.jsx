@@ -72,12 +72,12 @@ export function Register() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-white selection:bg-black selection:text-white relative">
+    <div className="min-h-screen flex flex-col md:flex-row bg-[#0a0a0a] selection:bg-[#B8934E]/30 selection:text-white relative">
       <SEO title={"Register"} description={"Create your Milaya account to enjoy a premium shopping experience and exclusive clothing deals."} />
       
       {/* Left Side: Fashion Image Cover */}
       <div className="hidden md:block md:w-1/2 relative">
-        <div className="absolute inset-0 bg-black/15 z-10" />
+        <div className="absolute inset-0 bg-black/50 z-10" />
         <img 
           src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop" 
           alt="Fashion Model" 
@@ -90,18 +90,19 @@ export function Register() {
       </div>
 
       {/* Right Side: Register Form */}
-      <div className="w-full md:w-1/2 min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 lg:px-24 py-10 pb-32 sm:py-0 relative overflow-y-auto">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="w-full max-w-[420px] z-10 my-auto"
-        >
+      <div className="w-full md:w-1/2 min-h-screen flex flex-col px-6 sm:px-12 lg:px-24 py-12 relative overflow-y-auto">
+        <div className="flex-1 flex flex-col justify-center items-center w-full">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="w-full max-w-[420px] z-10 my-auto"
+          >
           {/* Logo */}
           <motion.div variants={itemVariants} className="flex justify-center mb-8">
             <Link to="/" className="inline-flex items-center group w-full justify-center">
               <img 
-                src="/updatelogo.jpeg" 
+                src="/updatelogo-removebg-preview.png" 
                 alt="Milaya Logo" 
                 className="h-28 sm:h-40 w-auto object-contain group-hover:opacity-70 transition-opacity duration-500"
               />
@@ -109,48 +110,48 @@ export function Register() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="mb-10 text-center">
-            <h3 className="text-3xl sm:text-4xl font-serif text-[#1A050A] tracking-wide mb-2">Create Account</h3>
-            <p className="text-sm text-gray-500 font-light">Experience the art of fine clothing.</p>
+            <h3 className="text-3xl sm:text-4xl font-serif text-stone-100 tracking-wide mb-2">Create Account</h3>
+            <p className="text-sm text-stone-400 font-light">Experience the art of fine clothing.</p>
           </motion.div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <motion.div variants={itemVariants} className="space-y-1">
-              <label htmlFor="name" className="block text-[#1A050A] text-[11px] font-semibold uppercase tracking-widest ml-1 mb-2">Full Name</label>
-              <div className={`relative flex items-center border ${errors.name ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-gray-50'} rounded-xl focus-within:border-[#800000] focus-within:ring-1 focus-within:ring-[#800000] transition-all duration-300`}>
-                <div className="pl-4 text-gray-400">
+              <label htmlFor="name" className="block text-stone-300 text-[11px] font-semibold uppercase tracking-widest ml-1 mb-2">Full Name</label>
+              <div className={`relative flex items-center border ${errors.name ? 'border-rose-500/50 bg-rose-500/5' : 'border-white/10 bg-white/5'} backdrop-blur-md rounded-xl focus-within:border-[#B8934E] focus-within:bg-black/40 focus-within:shadow-[0_0_15px_rgba(184,147,78,0.15)] transition-all duration-300`}>
+                <div className={`pl-4 ${errors.name ? 'text-rose-400' : 'text-stone-500'} transition-colors`}>
                   <User className="w-5 h-5" strokeWidth={1.5} />
                 </div>
                 <input
                   id="name"
                   type="text"
                   {...register("name")}
-                  className="w-full py-3.5 px-3 bg-transparent border-none outline-none text-black text-sm placeholder:text-gray-400 focus:ring-0"
+                  className="w-full py-3.5 px-3 bg-transparent border-none outline-none text-white text-sm placeholder:text-stone-600 focus:ring-0"
                   placeholder="Enter your full name"
                 />
               </div>
               {errors.name && (
-                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5 ml-1">
+                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-rose-400 text-xs mt-2 ml-2 font-medium">
                   {errors.name.message}
                 </motion.p>
               )}
             </motion.div>
 
             <motion.div variants={itemVariants} className="space-y-1">
-              <label htmlFor="email" className="block text-[#1A050A] text-[11px] font-semibold uppercase tracking-widest ml-1 mb-2">Email Address</label>
-              <div className={`relative flex items-center border ${errors.email ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-gray-50'} rounded-xl focus-within:border-[#800000] focus-within:ring-1 focus-within:ring-[#800000] transition-all duration-300`}>
-                <div className="pl-4 text-gray-400">
+              <label htmlFor="email" className="block text-stone-300 text-[11px] font-semibold uppercase tracking-widest ml-1 mb-2">Email Address</label>
+              <div className={`relative flex items-center border ${errors.email ? 'border-rose-500/50 bg-rose-500/5' : 'border-white/10 bg-white/5'} backdrop-blur-md rounded-xl focus-within:border-[#B8934E] focus-within:bg-black/40 focus-within:shadow-[0_0_15px_rgba(184,147,78,0.15)] transition-all duration-300`}>
+                <div className={`pl-4 ${errors.email ? 'text-rose-400' : 'text-stone-500'} transition-colors`}>
                   <Mail className="w-5 h-5" strokeWidth={1.5} />
                 </div>
                 <input
                   id="email"
                   type="email"
                   {...register("email")}
-                  className="w-full py-3.5 px-3 bg-transparent border-none outline-none text-black text-sm placeholder:text-gray-400 focus:ring-0"
+                  className="w-full py-3.5 px-3 bg-transparent border-none outline-none text-white text-sm placeholder:text-stone-600 focus:ring-0"
                   placeholder="Enter your email"
                 />
               </div>
               {errors.email && (
-                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5 ml-1">
+                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-rose-400 text-xs mt-2 ml-2 font-medium">
                   {errors.email.message}
                 </motion.p>
               )}
@@ -158,29 +159,29 @@ export function Register() {
 
             <motion.div variants={itemVariants} className="space-y-1">
               <div className="flex justify-between items-end mb-2">
-                <label htmlFor="password" className="block text-[#1A050A] text-[11px] font-semibold uppercase tracking-widest ml-1">Password</label>
+                <label htmlFor="password" className="block text-stone-300 text-[11px] font-semibold uppercase tracking-widest ml-1">Password</label>
               </div>
-              <div className={`relative flex items-center border ${errors.password ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-gray-50'} rounded-xl focus-within:border-[#800000] focus-within:ring-1 focus-within:ring-[#800000] transition-all duration-300`}>
-                <div className="pl-4 text-gray-400">
+              <div className={`relative flex items-center border ${errors.password ? 'border-rose-500/50 bg-rose-500/5' : 'border-white/10 bg-white/5'} backdrop-blur-md rounded-xl focus-within:border-[#B8934E] focus-within:bg-black/40 focus-within:shadow-[0_0_15px_rgba(184,147,78,0.15)] transition-all duration-300`}>
+                <div className={`pl-4 ${errors.password ? 'text-rose-400' : 'text-stone-500'} transition-colors`}>
                   <Lock className="w-5 h-5" strokeWidth={1.5} />
                 </div>
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  className="w-full py-3.5 px-3 pr-10 bg-transparent border-none outline-none text-black text-sm placeholder:text-gray-400 focus:ring-0"
+                  className="w-full py-3.5 px-3 pr-10 bg-transparent border-none outline-none text-white text-sm placeholder:text-stone-600 focus:ring-0"
                   placeholder="Create a password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-black transition-colors cursor-pointer"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-stone-500 hover:text-white transition-colors cursor-pointer"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" strokeWidth={1.5} /> : <Eye className="w-4 h-4" strokeWidth={1.5} />}
                 </button>
               </div>
               {errors.password && (
-                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5 ml-1">
+                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-rose-400 text-xs mt-2 ml-2 font-medium">
                   {errors.password.message}
                 </motion.p>
               )}
@@ -198,30 +199,30 @@ export function Register() {
                     {...register("agreeToTerms")}
                     className="peer sr-only"
                   />
-                  <div className="w-4 h-4 border border-gray-300 bg-transparent transition-all duration-300 flex items-center justify-center peer-checked:bg-black peer-checked:border-black peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300 group-hover:border-black"></div>
+                  <div className="w-4 h-4 border border-stone-600 bg-transparent transition-all duration-300 flex items-center justify-center peer-checked:bg-[#B8934E] peer-checked:border-[#B8934E] peer-focus-visible:ring-2 peer-focus-visible:ring-stone-600 group-hover:border-[#B8934E]"></div>
                   <span className="absolute text-[10px] font-bold text-white transform scale-0 peer-checked:scale-100 transition-transform duration-300 leading-none select-none pointer-events-none">
                     ✓
                   </span>
                 </label>
-                <label htmlFor="agreeToTerms" className="text-xs text-gray-500 font-light cursor-pointer">
-                  I agree to the <Link to="/terms" target="_blank" rel="noopener noreferrer" className="text-black font-medium hover:underline underline-offset-2 decoration-gray-300 hover:decoration-black transition-all">Terms</Link> and <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="text-black font-medium hover:underline underline-offset-2 decoration-gray-300 hover:decoration-black transition-all">Privacy Policy</Link>.
+                <label htmlFor="agreeToTerms" className="text-xs text-stone-400 font-light cursor-pointer">
+                  I agree to the <Link to="/terms" target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:underline underline-offset-2 decoration-stone-600 hover:decoration-white transition-all">Terms</Link> and <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:underline underline-offset-2 decoration-stone-600 hover:decoration-white transition-all">Privacy Policy</Link>.
                 </label>
               </div>
               {errors.agreeToTerms && (
-                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-xs mt-1.5">
+                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-rose-400 text-xs mt-2 font-medium">
                   {errors.agreeToTerms.message}
                 </motion.p>
               )}
             </motion.div>
 
-            <motion.div variants={itemVariants} className="pt-4">
+            <motion.div variants={itemVariants} className="pt-6">
               <button
                 type="submit"
                 disabled={isLoading || !isValid}
-                className="w-full bg-[#1A050A] text-white h-[52px] rounded-xl hover:bg-[#2D0D18] hover:shadow-lg transition-all duration-300 font-semibold tracking-widest uppercase text-[12px] flex justify-center items-center disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+                className="w-full bg-white text-black h-[52px] rounded-xl hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 font-bold tracking-widest uppercase text-[12px] flex justify-center items-center disabled:bg-stone-800 disabled:text-stone-500 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
-                  <div className="w-4 h-4 border-2 border-white/80 border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-5 h-5 border-2 border-black/80 border-t-transparent rounded-full animate-spin"></div>
                 ) : (
                   <span>Create Account</span>
                 )}
@@ -229,24 +230,23 @@ export function Register() {
             </motion.div>
           </form>
 
-          <motion.div variants={itemVariants} className="mt-8 text-center text-sm text-gray-500 font-light">
+          <motion.div variants={itemVariants} className="mt-8 text-center text-sm text-stone-400 font-light">
             Already have an account?{" "}
-            <Link to="/login" className="font-medium text-[#800000] hover:underline underline-offset-4 decoration-[#800000]/30 hover:decoration-[#800000] transition-all">
+            <Link to="/login" className="font-medium text-[#B8934E] hover:underline underline-offset-4 decoration-[#B8934E]/30 hover:decoration-[#B8934E] transition-all">
               Sign in
             </Link>
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex items-center my-8">
-            <div className="flex-grow border-t border-gray-200"></div>
-            <span className="flex-shrink mx-4 text-[10px] text-gray-400 uppercase tracking-widest font-semibold">Or</span>
-            <div className="flex-grow border-t border-gray-200"></div>
+            <div className="flex-grow h-px bg-gradient-to-r from-transparent via-stone-700 to-transparent"></div>
+            <span className="flex-shrink mx-4 text-[10px] text-stone-500 uppercase tracking-widest font-semibold">Or</span>
+            <div className="flex-grow h-px bg-gradient-to-l from-transparent via-stone-700 to-transparent"></div>
           </motion.div>
 
-          {/* Official Google Sign-In Button */}
           <motion.button
             variants={itemVariants}
             onClick={() => window.location.href = `${(import.meta.env.VITE_API_URL || 'https://milaya-app.onrender.com/api/v1').replace(/\/api\/v1\/?$/, '')}/api/v1/auth/google`}
-            className="w-full flex items-center justify-center space-x-3 bg-white hover:bg-gray-50 border border-gray-200 rounded-xl py-3.5 text-black transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-200 hover:shadow-sm"
+            className="w-full flex items-center justify-center space-x-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl py-3.5 text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-stone-600 backdrop-blur-md hover:shadow-lg"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -257,17 +257,17 @@ export function Register() {
             <span className="text-[13px] font-medium tracking-wide">Continue with Google</span>
           </motion.button>
         </motion.div>
+        </div>
 
-        {/* Minimal Footer */}
-        <footer className="mt-12 sm:absolute sm:bottom-6 w-full text-center z-10 left-0 right-0">
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 text-gray-400">
+        <footer className="mt-8 mb-6 w-full text-center z-10">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 text-stone-500">
             <div className="text-[10px] uppercase tracking-widest">
               © {new Date().getFullYear()} Milaya
             </div>
-            <div className="hidden sm:block text-gray-300">•</div>
+            <div className="hidden sm:block text-stone-700">•</div>
             <div className="flex space-x-4 text-[10px] uppercase tracking-widest">
-              <Link to="/privacy" className="hover:text-black transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-black transition-colors">Terms</Link>
+              <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+              <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
             </div>
           </div>
         </footer>
