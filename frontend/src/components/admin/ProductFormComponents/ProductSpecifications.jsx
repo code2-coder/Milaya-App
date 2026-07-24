@@ -24,7 +24,7 @@ function SpecSelect({ name, label, attributeType, attributes, onCreateAttr, onEd
               onCreateAttr(attributeType, label, val.trim());
             }
           }}
-          className="text-[10px] uppercase tracking-wider font-bold text-amber-700 hover:text-amber-800 flex items-center transition-colors bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-md"
+          className="text-[11px] tracking-wider font-bold text-amber-700 hover:text-amber-800 flex items-center transition-colors bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-md"
         >
           <Plus className="w-3 h-3 mr-1" />
           Create
